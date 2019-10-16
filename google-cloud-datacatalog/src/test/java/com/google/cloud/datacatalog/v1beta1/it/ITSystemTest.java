@@ -15,6 +15,8 @@
  */
 package com.google.cloud.datacatalog.v1beta1.it;
 
+import static org.junit.Assert.assertEquals;
+
 import com.google.cloud.ServiceOptions;
 import com.google.cloud.datacatalog.EntryGroup;
 import com.google.cloud.datacatalog.EntryGroupName;
@@ -31,8 +33,6 @@ import com.google.protobuf.FieldMask;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class ITSystemTest {
   private static DataCatalogClient client;
