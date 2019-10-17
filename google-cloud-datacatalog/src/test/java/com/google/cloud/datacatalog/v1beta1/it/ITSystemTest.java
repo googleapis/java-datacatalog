@@ -27,9 +27,9 @@ import com.google.cloud.datacatalog.TagTemplate;
 import com.google.cloud.datacatalog.TagTemplateField;
 import com.google.cloud.datacatalog.TagTemplateName;
 import com.google.cloud.datacatalog.v1beta1.DataCatalogClient;
-import com.google.cloud.datacatalog.v1beta1.DataCatalogHelper;
 import com.google.iam.v1.Policy;
 import com.google.protobuf.FieldMask;
+import java.util.UUID;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -38,9 +38,12 @@ public class ITSystemTest {
   private static DataCatalogClient client;
 
   private static final String PROJECT_ID = ServiceOptions.getDefaultProjectId();
-  private static final String TAG_TEMPLATE_ID = DataCatalogHelper.generateTagTemplateId();
-  private static final String TAG_TEMPLATE_FIELD_ID = DataCatalogHelper.generateTagTempleFieldId();
-  private static final String ENTRY_GROUP_ID = DataCatalogHelper.generateEntryGroupId();
+  private static final String TAG_TEMPLATE_ID =
+      "test_tag_template_id_" + UUID.randomUUID().toString().substring(0, 8);
+  private static final String TAG_TEMPLATE_FIELD_ID =
+      "test_tag_template_field_id_" + UUID.randomUUID().toString().substring(0, 8);
+  private static final String ENTRY_GROUP_ID =
+      "test_entry_group_id_" + UUID.randomUUID().toString().substring(0, 8);
   private static final String TAG_TEMPLATE_DISPLAY_NAME = "test-tag-template-display";
   private static final String ENTRY_GROUP_DISPLAY_NAME = "test-entry-group-display";
   private static final String DESCRIPTION = "test-description";
@@ -73,7 +76,7 @@ public class ITSystemTest {
           .setType(FieldType.newBuilder().setPrimitiveType(FieldType.PrimitiveType.BOOL).build())
           .build();
 
-  private static final TagTemplate TAGTEMPLATE =
+  private static final TagTemplate TAG_TEMPLATE =
       TagTemplate.newBuilder()
           .setName(TAG_TEMPLATE_ID)
           .setDisplayName(TAG_TEMPLATE_DISPLAY_NAME)
@@ -91,7 +94,7 @@ public class ITSystemTest {
   @BeforeClass
   public static void beforeClass() throws Exception {
     client = DataCatalogClient.create();
-    client.createTagTemplate(PARENT, TAG_TEMPLATE_ID, TAGTEMPLATE);
+    client.createTagTemplate(PARENT, TAG_TEMPLATE_ID, TAG_TEMPLATE);
     client.createEntryGroup(PARENT, ENTRY_GROUP_ID, ENTRY_GROUP);
   }
 
