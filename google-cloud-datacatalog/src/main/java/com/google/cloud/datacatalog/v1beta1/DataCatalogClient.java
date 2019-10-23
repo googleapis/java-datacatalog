@@ -537,8 +537,7 @@ public class DataCatalogClient implements BackgroundResource {
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
    *   SearchCatalogRequest.Scope scope = SearchCatalogRequest.Scope.newBuilder().build();
    *   String query = "";
-   *   String orderBy = "";
-   *   for (SearchCatalogResult element : dataCatalogClient.searchCatalog(scope, query, orderBy).iterateAll()) {
+   *   for (SearchCatalogResult element : dataCatalogClient.searchCatalog(scope, query).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -551,22 +550,12 @@ public class DataCatalogClient implements BackgroundResource {
    *     <p>Note: Query tokens need to have a minimum of 3 characters for substring matching to work
    *     correctly. See [Data Catalog Search Syntax](/data-catalog/docs/how-to/search-reference) for
    *     more information.
-   * @param orderBy Specifies the ordering of results, currently supported case-sensitive choices
-   *     are:
-   *     <p>&#42; `relevance`, only supports desecending &#42; `last_access_timestamp [asc|desc]`,
-   *     defaults to descending if not specified &#42; `last_modified_timestamp [asc|desc]`,
-   *     defaults to descending if not specified
-   *     <p>If not specified, defaults to `relevance` descending.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final SearchCatalogPagedResponse searchCatalog(
-      SearchCatalogRequest.Scope scope, String query, String orderBy) {
+      SearchCatalogRequest.Scope scope, String query) {
     SearchCatalogRequest request =
-        SearchCatalogRequest.newBuilder()
-            .setScope(scope)
-            .setQuery(query)
-            .setOrderBy(orderBy)
-            .build();
+        SearchCatalogRequest.newBuilder().setScope(scope).setQuery(query).build();
     return searchCatalog(request);
   }
 
@@ -591,11 +580,9 @@ public class DataCatalogClient implements BackgroundResource {
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
    *   SearchCatalogRequest.Scope scope = SearchCatalogRequest.Scope.newBuilder().build();
    *   String query = "";
-   *   String orderBy = "";
    *   SearchCatalogRequest request = SearchCatalogRequest.newBuilder()
    *     .setScope(scope)
    *     .setQuery(query)
-   *     .setOrderBy(orderBy)
    *     .build();
    *   for (SearchCatalogResult element : dataCatalogClient.searchCatalog(request).iterateAll()) {
    *     // doThingsWith(element);
@@ -631,11 +618,9 @@ public class DataCatalogClient implements BackgroundResource {
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
    *   SearchCatalogRequest.Scope scope = SearchCatalogRequest.Scope.newBuilder().build();
    *   String query = "";
-   *   String orderBy = "";
    *   SearchCatalogRequest request = SearchCatalogRequest.newBuilder()
    *     .setScope(scope)
    *     .setQuery(query)
-   *     .setOrderBy(orderBy)
    *     .build();
    *   ApiFuture&lt;SearchCatalogPagedResponse&gt; future = dataCatalogClient.searchCatalogPagedCallable().futureCall(request);
    *   // Do something
@@ -671,11 +656,9 @@ public class DataCatalogClient implements BackgroundResource {
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
    *   SearchCatalogRequest.Scope scope = SearchCatalogRequest.Scope.newBuilder().build();
    *   String query = "";
-   *   String orderBy = "";
    *   SearchCatalogRequest request = SearchCatalogRequest.newBuilder()
    *     .setScope(scope)
    *     .setQuery(query)
-   *     .setOrderBy(orderBy)
    *     .build();
    *   while (true) {
    *     SearchCatalogResponse response = dataCatalogClient.searchCatalogCallable().call(request);

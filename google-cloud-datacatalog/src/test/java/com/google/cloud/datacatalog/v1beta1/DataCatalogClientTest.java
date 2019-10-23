@@ -128,9 +128,8 @@ public class DataCatalogClientTest {
 
     SearchCatalogRequest.Scope scope = SearchCatalogRequest.Scope.newBuilder().build();
     String query = "query107944136";
-    String orderBy = "orderBy1234304744";
 
-    SearchCatalogPagedResponse pagedListResponse = client.searchCatalog(scope, query, orderBy);
+    SearchCatalogPagedResponse pagedListResponse = client.searchCatalog(scope, query);
 
     List<SearchCatalogResult> resources = Lists.newArrayList(pagedListResponse.iterateAll());
     Assert.assertEquals(1, resources.size());
@@ -142,7 +141,6 @@ public class DataCatalogClientTest {
 
     Assert.assertEquals(scope, actualRequest.getScope());
     Assert.assertEquals(query, actualRequest.getQuery());
-    Assert.assertEquals(orderBy, actualRequest.getOrderBy());
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -158,9 +156,8 @@ public class DataCatalogClientTest {
     try {
       SearchCatalogRequest.Scope scope = SearchCatalogRequest.Scope.newBuilder().build();
       String query = "query107944136";
-      String orderBy = "orderBy1234304744";
 
-      client.searchCatalog(scope, query, orderBy);
+      client.searchCatalog(scope, query);
       Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception
