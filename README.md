@@ -17,8 +17,6 @@ Data Catalog is a fully managed and scalable metadata management service that em
 
 Quickstart
 ----------
-
-[//]: # ({x-version-update-start:google-cloud-datacatalog:released})
 If you are using Maven with Bom, Add this to your pom.xml file.
 ```xml
 <dependencyManagement>
@@ -37,12 +35,13 @@ If you are using Maven with Bom, Add this to your pom.xml file.
   <artifactId>google-cloud-datacatalog</artifactId>
 </dependency>
 ```
+[//]: # ({x-version-update-start:google-cloud-datacatalog:released})
 If you are using Maven without Bom, Add this to your dependencies.
 ```xml
 <dependency>
   <groupId>com.google.cloud</groupId>
   <artifactId>google-cloud-datacatalog</artifactId>
-  <version>0.29.0-alpha</version>
+  <version>0.29.1-alpha</version>
 </dependency>
 ```
 If you are using Gradle, add this to your dependencies
