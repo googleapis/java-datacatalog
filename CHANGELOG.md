@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.29.1](https://www.github.com/googleapis/java-datacatalog/compare/v0.29.0...v0.29.1) (2019-11-18)
+
+
+### Documentation
+
+* remove orderBy from doc samples ([#28](https://www.github.com/googleapis/java-datacatalog/issues/28)) ([a9c3485](https://www.github.com/googleapis/java-datacatalog/commit/a9c348510f3e47b4ec4cdd2de1b0a042a0f6af99))
+
 ## [0.29.0](https://www.github.com/googleapis/java-datacatalog/compare/0.28.0...v0.29.0) (2019-10-25)
 
 
