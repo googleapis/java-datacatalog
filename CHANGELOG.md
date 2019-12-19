@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.30.1](https://www.github.com/googleapis/java-datacatalog/compare/v0.30.0...v0.30.1) (2019-12-19)
+
+
+### Documentation
+
+* **regen:** updated docs from protoc update ([#42](https://www.github.com/googleapis/java-datacatalog/issues/42)) ([87883e1](https://www.github.com/googleapis/java-datacatalog/commit/87883e1effed1815dd53adf1f5fc39b86508b2e2))
+
 ## [0.30.0](https://www.github.com/googleapis/java-datacatalog/compare/v0.29.0...v0.30.0) (2019-11-20)
 
 
