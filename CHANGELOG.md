@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.33.1](https://www.github.com/googleapis/java-datacatalog/compare/v0.33.0...v0.33.1) (2020-03-30)
+
+
+### Dependencies
+
+* update dependency com.google.api:api-common to v1.9.0 ([#129](https://www.github.com/googleapis/java-datacatalog/issues/129)) ([e832dac](https://www.github.com/googleapis/java-datacatalog/commit/e832dac064d43461e452f4b020adf20d57f510ea))
+
 ## [0.33.0](https://www.github.com/googleapis/java-datacatalog/compare/v0.32.1...v0.33.0) (2020-03-11)
 
 
