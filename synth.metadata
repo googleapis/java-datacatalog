@@ -1,6 +1,13 @@
 {
-  "updateTime": "2020-04-06T23:11:06.166055Z",
+  "updateTime": "2020-04-08T23:20:53.480111Z",
   "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/java-datacatalog.git",
+        "sha": "83135fb23d1e6ca16720c12138eef6294f3db1ec"
+      }
+    },
     {
       "git": {
         "name": "googleapis",
