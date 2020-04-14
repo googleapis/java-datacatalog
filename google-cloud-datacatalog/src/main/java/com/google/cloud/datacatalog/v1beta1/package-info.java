@@ -29,8 +29,10 @@
  * <pre>
  * <code>
  * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
- *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
- *   dataCatalogClient.deleteEntryGroup(name);
+ *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
+ *   String entryGroupId = "";
+ *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
+ *   EntryGroup response = dataCatalogClient.createEntryGroup(formattedParent, entryGroupId, entryGroup);
  * }
  * </code>
  * </pre>
@@ -45,9 +47,8 @@
  * <pre>
  * <code>
  * try (PolicyTagManagerClient policyTagManagerClient = PolicyTagManagerClient.create()) {
- *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
- *   Taxonomy taxonomy = Taxonomy.newBuilder().build();
- *   Taxonomy response = policyTagManagerClient.createTaxonomy(parent, taxonomy);
+ *   CreateTaxonomyRequest request = CreateTaxonomyRequest.newBuilder().build();
+ *   Taxonomy response = policyTagManagerClient.createTaxonomy(request);
  * }
  * </code>
  * </pre>
@@ -63,10 +64,7 @@
  * <pre>
  * <code>
  * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient = PolicyTagManagerSerializationClient.create()) {
- *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
- *   ImportTaxonomiesRequest request = ImportTaxonomiesRequest.newBuilder()
- *     .setParent(parent.toString())
- *     .build();
+ *   ImportTaxonomiesRequest request = ImportTaxonomiesRequest.newBuilder().build();
  *   ImportTaxonomiesResponse response = policyTagManagerSerializationClient.importTaxonomies(request);
  * }
  * </code>

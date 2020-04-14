@@ -15,8 +15,6 @@
  */
 package com.google.cloud.datacatalog.v1beta1.stub;
 
-import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.ListEntriesPagedResponse;
-import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.ListEntryGroupsPagedResponse;
 import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.ListTagsPagedResponse;
 import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.SearchCatalogPagedResponse;
 
@@ -106,16 +104,16 @@ import org.threeten.bp.Duration;
  * <p>The builder of this class is recursive, so contained classes are themselves builders. When
  * build() is called, the tree of builders is called to create the complete settings object.
  *
- * <p>For example, to set the total timeout of deleteEntryGroup to 30 seconds:
+ * <p>For example, to set the total timeout of createEntryGroup to 30 seconds:
  *
  * <pre>
  * <code>
  * DataCatalogStubSettings.Builder dataCatalogSettingsBuilder =
  *     DataCatalogStubSettings.newBuilder();
  * dataCatalogSettingsBuilder
- *     .deleteEntryGroupSettings()
+ *     .createEntryGroupSettings()
  *     .setRetrySettings(
- *         dataCatalogSettingsBuilder.deleteEntryGroupSettings().getRetrySettings().toBuilder()
+ *         dataCatalogSettingsBuilder.createEntryGroupSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
  * DataCatalogStubSettings dataCatalogSettings = dataCatalogSettingsBuilder.build();
@@ -132,39 +130,37 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
   private final PagedCallSettings<
           SearchCatalogRequest, SearchCatalogResponse, SearchCatalogPagedResponse>
       searchCatalogSettings;
+  private final UnaryCallSettings<CreateEntryGroupRequest, EntryGroup> createEntryGroupSettings;
+  private final UnaryCallSettings<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings;
   private final UnaryCallSettings<DeleteEntryGroupRequest, Empty> deleteEntryGroupSettings;
+  private final UnaryCallSettings<CreateEntryRequest, Entry> createEntrySettings;
+  private final UnaryCallSettings<UpdateEntryRequest, Entry> updateEntrySettings;
   private final UnaryCallSettings<DeleteEntryRequest, Empty> deleteEntrySettings;
   private final UnaryCallSettings<GetEntryRequest, Entry> getEntrySettings;
   private final UnaryCallSettings<LookupEntryRequest, Entry> lookupEntrySettings;
-  private final UnaryCallSettings<DeleteTagTemplateRequest, Empty> deleteTagTemplateSettings;
-  private final UnaryCallSettings<DeleteTagTemplateFieldRequest, Empty>
-      deleteTagTemplateFieldSettings;
-  private final UnaryCallSettings<DeleteTagRequest, Empty> deleteTagSettings;
-  private final UnaryCallSettings<GetIamPolicyRequest, Policy> getIamPolicySettings;
-  private final UnaryCallSettings<CreateEntryGroupRequest, EntryGroup> createEntryGroupSettings;
-  private final UnaryCallSettings<UpdateEntryGroupRequest, EntryGroup> updateEntryGroupSettings;
-  private final UnaryCallSettings<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings;
-  private final PagedCallSettings<
-          ListEntryGroupsRequest, ListEntryGroupsResponse, ListEntryGroupsPagedResponse>
+  private final UnaryCallSettings<ListEntryGroupsRequest, ListEntryGroupsResponse>
       listEntryGroupsSettings;
-  private final UnaryCallSettings<CreateEntryRequest, Entry> createEntrySettings;
-  private final UnaryCallSettings<UpdateEntryRequest, Entry> updateEntrySettings;
-  private final PagedCallSettings<ListEntriesRequest, ListEntriesResponse, ListEntriesPagedResponse>
-      listEntriesSettings;
+  private final UnaryCallSettings<ListEntriesRequest, ListEntriesResponse> listEntriesSettings;
+  private final UnaryCallSettings<UpdateEntryGroupRequest, EntryGroup> updateEntryGroupSettings;
   private final UnaryCallSettings<CreateTagTemplateRequest, TagTemplate> createTagTemplateSettings;
   private final UnaryCallSettings<GetTagTemplateRequest, TagTemplate> getTagTemplateSettings;
   private final UnaryCallSettings<UpdateTagTemplateRequest, TagTemplate> updateTagTemplateSettings;
+  private final UnaryCallSettings<DeleteTagTemplateRequest, Empty> deleteTagTemplateSettings;
   private final UnaryCallSettings<CreateTagTemplateFieldRequest, TagTemplateField>
       createTagTemplateFieldSettings;
   private final UnaryCallSettings<UpdateTagTemplateFieldRequest, TagTemplateField>
       updateTagTemplateFieldSettings;
   private final UnaryCallSettings<RenameTagTemplateFieldRequest, TagTemplateField>
       renameTagTemplateFieldSettings;
+  private final UnaryCallSettings<DeleteTagTemplateFieldRequest, Empty>
+      deleteTagTemplateFieldSettings;
   private final UnaryCallSettings<CreateTagRequest, Tag> createTagSettings;
   private final UnaryCallSettings<UpdateTagRequest, Tag> updateTagSettings;
+  private final UnaryCallSettings<DeleteTagRequest, Empty> deleteTagSettings;
   private final PagedCallSettings<ListTagsRequest, ListTagsResponse, ListTagsPagedResponse>
       listTagsSettings;
   private final UnaryCallSettings<SetIamPolicyRequest, Policy> setIamPolicySettings;
+  private final UnaryCallSettings<GetIamPolicyRequest, Policy> getIamPolicySettings;
   private final UnaryCallSettings<TestIamPermissionsRequest, TestIamPermissionsResponse>
       testIamPermissionsSettings;
 
@@ -174,9 +170,29 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
     return searchCatalogSettings;
   }
 
+  /** Returns the object with the settings used for calls to createEntryGroup. */
+  public UnaryCallSettings<CreateEntryGroupRequest, EntryGroup> createEntryGroupSettings() {
+    return createEntryGroupSettings;
+  }
+
+  /** Returns the object with the settings used for calls to getEntryGroup. */
+  public UnaryCallSettings<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings() {
+    return getEntryGroupSettings;
+  }
+
   /** Returns the object with the settings used for calls to deleteEntryGroup. */
   public UnaryCallSettings<DeleteEntryGroupRequest, Empty> deleteEntryGroupSettings() {
     return deleteEntryGroupSettings;
+  }
+
+  /** Returns the object with the settings used for calls to createEntry. */
+  public UnaryCallSettings<CreateEntryRequest, Entry> createEntrySettings() {
+    return createEntrySettings;
+  }
+
+  /** Returns the object with the settings used for calls to updateEntry. */
+  public UnaryCallSettings<UpdateEntryRequest, Entry> updateEntrySettings() {
+    return updateEntrySettings;
   }
 
   /** Returns the object with the settings used for calls to deleteEntry. */
@@ -194,62 +210,20 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
     return lookupEntrySettings;
   }
 
-  /** Returns the object with the settings used for calls to deleteTagTemplate. */
-  public UnaryCallSettings<DeleteTagTemplateRequest, Empty> deleteTagTemplateSettings() {
-    return deleteTagTemplateSettings;
+  /** Returns the object with the settings used for calls to listEntryGroups. */
+  public UnaryCallSettings<ListEntryGroupsRequest, ListEntryGroupsResponse>
+      listEntryGroupsSettings() {
+    return listEntryGroupsSettings;
   }
 
-  /** Returns the object with the settings used for calls to deleteTagTemplateField. */
-  public UnaryCallSettings<DeleteTagTemplateFieldRequest, Empty> deleteTagTemplateFieldSettings() {
-    return deleteTagTemplateFieldSettings;
-  }
-
-  /** Returns the object with the settings used for calls to deleteTag. */
-  public UnaryCallSettings<DeleteTagRequest, Empty> deleteTagSettings() {
-    return deleteTagSettings;
-  }
-
-  /** Returns the object with the settings used for calls to getIamPolicy. */
-  public UnaryCallSettings<GetIamPolicyRequest, Policy> getIamPolicySettings() {
-    return getIamPolicySettings;
-  }
-
-  /** Returns the object with the settings used for calls to createEntryGroup. */
-  public UnaryCallSettings<CreateEntryGroupRequest, EntryGroup> createEntryGroupSettings() {
-    return createEntryGroupSettings;
+  /** Returns the object with the settings used for calls to listEntries. */
+  public UnaryCallSettings<ListEntriesRequest, ListEntriesResponse> listEntriesSettings() {
+    return listEntriesSettings;
   }
 
   /** Returns the object with the settings used for calls to updateEntryGroup. */
   public UnaryCallSettings<UpdateEntryGroupRequest, EntryGroup> updateEntryGroupSettings() {
     return updateEntryGroupSettings;
-  }
-
-  /** Returns the object with the settings used for calls to getEntryGroup. */
-  public UnaryCallSettings<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings() {
-    return getEntryGroupSettings;
-  }
-
-  /** Returns the object with the settings used for calls to listEntryGroups. */
-  public PagedCallSettings<
-          ListEntryGroupsRequest, ListEntryGroupsResponse, ListEntryGroupsPagedResponse>
-      listEntryGroupsSettings() {
-    return listEntryGroupsSettings;
-  }
-
-  /** Returns the object with the settings used for calls to createEntry. */
-  public UnaryCallSettings<CreateEntryRequest, Entry> createEntrySettings() {
-    return createEntrySettings;
-  }
-
-  /** Returns the object with the settings used for calls to updateEntry. */
-  public UnaryCallSettings<UpdateEntryRequest, Entry> updateEntrySettings() {
-    return updateEntrySettings;
-  }
-
-  /** Returns the object with the settings used for calls to listEntries. */
-  public PagedCallSettings<ListEntriesRequest, ListEntriesResponse, ListEntriesPagedResponse>
-      listEntriesSettings() {
-    return listEntriesSettings;
   }
 
   /** Returns the object with the settings used for calls to createTagTemplate. */
@@ -265,6 +239,11 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
   /** Returns the object with the settings used for calls to updateTagTemplate. */
   public UnaryCallSettings<UpdateTagTemplateRequest, TagTemplate> updateTagTemplateSettings() {
     return updateTagTemplateSettings;
+  }
+
+  /** Returns the object with the settings used for calls to deleteTagTemplate. */
+  public UnaryCallSettings<DeleteTagTemplateRequest, Empty> deleteTagTemplateSettings() {
+    return deleteTagTemplateSettings;
   }
 
   /** Returns the object with the settings used for calls to createTagTemplateField. */
@@ -285,6 +264,11 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
     return renameTagTemplateFieldSettings;
   }
 
+  /** Returns the object with the settings used for calls to deleteTagTemplateField. */
+  public UnaryCallSettings<DeleteTagTemplateFieldRequest, Empty> deleteTagTemplateFieldSettings() {
+    return deleteTagTemplateFieldSettings;
+  }
+
   /** Returns the object with the settings used for calls to createTag. */
   public UnaryCallSettings<CreateTagRequest, Tag> createTagSettings() {
     return createTagSettings;
@@ -293,6 +277,11 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
   /** Returns the object with the settings used for calls to updateTag. */
   public UnaryCallSettings<UpdateTagRequest, Tag> updateTagSettings() {
     return updateTagSettings;
+  }
+
+  /** Returns the object with the settings used for calls to deleteTag. */
+  public UnaryCallSettings<DeleteTagRequest, Empty> deleteTagSettings() {
+    return deleteTagSettings;
   }
 
   /** Returns the object with the settings used for calls to listTags. */
@@ -304,6 +293,11 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
   /** Returns the object with the settings used for calls to setIamPolicy. */
   public UnaryCallSettings<SetIamPolicyRequest, Policy> setIamPolicySettings() {
     return setIamPolicySettings;
+  }
+
+  /** Returns the object with the settings used for calls to getIamPolicy. */
+  public UnaryCallSettings<GetIamPolicyRequest, Policy> getIamPolicySettings() {
+    return getIamPolicySettings;
   }
 
   /** Returns the object with the settings used for calls to testIamPermissions. */
@@ -382,31 +376,31 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
     super(settingsBuilder);
 
     searchCatalogSettings = settingsBuilder.searchCatalogSettings().build();
+    createEntryGroupSettings = settingsBuilder.createEntryGroupSettings().build();
+    getEntryGroupSettings = settingsBuilder.getEntryGroupSettings().build();
     deleteEntryGroupSettings = settingsBuilder.deleteEntryGroupSettings().build();
+    createEntrySettings = settingsBuilder.createEntrySettings().build();
+    updateEntrySettings = settingsBuilder.updateEntrySettings().build();
     deleteEntrySettings = settingsBuilder.deleteEntrySettings().build();
     getEntrySettings = settingsBuilder.getEntrySettings().build();
     lookupEntrySettings = settingsBuilder.lookupEntrySettings().build();
-    deleteTagTemplateSettings = settingsBuilder.deleteTagTemplateSettings().build();
-    deleteTagTemplateFieldSettings = settingsBuilder.deleteTagTemplateFieldSettings().build();
-    deleteTagSettings = settingsBuilder.deleteTagSettings().build();
-    getIamPolicySettings = settingsBuilder.getIamPolicySettings().build();
-    createEntryGroupSettings = settingsBuilder.createEntryGroupSettings().build();
-    updateEntryGroupSettings = settingsBuilder.updateEntryGroupSettings().build();
-    getEntryGroupSettings = settingsBuilder.getEntryGroupSettings().build();
     listEntryGroupsSettings = settingsBuilder.listEntryGroupsSettings().build();
-    createEntrySettings = settingsBuilder.createEntrySettings().build();
-    updateEntrySettings = settingsBuilder.updateEntrySettings().build();
     listEntriesSettings = settingsBuilder.listEntriesSettings().build();
+    updateEntryGroupSettings = settingsBuilder.updateEntryGroupSettings().build();
     createTagTemplateSettings = settingsBuilder.createTagTemplateSettings().build();
     getTagTemplateSettings = settingsBuilder.getTagTemplateSettings().build();
     updateTagTemplateSettings = settingsBuilder.updateTagTemplateSettings().build();
+    deleteTagTemplateSettings = settingsBuilder.deleteTagTemplateSettings().build();
     createTagTemplateFieldSettings = settingsBuilder.createTagTemplateFieldSettings().build();
     updateTagTemplateFieldSettings = settingsBuilder.updateTagTemplateFieldSettings().build();
     renameTagTemplateFieldSettings = settingsBuilder.renameTagTemplateFieldSettings().build();
+    deleteTagTemplateFieldSettings = settingsBuilder.deleteTagTemplateFieldSettings().build();
     createTagSettings = settingsBuilder.createTagSettings().build();
     updateTagSettings = settingsBuilder.updateTagSettings().build();
+    deleteTagSettings = settingsBuilder.deleteTagSettings().build();
     listTagsSettings = settingsBuilder.listTagsSettings().build();
     setIamPolicySettings = settingsBuilder.setIamPolicySettings().build();
+    getIamPolicySettings = settingsBuilder.getIamPolicySettings().build();
     testIamPermissionsSettings = settingsBuilder.testIamPermissionsSettings().build();
   }
 
@@ -445,81 +439,6 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
               return payload.getResultsList() != null
                   ? payload.getResultsList()
                   : ImmutableList.<SearchCatalogResult>of();
-            }
-          };
-
-  private static final PagedListDescriptor<
-          ListEntryGroupsRequest, ListEntryGroupsResponse, EntryGroup>
-      LIST_ENTRY_GROUPS_PAGE_STR_DESC =
-          new PagedListDescriptor<ListEntryGroupsRequest, ListEntryGroupsResponse, EntryGroup>() {
-            @Override
-            public String emptyToken() {
-              return "";
-            }
-
-            @Override
-            public ListEntryGroupsRequest injectToken(
-                ListEntryGroupsRequest payload, String token) {
-              return ListEntryGroupsRequest.newBuilder(payload).setPageToken(token).build();
-            }
-
-            @Override
-            public ListEntryGroupsRequest injectPageSize(
-                ListEntryGroupsRequest payload, int pageSize) {
-              return ListEntryGroupsRequest.newBuilder(payload).setPageSize(pageSize).build();
-            }
-
-            @Override
-            public Integer extractPageSize(ListEntryGroupsRequest payload) {
-              return payload.getPageSize();
-            }
-
-            @Override
-            public String extractNextToken(ListEntryGroupsResponse payload) {
-              return payload.getNextPageToken();
-            }
-
-            @Override
-            public Iterable<EntryGroup> extractResources(ListEntryGroupsResponse payload) {
-              return payload.getEntryGroupsList() != null
-                  ? payload.getEntryGroupsList()
-                  : ImmutableList.<EntryGroup>of();
-            }
-          };
-
-  private static final PagedListDescriptor<ListEntriesRequest, ListEntriesResponse, Entry>
-      LIST_ENTRIES_PAGE_STR_DESC =
-          new PagedListDescriptor<ListEntriesRequest, ListEntriesResponse, Entry>() {
-            @Override
-            public String emptyToken() {
-              return "";
-            }
-
-            @Override
-            public ListEntriesRequest injectToken(ListEntriesRequest payload, String token) {
-              return ListEntriesRequest.newBuilder(payload).setPageToken(token).build();
-            }
-
-            @Override
-            public ListEntriesRequest injectPageSize(ListEntriesRequest payload, int pageSize) {
-              return ListEntriesRequest.newBuilder(payload).setPageSize(pageSize).build();
-            }
-
-            @Override
-            public Integer extractPageSize(ListEntriesRequest payload) {
-              return payload.getPageSize();
-            }
-
-            @Override
-            public String extractNextToken(ListEntriesResponse payload) {
-              return payload.getNextPageToken();
-            }
-
-            @Override
-            public Iterable<Entry> extractResources(ListEntriesResponse payload) {
-              return payload.getEntriesList() != null
-                  ? payload.getEntriesList()
-                  : ImmutableList.<Entry>of();
             }
           };
 
@@ -578,40 +497,6 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
           };
 
   private static final PagedListResponseFactory<
-          ListEntryGroupsRequest, ListEntryGroupsResponse, ListEntryGroupsPagedResponse>
-      LIST_ENTRY_GROUPS_PAGE_STR_FACT =
-          new PagedListResponseFactory<
-              ListEntryGroupsRequest, ListEntryGroupsResponse, ListEntryGroupsPagedResponse>() {
-            @Override
-            public ApiFuture<ListEntryGroupsPagedResponse> getFuturePagedResponse(
-                UnaryCallable<ListEntryGroupsRequest, ListEntryGroupsResponse> callable,
-                ListEntryGroupsRequest request,
-                ApiCallContext context,
-                ApiFuture<ListEntryGroupsResponse> futureResponse) {
-              PageContext<ListEntryGroupsRequest, ListEntryGroupsResponse, EntryGroup> pageContext =
-                  PageContext.create(callable, LIST_ENTRY_GROUPS_PAGE_STR_DESC, request, context);
-              return ListEntryGroupsPagedResponse.createAsync(pageContext, futureResponse);
-            }
-          };
-
-  private static final PagedListResponseFactory<
-          ListEntriesRequest, ListEntriesResponse, ListEntriesPagedResponse>
-      LIST_ENTRIES_PAGE_STR_FACT =
-          new PagedListResponseFactory<
-              ListEntriesRequest, ListEntriesResponse, ListEntriesPagedResponse>() {
-            @Override
-            public ApiFuture<ListEntriesPagedResponse> getFuturePagedResponse(
-                UnaryCallable<ListEntriesRequest, ListEntriesResponse> callable,
-                ListEntriesRequest request,
-                ApiCallContext context,
-                ApiFuture<ListEntriesResponse> futureResponse) {
-              PageContext<ListEntriesRequest, ListEntriesResponse, Entry> pageContext =
-                  PageContext.create(callable, LIST_ENTRIES_PAGE_STR_DESC, request, context);
-              return ListEntriesPagedResponse.createAsync(pageContext, futureResponse);
-            }
-          };
-
-  private static final PagedListResponseFactory<
           ListTagsRequest, ListTagsResponse, ListTagsPagedResponse>
       LIST_TAGS_PAGE_STR_FACT =
           new PagedListResponseFactory<ListTagsRequest, ListTagsResponse, ListTagsPagedResponse>() {
@@ -634,48 +519,46 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
     private final PagedCallSettings.Builder<
             SearchCatalogRequest, SearchCatalogResponse, SearchCatalogPagedResponse>
         searchCatalogSettings;
+    private final UnaryCallSettings.Builder<CreateEntryGroupRequest, EntryGroup>
+        createEntryGroupSettings;
+    private final UnaryCallSettings.Builder<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings;
     private final UnaryCallSettings.Builder<DeleteEntryGroupRequest, Empty>
         deleteEntryGroupSettings;
+    private final UnaryCallSettings.Builder<CreateEntryRequest, Entry> createEntrySettings;
+    private final UnaryCallSettings.Builder<UpdateEntryRequest, Entry> updateEntrySettings;
     private final UnaryCallSettings.Builder<DeleteEntryRequest, Empty> deleteEntrySettings;
     private final UnaryCallSettings.Builder<GetEntryRequest, Entry> getEntrySettings;
     private final UnaryCallSettings.Builder<LookupEntryRequest, Entry> lookupEntrySettings;
-    private final UnaryCallSettings.Builder<DeleteTagTemplateRequest, Empty>
-        deleteTagTemplateSettings;
-    private final UnaryCallSettings.Builder<DeleteTagTemplateFieldRequest, Empty>
-        deleteTagTemplateFieldSettings;
-    private final UnaryCallSettings.Builder<DeleteTagRequest, Empty> deleteTagSettings;
-    private final UnaryCallSettings.Builder<GetIamPolicyRequest, Policy> getIamPolicySettings;
-    private final UnaryCallSettings.Builder<CreateEntryGroupRequest, EntryGroup>
-        createEntryGroupSettings;
+    private final UnaryCallSettings.Builder<ListEntryGroupsRequest, ListEntryGroupsResponse>
+        listEntryGroupsSettings;
+    private final UnaryCallSettings.Builder<ListEntriesRequest, ListEntriesResponse>
+        listEntriesSettings;
     private final UnaryCallSettings.Builder<UpdateEntryGroupRequest, EntryGroup>
         updateEntryGroupSettings;
-    private final UnaryCallSettings.Builder<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings;
-    private final PagedCallSettings.Builder<
-            ListEntryGroupsRequest, ListEntryGroupsResponse, ListEntryGroupsPagedResponse>
-        listEntryGroupsSettings;
-    private final UnaryCallSettings.Builder<CreateEntryRequest, Entry> createEntrySettings;
-    private final UnaryCallSettings.Builder<UpdateEntryRequest, Entry> updateEntrySettings;
-    private final PagedCallSettings.Builder<
-            ListEntriesRequest, ListEntriesResponse, ListEntriesPagedResponse>
-        listEntriesSettings;
     private final UnaryCallSettings.Builder<CreateTagTemplateRequest, TagTemplate>
         createTagTemplateSettings;
     private final UnaryCallSettings.Builder<GetTagTemplateRequest, TagTemplate>
         getTagTemplateSettings;
     private final UnaryCallSettings.Builder<UpdateTagTemplateRequest, TagTemplate>
         updateTagTemplateSettings;
+    private final UnaryCallSettings.Builder<DeleteTagTemplateRequest, Empty>
+        deleteTagTemplateSettings;
     private final UnaryCallSettings.Builder<CreateTagTemplateFieldRequest, TagTemplateField>
         createTagTemplateFieldSettings;
     private final UnaryCallSettings.Builder<UpdateTagTemplateFieldRequest, TagTemplateField>
         updateTagTemplateFieldSettings;
     private final UnaryCallSettings.Builder<RenameTagTemplateFieldRequest, TagTemplateField>
         renameTagTemplateFieldSettings;
+    private final UnaryCallSettings.Builder<DeleteTagTemplateFieldRequest, Empty>
+        deleteTagTemplateFieldSettings;
     private final UnaryCallSettings.Builder<CreateTagRequest, Tag> createTagSettings;
     private final UnaryCallSettings.Builder<UpdateTagRequest, Tag> updateTagSettings;
+    private final UnaryCallSettings.Builder<DeleteTagRequest, Empty> deleteTagSettings;
     private final PagedCallSettings.Builder<
             ListTagsRequest, ListTagsResponse, ListTagsPagedResponse>
         listTagsSettings;
     private final UnaryCallSettings.Builder<SetIamPolicyRequest, Policy> setIamPolicySettings;
+    private final UnaryCallSettings.Builder<GetIamPolicyRequest, Policy> getIamPolicySettings;
     private final UnaryCallSettings.Builder<TestIamPermissionsRequest, TestIamPermissionsResponse>
         testIamPermissionsSettings;
 
@@ -722,7 +605,15 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
 
       searchCatalogSettings = PagedCallSettings.newBuilder(SEARCH_CATALOG_PAGE_STR_FACT);
 
+      createEntryGroupSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
+      getEntryGroupSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
       deleteEntryGroupSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
+      createEntrySettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
+      updateEntrySettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       deleteEntrySettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
@@ -730,27 +621,11 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
 
       lookupEntrySettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
-      deleteTagTemplateSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+      listEntryGroupsSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
-      deleteTagTemplateFieldSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
-
-      deleteTagSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
-
-      getIamPolicySettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
-
-      createEntryGroupSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+      listEntriesSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       updateEntryGroupSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
-
-      getEntryGroupSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
-
-      listEntryGroupsSettings = PagedCallSettings.newBuilder(LIST_ENTRY_GROUPS_PAGE_STR_FACT);
-
-      createEntrySettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
-
-      updateEntrySettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
-
-      listEntriesSettings = PagedCallSettings.newBuilder(LIST_ENTRIES_PAGE_STR_FACT);
 
       createTagTemplateSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
@@ -758,50 +633,58 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
 
       updateTagTemplateSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
+      deleteTagTemplateSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
       createTagTemplateFieldSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       updateTagTemplateFieldSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       renameTagTemplateFieldSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
+      deleteTagTemplateFieldSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
       createTagSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       updateTagSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
+      deleteTagSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
       listTagsSettings = PagedCallSettings.newBuilder(LIST_TAGS_PAGE_STR_FACT);
 
       setIamPolicySettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
+
+      getIamPolicySettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       testIamPermissionsSettings = UnaryCallSettings.newUnaryCallSettingsBuilder();
 
       unaryMethodSettingsBuilders =
           ImmutableList.<UnaryCallSettings.Builder<?, ?>>of(
               searchCatalogSettings,
+              createEntryGroupSettings,
+              getEntryGroupSettings,
               deleteEntryGroupSettings,
+              createEntrySettings,
+              updateEntrySettings,
               deleteEntrySettings,
               getEntrySettings,
               lookupEntrySettings,
-              deleteTagTemplateSettings,
-              deleteTagTemplateFieldSettings,
-              deleteTagSettings,
-              getIamPolicySettings,
-              createEntryGroupSettings,
-              updateEntryGroupSettings,
-              getEntryGroupSettings,
               listEntryGroupsSettings,
-              createEntrySettings,
-              updateEntrySettings,
               listEntriesSettings,
+              updateEntryGroupSettings,
               createTagTemplateSettings,
               getTagTemplateSettings,
               updateTagTemplateSettings,
+              deleteTagTemplateSettings,
               createTagTemplateFieldSettings,
               updateTagTemplateFieldSettings,
               renameTagTemplateFieldSettings,
+              deleteTagTemplateFieldSettings,
               createTagSettings,
               updateTagSettings,
+              deleteTagSettings,
               listTagsSettings,
               setIamPolicySettings,
+              getIamPolicySettings,
               testIamPermissionsSettings);
 
       initDefaults(this);
@@ -824,8 +707,28 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
+          .createEntryGroupSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .getEntryGroupSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
           .deleteEntryGroupSettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .createEntrySettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .updateEntrySettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
@@ -844,58 +747,18 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
-          .deleteTagTemplateSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
-          .deleteTagTemplateFieldSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
-          .deleteTagSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
-          .getIamPolicySettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
-          .createEntryGroupSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
-          .updateEntryGroupSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
-          .getEntryGroupSettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
           .listEntryGroupsSettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
-          .createEntrySettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
-          .updateEntrySettings()
-          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
-          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
-
-      builder
           .listEntriesSettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .updateEntryGroupSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
@@ -914,6 +777,11 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
+          .deleteTagTemplateSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
           .createTagTemplateFieldSettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
@@ -929,6 +797,11 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
+          .deleteTagTemplateFieldSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
           .createTagSettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
@@ -939,12 +812,22 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
+          .deleteTagSettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
           .listTagsSettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
       builder
           .setIamPolicySettings()
+          .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
+          .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
+
+      builder
+          .getIamPolicySettings()
           .setRetryableCodes(RETRYABLE_CODE_DEFINITIONS.get("non_idempotent"))
           .setRetrySettings(RETRY_PARAM_DEFINITIONS.get("default"));
 
@@ -960,61 +843,61 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
       super(settings);
 
       searchCatalogSettings = settings.searchCatalogSettings.toBuilder();
+      createEntryGroupSettings = settings.createEntryGroupSettings.toBuilder();
+      getEntryGroupSettings = settings.getEntryGroupSettings.toBuilder();
       deleteEntryGroupSettings = settings.deleteEntryGroupSettings.toBuilder();
+      createEntrySettings = settings.createEntrySettings.toBuilder();
+      updateEntrySettings = settings.updateEntrySettings.toBuilder();
       deleteEntrySettings = settings.deleteEntrySettings.toBuilder();
       getEntrySettings = settings.getEntrySettings.toBuilder();
       lookupEntrySettings = settings.lookupEntrySettings.toBuilder();
-      deleteTagTemplateSettings = settings.deleteTagTemplateSettings.toBuilder();
-      deleteTagTemplateFieldSettings = settings.deleteTagTemplateFieldSettings.toBuilder();
-      deleteTagSettings = settings.deleteTagSettings.toBuilder();
-      getIamPolicySettings = settings.getIamPolicySettings.toBuilder();
-      createEntryGroupSettings = settings.createEntryGroupSettings.toBuilder();
-      updateEntryGroupSettings = settings.updateEntryGroupSettings.toBuilder();
-      getEntryGroupSettings = settings.getEntryGroupSettings.toBuilder();
       listEntryGroupsSettings = settings.listEntryGroupsSettings.toBuilder();
-      createEntrySettings = settings.createEntrySettings.toBuilder();
-      updateEntrySettings = settings.updateEntrySettings.toBuilder();
       listEntriesSettings = settings.listEntriesSettings.toBuilder();
+      updateEntryGroupSettings = settings.updateEntryGroupSettings.toBuilder();
       createTagTemplateSettings = settings.createTagTemplateSettings.toBuilder();
       getTagTemplateSettings = settings.getTagTemplateSettings.toBuilder();
       updateTagTemplateSettings = settings.updateTagTemplateSettings.toBuilder();
+      deleteTagTemplateSettings = settings.deleteTagTemplateSettings.toBuilder();
       createTagTemplateFieldSettings = settings.createTagTemplateFieldSettings.toBuilder();
       updateTagTemplateFieldSettings = settings.updateTagTemplateFieldSettings.toBuilder();
       renameTagTemplateFieldSettings = settings.renameTagTemplateFieldSettings.toBuilder();
+      deleteTagTemplateFieldSettings = settings.deleteTagTemplateFieldSettings.toBuilder();
       createTagSettings = settings.createTagSettings.toBuilder();
       updateTagSettings = settings.updateTagSettings.toBuilder();
+      deleteTagSettings = settings.deleteTagSettings.toBuilder();
       listTagsSettings = settings.listTagsSettings.toBuilder();
       setIamPolicySettings = settings.setIamPolicySettings.toBuilder();
+      getIamPolicySettings = settings.getIamPolicySettings.toBuilder();
       testIamPermissionsSettings = settings.testIamPermissionsSettings.toBuilder();
 
       unaryMethodSettingsBuilders =
           ImmutableList.<UnaryCallSettings.Builder<?, ?>>of(
               searchCatalogSettings,
+              createEntryGroupSettings,
+              getEntryGroupSettings,
               deleteEntryGroupSettings,
+              createEntrySettings,
+              updateEntrySettings,
               deleteEntrySettings,
               getEntrySettings,
               lookupEntrySettings,
-              deleteTagTemplateSettings,
-              deleteTagTemplateFieldSettings,
-              deleteTagSettings,
-              getIamPolicySettings,
-              createEntryGroupSettings,
-              updateEntryGroupSettings,
-              getEntryGroupSettings,
               listEntryGroupsSettings,
-              createEntrySettings,
-              updateEntrySettings,
               listEntriesSettings,
+              updateEntryGroupSettings,
               createTagTemplateSettings,
               getTagTemplateSettings,
               updateTagTemplateSettings,
+              deleteTagTemplateSettings,
               createTagTemplateFieldSettings,
               updateTagTemplateFieldSettings,
               renameTagTemplateFieldSettings,
+              deleteTagTemplateFieldSettings,
               createTagSettings,
               updateTagSettings,
+              deleteTagSettings,
               listTagsSettings,
               setIamPolicySettings,
+              getIamPolicySettings,
               testIamPermissionsSettings);
     }
 
@@ -1041,9 +924,30 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
       return searchCatalogSettings;
     }
 
+    /** Returns the builder for the settings used for calls to createEntryGroup. */
+    public UnaryCallSettings.Builder<CreateEntryGroupRequest, EntryGroup>
+        createEntryGroupSettings() {
+      return createEntryGroupSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to getEntryGroup. */
+    public UnaryCallSettings.Builder<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings() {
+      return getEntryGroupSettings;
+    }
+
     /** Returns the builder for the settings used for calls to deleteEntryGroup. */
     public UnaryCallSettings.Builder<DeleteEntryGroupRequest, Empty> deleteEntryGroupSettings() {
       return deleteEntryGroupSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to createEntry. */
+    public UnaryCallSettings.Builder<CreateEntryRequest, Entry> createEntrySettings() {
+      return createEntrySettings;
+    }
+
+    /** Returns the builder for the settings used for calls to updateEntry. */
+    public UnaryCallSettings.Builder<UpdateEntryRequest, Entry> updateEntrySettings() {
+      return updateEntrySettings;
     }
 
     /** Returns the builder for the settings used for calls to deleteEntry. */
@@ -1061,66 +965,22 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
       return lookupEntrySettings;
     }
 
-    /** Returns the builder for the settings used for calls to deleteTagTemplate. */
-    public UnaryCallSettings.Builder<DeleteTagTemplateRequest, Empty> deleteTagTemplateSettings() {
-      return deleteTagTemplateSettings;
+    /** Returns the builder for the settings used for calls to listEntryGroups. */
+    public UnaryCallSettings.Builder<ListEntryGroupsRequest, ListEntryGroupsResponse>
+        listEntryGroupsSettings() {
+      return listEntryGroupsSettings;
     }
 
-    /** Returns the builder for the settings used for calls to deleteTagTemplateField. */
-    public UnaryCallSettings.Builder<DeleteTagTemplateFieldRequest, Empty>
-        deleteTagTemplateFieldSettings() {
-      return deleteTagTemplateFieldSettings;
-    }
-
-    /** Returns the builder for the settings used for calls to deleteTag. */
-    public UnaryCallSettings.Builder<DeleteTagRequest, Empty> deleteTagSettings() {
-      return deleteTagSettings;
-    }
-
-    /** Returns the builder for the settings used for calls to getIamPolicy. */
-    public UnaryCallSettings.Builder<GetIamPolicyRequest, Policy> getIamPolicySettings() {
-      return getIamPolicySettings;
-    }
-
-    /** Returns the builder for the settings used for calls to createEntryGroup. */
-    public UnaryCallSettings.Builder<CreateEntryGroupRequest, EntryGroup>
-        createEntryGroupSettings() {
-      return createEntryGroupSettings;
+    /** Returns the builder for the settings used for calls to listEntries. */
+    public UnaryCallSettings.Builder<ListEntriesRequest, ListEntriesResponse>
+        listEntriesSettings() {
+      return listEntriesSettings;
     }
 
     /** Returns the builder for the settings used for calls to updateEntryGroup. */
     public UnaryCallSettings.Builder<UpdateEntryGroupRequest, EntryGroup>
         updateEntryGroupSettings() {
       return updateEntryGroupSettings;
-    }
-
-    /** Returns the builder for the settings used for calls to getEntryGroup. */
-    public UnaryCallSettings.Builder<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings() {
-      return getEntryGroupSettings;
-    }
-
-    /** Returns the builder for the settings used for calls to listEntryGroups. */
-    public PagedCallSettings.Builder<
-            ListEntryGroupsRequest, ListEntryGroupsResponse, ListEntryGroupsPagedResponse>
-        listEntryGroupsSettings() {
-      return listEntryGroupsSettings;
-    }
-
-    /** Returns the builder for the settings used for calls to createEntry. */
-    public UnaryCallSettings.Builder<CreateEntryRequest, Entry> createEntrySettings() {
-      return createEntrySettings;
-    }
-
-    /** Returns the builder for the settings used for calls to updateEntry. */
-    public UnaryCallSettings.Builder<UpdateEntryRequest, Entry> updateEntrySettings() {
-      return updateEntrySettings;
-    }
-
-    /** Returns the builder for the settings used for calls to listEntries. */
-    public PagedCallSettings.Builder<
-            ListEntriesRequest, ListEntriesResponse, ListEntriesPagedResponse>
-        listEntriesSettings() {
-      return listEntriesSettings;
     }
 
     /** Returns the builder for the settings used for calls to createTagTemplate. */
@@ -1138,6 +998,11 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
     public UnaryCallSettings.Builder<UpdateTagTemplateRequest, TagTemplate>
         updateTagTemplateSettings() {
       return updateTagTemplateSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to deleteTagTemplate. */
+    public UnaryCallSettings.Builder<DeleteTagTemplateRequest, Empty> deleteTagTemplateSettings() {
+      return deleteTagTemplateSettings;
     }
 
     /** Returns the builder for the settings used for calls to createTagTemplateField. */
@@ -1158,6 +1023,12 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
       return renameTagTemplateFieldSettings;
     }
 
+    /** Returns the builder for the settings used for calls to deleteTagTemplateField. */
+    public UnaryCallSettings.Builder<DeleteTagTemplateFieldRequest, Empty>
+        deleteTagTemplateFieldSettings() {
+      return deleteTagTemplateFieldSettings;
+    }
+
     /** Returns the builder for the settings used for calls to createTag. */
     public UnaryCallSettings.Builder<CreateTagRequest, Tag> createTagSettings() {
       return createTagSettings;
@@ -1166,6 +1037,11 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
     /** Returns the builder for the settings used for calls to updateTag. */
     public UnaryCallSettings.Builder<UpdateTagRequest, Tag> updateTagSettings() {
       return updateTagSettings;
+    }
+
+    /** Returns the builder for the settings used for calls to deleteTag. */
+    public UnaryCallSettings.Builder<DeleteTagRequest, Empty> deleteTagSettings() {
+      return deleteTagSettings;
     }
 
     /** Returns the builder for the settings used for calls to listTags. */
@@ -1177,6 +1053,11 @@ public class DataCatalogStubSettings extends StubSettings<DataCatalogStubSetting
     /** Returns the builder for the settings used for calls to setIamPolicy. */
     public UnaryCallSettings.Builder<SetIamPolicyRequest, Policy> setIamPolicySettings() {
       return setIamPolicySettings;
+    }
+
+    /** Returns the builder for the settings used for calls to getIamPolicy. */
+    public UnaryCallSettings.Builder<GetIamPolicyRequest, Policy> getIamPolicySettings() {
+      return getIamPolicySettings;
     }
 
     /** Returns the builder for the settings used for calls to testIamPermissions. */

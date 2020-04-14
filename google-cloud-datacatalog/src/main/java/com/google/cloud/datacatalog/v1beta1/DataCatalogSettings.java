@@ -15,8 +15,6 @@
  */
 package com.google.cloud.datacatalog.v1beta1;
 
-import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.ListEntriesPagedResponse;
-import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.ListEntryGroupsPagedResponse;
 import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.ListTagsPagedResponse;
 import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.SearchCatalogPagedResponse;
 
@@ -57,16 +55,16 @@ import javax.annotation.Generated;
  * <p>The builder of this class is recursive, so contained classes are themselves builders. When
  * build() is called, the tree of builders is called to create the complete settings object.
  *
- * <p>For example, to set the total timeout of deleteEntryGroup to 30 seconds:
+ * <p>For example, to set the total timeout of createEntryGroup to 30 seconds:
  *
  * <pre>
  * <code>
  * DataCatalogSettings.Builder dataCatalogSettingsBuilder =
  *     DataCatalogSettings.newBuilder();
  * dataCatalogSettingsBuilder
- *     .deleteEntryGroupSettings()
+ *     .createEntryGroupSettings()
  *     .setRetrySettings(
- *         dataCatalogSettingsBuilder.deleteEntryGroupSettings().getRetrySettings().toBuilder()
+ *         dataCatalogSettingsBuilder.createEntryGroupSettings().getRetrySettings().toBuilder()
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
  * DataCatalogSettings dataCatalogSettings = dataCatalogSettingsBuilder.build();
@@ -82,9 +80,29 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
     return ((DataCatalogStubSettings) getStubSettings()).searchCatalogSettings();
   }
 
+  /** Returns the object with the settings used for calls to createEntryGroup. */
+  public UnaryCallSettings<CreateEntryGroupRequest, EntryGroup> createEntryGroupSettings() {
+    return ((DataCatalogStubSettings) getStubSettings()).createEntryGroupSettings();
+  }
+
+  /** Returns the object with the settings used for calls to getEntryGroup. */
+  public UnaryCallSettings<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings() {
+    return ((DataCatalogStubSettings) getStubSettings()).getEntryGroupSettings();
+  }
+
   /** Returns the object with the settings used for calls to deleteEntryGroup. */
   public UnaryCallSettings<DeleteEntryGroupRequest, Empty> deleteEntryGroupSettings() {
     return ((DataCatalogStubSettings) getStubSettings()).deleteEntryGroupSettings();
+  }
+
+  /** Returns the object with the settings used for calls to createEntry. */
+  public UnaryCallSettings<CreateEntryRequest, Entry> createEntrySettings() {
+    return ((DataCatalogStubSettings) getStubSettings()).createEntrySettings();
+  }
+
+  /** Returns the object with the settings used for calls to updateEntry. */
+  public UnaryCallSettings<UpdateEntryRequest, Entry> updateEntrySettings() {
+    return ((DataCatalogStubSettings) getStubSettings()).updateEntrySettings();
   }
 
   /** Returns the object with the settings used for calls to deleteEntry. */
@@ -102,62 +120,20 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
     return ((DataCatalogStubSettings) getStubSettings()).lookupEntrySettings();
   }
 
-  /** Returns the object with the settings used for calls to deleteTagTemplate. */
-  public UnaryCallSettings<DeleteTagTemplateRequest, Empty> deleteTagTemplateSettings() {
-    return ((DataCatalogStubSettings) getStubSettings()).deleteTagTemplateSettings();
+  /** Returns the object with the settings used for calls to listEntryGroups. */
+  public UnaryCallSettings<ListEntryGroupsRequest, ListEntryGroupsResponse>
+      listEntryGroupsSettings() {
+    return ((DataCatalogStubSettings) getStubSettings()).listEntryGroupsSettings();
   }
 
-  /** Returns the object with the settings used for calls to deleteTagTemplateField. */
-  public UnaryCallSettings<DeleteTagTemplateFieldRequest, Empty> deleteTagTemplateFieldSettings() {
-    return ((DataCatalogStubSettings) getStubSettings()).deleteTagTemplateFieldSettings();
-  }
-
-  /** Returns the object with the settings used for calls to deleteTag. */
-  public UnaryCallSettings<DeleteTagRequest, Empty> deleteTagSettings() {
-    return ((DataCatalogStubSettings) getStubSettings()).deleteTagSettings();
-  }
-
-  /** Returns the object with the settings used for calls to getIamPolicy. */
-  public UnaryCallSettings<GetIamPolicyRequest, Policy> getIamPolicySettings() {
-    return ((DataCatalogStubSettings) getStubSettings()).getIamPolicySettings();
-  }
-
-  /** Returns the object with the settings used for calls to createEntryGroup. */
-  public UnaryCallSettings<CreateEntryGroupRequest, EntryGroup> createEntryGroupSettings() {
-    return ((DataCatalogStubSettings) getStubSettings()).createEntryGroupSettings();
+  /** Returns the object with the settings used for calls to listEntries. */
+  public UnaryCallSettings<ListEntriesRequest, ListEntriesResponse> listEntriesSettings() {
+    return ((DataCatalogStubSettings) getStubSettings()).listEntriesSettings();
   }
 
   /** Returns the object with the settings used for calls to updateEntryGroup. */
   public UnaryCallSettings<UpdateEntryGroupRequest, EntryGroup> updateEntryGroupSettings() {
     return ((DataCatalogStubSettings) getStubSettings()).updateEntryGroupSettings();
-  }
-
-  /** Returns the object with the settings used for calls to getEntryGroup. */
-  public UnaryCallSettings<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings() {
-    return ((DataCatalogStubSettings) getStubSettings()).getEntryGroupSettings();
-  }
-
-  /** Returns the object with the settings used for calls to listEntryGroups. */
-  public PagedCallSettings<
-          ListEntryGroupsRequest, ListEntryGroupsResponse, ListEntryGroupsPagedResponse>
-      listEntryGroupsSettings() {
-    return ((DataCatalogStubSettings) getStubSettings()).listEntryGroupsSettings();
-  }
-
-  /** Returns the object with the settings used for calls to createEntry. */
-  public UnaryCallSettings<CreateEntryRequest, Entry> createEntrySettings() {
-    return ((DataCatalogStubSettings) getStubSettings()).createEntrySettings();
-  }
-
-  /** Returns the object with the settings used for calls to updateEntry. */
-  public UnaryCallSettings<UpdateEntryRequest, Entry> updateEntrySettings() {
-    return ((DataCatalogStubSettings) getStubSettings()).updateEntrySettings();
-  }
-
-  /** Returns the object with the settings used for calls to listEntries. */
-  public PagedCallSettings<ListEntriesRequest, ListEntriesResponse, ListEntriesPagedResponse>
-      listEntriesSettings() {
-    return ((DataCatalogStubSettings) getStubSettings()).listEntriesSettings();
   }
 
   /** Returns the object with the settings used for calls to createTagTemplate. */
@@ -173,6 +149,11 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
   /** Returns the object with the settings used for calls to updateTagTemplate. */
   public UnaryCallSettings<UpdateTagTemplateRequest, TagTemplate> updateTagTemplateSettings() {
     return ((DataCatalogStubSettings) getStubSettings()).updateTagTemplateSettings();
+  }
+
+  /** Returns the object with the settings used for calls to deleteTagTemplate. */
+  public UnaryCallSettings<DeleteTagTemplateRequest, Empty> deleteTagTemplateSettings() {
+    return ((DataCatalogStubSettings) getStubSettings()).deleteTagTemplateSettings();
   }
 
   /** Returns the object with the settings used for calls to createTagTemplateField. */
@@ -193,6 +174,11 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
     return ((DataCatalogStubSettings) getStubSettings()).renameTagTemplateFieldSettings();
   }
 
+  /** Returns the object with the settings used for calls to deleteTagTemplateField. */
+  public UnaryCallSettings<DeleteTagTemplateFieldRequest, Empty> deleteTagTemplateFieldSettings() {
+    return ((DataCatalogStubSettings) getStubSettings()).deleteTagTemplateFieldSettings();
+  }
+
   /** Returns the object with the settings used for calls to createTag. */
   public UnaryCallSettings<CreateTagRequest, Tag> createTagSettings() {
     return ((DataCatalogStubSettings) getStubSettings()).createTagSettings();
@@ -201,6 +187,11 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
   /** Returns the object with the settings used for calls to updateTag. */
   public UnaryCallSettings<UpdateTagRequest, Tag> updateTagSettings() {
     return ((DataCatalogStubSettings) getStubSettings()).updateTagSettings();
+  }
+
+  /** Returns the object with the settings used for calls to deleteTag. */
+  public UnaryCallSettings<DeleteTagRequest, Empty> deleteTagSettings() {
+    return ((DataCatalogStubSettings) getStubSettings()).deleteTagSettings();
   }
 
   /** Returns the object with the settings used for calls to listTags. */
@@ -212,6 +203,11 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
   /** Returns the object with the settings used for calls to setIamPolicy. */
   public UnaryCallSettings<SetIamPolicyRequest, Policy> setIamPolicySettings() {
     return ((DataCatalogStubSettings) getStubSettings()).setIamPolicySettings();
+  }
+
+  /** Returns the object with the settings used for calls to getIamPolicy. */
+  public UnaryCallSettings<GetIamPolicyRequest, Policy> getIamPolicySettings() {
+    return ((DataCatalogStubSettings) getStubSettings()).getIamPolicySettings();
   }
 
   /** Returns the object with the settings used for calls to testIamPermissions. */
@@ -323,9 +319,30 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
       return getStubSettingsBuilder().searchCatalogSettings();
     }
 
+    /** Returns the builder for the settings used for calls to createEntryGroup. */
+    public UnaryCallSettings.Builder<CreateEntryGroupRequest, EntryGroup>
+        createEntryGroupSettings() {
+      return getStubSettingsBuilder().createEntryGroupSettings();
+    }
+
+    /** Returns the builder for the settings used for calls to getEntryGroup. */
+    public UnaryCallSettings.Builder<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings() {
+      return getStubSettingsBuilder().getEntryGroupSettings();
+    }
+
     /** Returns the builder for the settings used for calls to deleteEntryGroup. */
     public UnaryCallSettings.Builder<DeleteEntryGroupRequest, Empty> deleteEntryGroupSettings() {
       return getStubSettingsBuilder().deleteEntryGroupSettings();
+    }
+
+    /** Returns the builder for the settings used for calls to createEntry. */
+    public UnaryCallSettings.Builder<CreateEntryRequest, Entry> createEntrySettings() {
+      return getStubSettingsBuilder().createEntrySettings();
+    }
+
+    /** Returns the builder for the settings used for calls to updateEntry. */
+    public UnaryCallSettings.Builder<UpdateEntryRequest, Entry> updateEntrySettings() {
+      return getStubSettingsBuilder().updateEntrySettings();
     }
 
     /** Returns the builder for the settings used for calls to deleteEntry. */
@@ -343,66 +360,22 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
       return getStubSettingsBuilder().lookupEntrySettings();
     }
 
-    /** Returns the builder for the settings used for calls to deleteTagTemplate. */
-    public UnaryCallSettings.Builder<DeleteTagTemplateRequest, Empty> deleteTagTemplateSettings() {
-      return getStubSettingsBuilder().deleteTagTemplateSettings();
+    /** Returns the builder for the settings used for calls to listEntryGroups. */
+    public UnaryCallSettings.Builder<ListEntryGroupsRequest, ListEntryGroupsResponse>
+        listEntryGroupsSettings() {
+      return getStubSettingsBuilder().listEntryGroupsSettings();
     }
 
-    /** Returns the builder for the settings used for calls to deleteTagTemplateField. */
-    public UnaryCallSettings.Builder<DeleteTagTemplateFieldRequest, Empty>
-        deleteTagTemplateFieldSettings() {
-      return getStubSettingsBuilder().deleteTagTemplateFieldSettings();
-    }
-
-    /** Returns the builder for the settings used for calls to deleteTag. */
-    public UnaryCallSettings.Builder<DeleteTagRequest, Empty> deleteTagSettings() {
-      return getStubSettingsBuilder().deleteTagSettings();
-    }
-
-    /** Returns the builder for the settings used for calls to getIamPolicy. */
-    public UnaryCallSettings.Builder<GetIamPolicyRequest, Policy> getIamPolicySettings() {
-      return getStubSettingsBuilder().getIamPolicySettings();
-    }
-
-    /** Returns the builder for the settings used for calls to createEntryGroup. */
-    public UnaryCallSettings.Builder<CreateEntryGroupRequest, EntryGroup>
-        createEntryGroupSettings() {
-      return getStubSettingsBuilder().createEntryGroupSettings();
+    /** Returns the builder for the settings used for calls to listEntries. */
+    public UnaryCallSettings.Builder<ListEntriesRequest, ListEntriesResponse>
+        listEntriesSettings() {
+      return getStubSettingsBuilder().listEntriesSettings();
     }
 
     /** Returns the builder for the settings used for calls to updateEntryGroup. */
     public UnaryCallSettings.Builder<UpdateEntryGroupRequest, EntryGroup>
         updateEntryGroupSettings() {
       return getStubSettingsBuilder().updateEntryGroupSettings();
-    }
-
-    /** Returns the builder for the settings used for calls to getEntryGroup. */
-    public UnaryCallSettings.Builder<GetEntryGroupRequest, EntryGroup> getEntryGroupSettings() {
-      return getStubSettingsBuilder().getEntryGroupSettings();
-    }
-
-    /** Returns the builder for the settings used for calls to listEntryGroups. */
-    public PagedCallSettings.Builder<
-            ListEntryGroupsRequest, ListEntryGroupsResponse, ListEntryGroupsPagedResponse>
-        listEntryGroupsSettings() {
-      return getStubSettingsBuilder().listEntryGroupsSettings();
-    }
-
-    /** Returns the builder for the settings used for calls to createEntry. */
-    public UnaryCallSettings.Builder<CreateEntryRequest, Entry> createEntrySettings() {
-      return getStubSettingsBuilder().createEntrySettings();
-    }
-
-    /** Returns the builder for the settings used for calls to updateEntry. */
-    public UnaryCallSettings.Builder<UpdateEntryRequest, Entry> updateEntrySettings() {
-      return getStubSettingsBuilder().updateEntrySettings();
-    }
-
-    /** Returns the builder for the settings used for calls to listEntries. */
-    public PagedCallSettings.Builder<
-            ListEntriesRequest, ListEntriesResponse, ListEntriesPagedResponse>
-        listEntriesSettings() {
-      return getStubSettingsBuilder().listEntriesSettings();
     }
 
     /** Returns the builder for the settings used for calls to createTagTemplate. */
@@ -420,6 +393,11 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
     public UnaryCallSettings.Builder<UpdateTagTemplateRequest, TagTemplate>
         updateTagTemplateSettings() {
       return getStubSettingsBuilder().updateTagTemplateSettings();
+    }
+
+    /** Returns the builder for the settings used for calls to deleteTagTemplate. */
+    public UnaryCallSettings.Builder<DeleteTagTemplateRequest, Empty> deleteTagTemplateSettings() {
+      return getStubSettingsBuilder().deleteTagTemplateSettings();
     }
 
     /** Returns the builder for the settings used for calls to createTagTemplateField. */
@@ -440,6 +418,12 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
       return getStubSettingsBuilder().renameTagTemplateFieldSettings();
     }
 
+    /** Returns the builder for the settings used for calls to deleteTagTemplateField. */
+    public UnaryCallSettings.Builder<DeleteTagTemplateFieldRequest, Empty>
+        deleteTagTemplateFieldSettings() {
+      return getStubSettingsBuilder().deleteTagTemplateFieldSettings();
+    }
+
     /** Returns the builder for the settings used for calls to createTag. */
     public UnaryCallSettings.Builder<CreateTagRequest, Tag> createTagSettings() {
       return getStubSettingsBuilder().createTagSettings();
@@ -448,6 +432,11 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
     /** Returns the builder for the settings used for calls to updateTag. */
     public UnaryCallSettings.Builder<UpdateTagRequest, Tag> updateTagSettings() {
       return getStubSettingsBuilder().updateTagSettings();
+    }
+
+    /** Returns the builder for the settings used for calls to deleteTag. */
+    public UnaryCallSettings.Builder<DeleteTagRequest, Empty> deleteTagSettings() {
+      return getStubSettingsBuilder().deleteTagSettings();
     }
 
     /** Returns the builder for the settings used for calls to listTags. */
@@ -459,6 +448,11 @@ public class DataCatalogSettings extends ClientSettings<DataCatalogSettings> {
     /** Returns the builder for the settings used for calls to setIamPolicy. */
     public UnaryCallSettings.Builder<SetIamPolicyRequest, Policy> setIamPolicySettings() {
       return getStubSettingsBuilder().setIamPolicySettings();
+    }
+
+    /** Returns the builder for the settings used for calls to getIamPolicy. */
+    public UnaryCallSettings.Builder<GetIamPolicyRequest, Policy> getIamPolicySettings() {
+      return getStubSettingsBuilder().getIamPolicySettings();
     }
 
     /** Returns the builder for the settings used for calls to testIamPermissions. */

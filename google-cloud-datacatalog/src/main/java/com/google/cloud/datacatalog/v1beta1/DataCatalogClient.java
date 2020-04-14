@@ -25,6 +25,7 @@ import com.google.api.gax.paging.AbstractPage;
 import com.google.api.gax.paging.AbstractPagedListResponse;
 import com.google.api.gax.rpc.PageContext;
 import com.google.api.gax.rpc.UnaryCallable;
+import com.google.api.pathtemplate.PathTemplate;
 import com.google.cloud.datacatalog.v1beta1.stub.DataCatalogStub;
 import com.google.cloud.datacatalog.v1beta1.stub.DataCatalogStubSettings;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -51,8 +52,10 @@ import javax.annotation.Generated;
  * <pre>
  * <code>
  * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
- *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
- *   dataCatalogClient.deleteEntryGroup(name);
+ *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
+ *   String entryGroupId = "";
+ *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
+ *   EntryGroup response = dataCatalogClient.createEntryGroup(formattedParent, entryGroupId, entryGroup);
  * }
  * </code>
  * </pre>
@@ -112,6 +115,330 @@ import javax.annotation.Generated;
 public class DataCatalogClient implements BackgroundResource {
   private final DataCatalogSettings settings;
   private final DataCatalogStub stub;
+
+  private static final PathTemplate ENTRY_PATH_TEMPLATE =
+      PathTemplate.createWithoutUrlEncoding(
+          "projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}");
+
+  private static final PathTemplate ENTRY_GROUP_PATH_TEMPLATE =
+      PathTemplate.createWithoutUrlEncoding(
+          "projects/{project}/locations/{location}/entryGroups/{entry_group}");
+
+  private static final PathTemplate FIELD_PATH_TEMPLATE =
+      PathTemplate.createWithoutUrlEncoding(
+          "projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}");
+
+  private static final PathTemplate LOCATION_PATH_TEMPLATE =
+      PathTemplate.createWithoutUrlEncoding("projects/{project}/locations/{location}");
+
+  private static final PathTemplate TAG_PATH_TEMPLATE =
+      PathTemplate.createWithoutUrlEncoding(
+          "projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}/tags/{tag}");
+
+  private static final PathTemplate TAG_TEMPLATE_PATH_TEMPLATE =
+      PathTemplate.createWithoutUrlEncoding(
+          "projects/{project}/locations/{location}/tagTemplates/{tag_template}");
+
+  /**
+   * Formats a string containing the fully-qualified path to represent a entry resource.
+   *
+   * @deprecated Use the {@link EntryName} class instead.
+   */
+  @Deprecated
+  public static final String formatEntryName(
+      String project, String location, String entryGroup, String entry) {
+    return ENTRY_PATH_TEMPLATE.instantiate(
+        "project", project,
+        "location", location,
+        "entry_group", entryGroup,
+        "entry", entry);
+  }
+
+  /**
+   * Formats a string containing the fully-qualified path to represent a entry_group resource.
+   *
+   * @deprecated Use the {@link EntryGroupName} class instead.
+   */
+  @Deprecated
+  public static final String formatEntryGroupName(
+      String project, String location, String entryGroup) {
+    return ENTRY_GROUP_PATH_TEMPLATE.instantiate(
+        "project", project,
+        "location", location,
+        "entry_group", entryGroup);
+  }
+
+  /**
+   * Formats a string containing the fully-qualified path to represent a field resource.
+   *
+   * @deprecated Use the {@link FieldName} class instead.
+   */
+  @Deprecated
+  public static final String formatFieldName(
+      String project, String location, String tagTemplate, String field) {
+    return FIELD_PATH_TEMPLATE.instantiate(
+        "project", project,
+        "location", location,
+        "tag_template", tagTemplate,
+        "field", field);
+  }
+
+  /**
+   * Formats a string containing the fully-qualified path to represent a location resource.
+   *
+   * @deprecated Use the {@link LocationName} class instead.
+   */
+  @Deprecated
+  public static final String formatLocationName(String project, String location) {
+    return LOCATION_PATH_TEMPLATE.instantiate(
+        "project", project,
+        "location", location);
+  }
+
+  /**
+   * Formats a string containing the fully-qualified path to represent a tag resource.
+   *
+   * @deprecated Use the {@link TagName} class instead.
+   */
+  @Deprecated
+  public static final String formatTagName(
+      String project, String location, String entryGroup, String entry, String tag) {
+    return TAG_PATH_TEMPLATE.instantiate(
+        "project", project,
+        "location", location,
+        "entry_group", entryGroup,
+        "entry", entry,
+        "tag", tag);
+  }
+
+  /**
+   * Formats a string containing the fully-qualified path to represent a tag_template resource.
+   *
+   * @deprecated Use the {@link TagTemplateName} class instead.
+   */
+  @Deprecated
+  public static final String formatTagTemplateName(
+      String project, String location, String tagTemplate) {
+    return TAG_TEMPLATE_PATH_TEMPLATE.instantiate(
+        "project", project,
+        "location", location,
+        "tag_template", tagTemplate);
+  }
+
+  /**
+   * Parses the project from the given fully-qualified path which represents a entry resource.
+   *
+   * @deprecated Use the {@link EntryName} class instead.
+   */
+  @Deprecated
+  public static final String parseProjectFromEntryName(String entryName) {
+    return ENTRY_PATH_TEMPLATE.parse(entryName).get("project");
+  }
+
+  /**
+   * Parses the location from the given fully-qualified path which represents a entry resource.
+   *
+   * @deprecated Use the {@link EntryName} class instead.
+   */
+  @Deprecated
+  public static final String parseLocationFromEntryName(String entryName) {
+    return ENTRY_PATH_TEMPLATE.parse(entryName).get("location");
+  }
+
+  /**
+   * Parses the entry_group from the given fully-qualified path which represents a entry resource.
+   *
+   * @deprecated Use the {@link EntryName} class instead.
+   */
+  @Deprecated
+  public static final String parseEntryGroupFromEntryName(String entryName) {
+    return ENTRY_PATH_TEMPLATE.parse(entryName).get("entry_group");
+  }
+
+  /**
+   * Parses the entry from the given fully-qualified path which represents a entry resource.
+   *
+   * @deprecated Use the {@link EntryName} class instead.
+   */
+  @Deprecated
+  public static final String parseEntryFromEntryName(String entryName) {
+    return ENTRY_PATH_TEMPLATE.parse(entryName).get("entry");
+  }
+
+  /**
+   * Parses the project from the given fully-qualified path which represents a entry_group resource.
+   *
+   * @deprecated Use the {@link EntryGroupName} class instead.
+   */
+  @Deprecated
+  public static final String parseProjectFromEntryGroupName(String entryGroupName) {
+    return ENTRY_GROUP_PATH_TEMPLATE.parse(entryGroupName).get("project");
+  }
+
+  /**
+   * Parses the location from the given fully-qualified path which represents a entry_group
+   * resource.
+   *
+   * @deprecated Use the {@link EntryGroupName} class instead.
+   */
+  @Deprecated
+  public static final String parseLocationFromEntryGroupName(String entryGroupName) {
+    return ENTRY_GROUP_PATH_TEMPLATE.parse(entryGroupName).get("location");
+  }
+
+  /**
+   * Parses the entry_group from the given fully-qualified path which represents a entry_group
+   * resource.
+   *
+   * @deprecated Use the {@link EntryGroupName} class instead.
+   */
+  @Deprecated
+  public static final String parseEntryGroupFromEntryGroupName(String entryGroupName) {
+    return ENTRY_GROUP_PATH_TEMPLATE.parse(entryGroupName).get("entry_group");
+  }
+
+  /**
+   * Parses the project from the given fully-qualified path which represents a field resource.
+   *
+   * @deprecated Use the {@link FieldName} class instead.
+   */
+  @Deprecated
+  public static final String parseProjectFromFieldName(String fieldName) {
+    return FIELD_PATH_TEMPLATE.parse(fieldName).get("project");
+  }
+
+  /**
+   * Parses the location from the given fully-qualified path which represents a field resource.
+   *
+   * @deprecated Use the {@link FieldName} class instead.
+   */
+  @Deprecated
+  public static final String parseLocationFromFieldName(String fieldName) {
+    return FIELD_PATH_TEMPLATE.parse(fieldName).get("location");
+  }
+
+  /**
+   * Parses the tag_template from the given fully-qualified path which represents a field resource.
+   *
+   * @deprecated Use the {@link FieldName} class instead.
+   */
+  @Deprecated
+  public static final String parseTagTemplateFromFieldName(String fieldName) {
+    return FIELD_PATH_TEMPLATE.parse(fieldName).get("tag_template");
+  }
+
+  /**
+   * Parses the field from the given fully-qualified path which represents a field resource.
+   *
+   * @deprecated Use the {@link FieldName} class instead.
+   */
+  @Deprecated
+  public static final String parseFieldFromFieldName(String fieldName) {
+    return FIELD_PATH_TEMPLATE.parse(fieldName).get("field");
+  }
+
+  /**
+   * Parses the project from the given fully-qualified path which represents a location resource.
+   *
+   * @deprecated Use the {@link LocationName} class instead.
+   */
+  @Deprecated
+  public static final String parseProjectFromLocationName(String locationName) {
+    return LOCATION_PATH_TEMPLATE.parse(locationName).get("project");
+  }
+
+  /**
+   * Parses the location from the given fully-qualified path which represents a location resource.
+   *
+   * @deprecated Use the {@link LocationName} class instead.
+   */
+  @Deprecated
+  public static final String parseLocationFromLocationName(String locationName) {
+    return LOCATION_PATH_TEMPLATE.parse(locationName).get("location");
+  }
+
+  /**
+   * Parses the project from the given fully-qualified path which represents a tag resource.
+   *
+   * @deprecated Use the {@link TagName} class instead.
+   */
+  @Deprecated
+  public static final String parseProjectFromTagName(String tagName) {
+    return TAG_PATH_TEMPLATE.parse(tagName).get("project");
+  }
+
+  /**
+   * Parses the location from the given fully-qualified path which represents a tag resource.
+   *
+   * @deprecated Use the {@link TagName} class instead.
+   */
+  @Deprecated
+  public static final String parseLocationFromTagName(String tagName) {
+    return TAG_PATH_TEMPLATE.parse(tagName).get("location");
+  }
+
+  /**
+   * Parses the entry_group from the given fully-qualified path which represents a tag resource.
+   *
+   * @deprecated Use the {@link TagName} class instead.
+   */
+  @Deprecated
+  public static final String parseEntryGroupFromTagName(String tagName) {
+    return TAG_PATH_TEMPLATE.parse(tagName).get("entry_group");
+  }
+
+  /**
+   * Parses the entry from the given fully-qualified path which represents a tag resource.
+   *
+   * @deprecated Use the {@link TagName} class instead.
+   */
+  @Deprecated
+  public static final String parseEntryFromTagName(String tagName) {
+    return TAG_PATH_TEMPLATE.parse(tagName).get("entry");
+  }
+
+  /**
+   * Parses the tag from the given fully-qualified path which represents a tag resource.
+   *
+   * @deprecated Use the {@link TagName} class instead.
+   */
+  @Deprecated
+  public static final String parseTagFromTagName(String tagName) {
+    return TAG_PATH_TEMPLATE.parse(tagName).get("tag");
+  }
+
+  /**
+   * Parses the project from the given fully-qualified path which represents a tag_template
+   * resource.
+   *
+   * @deprecated Use the {@link TagTemplateName} class instead.
+   */
+  @Deprecated
+  public static final String parseProjectFromTagTemplateName(String tagTemplateName) {
+    return TAG_TEMPLATE_PATH_TEMPLATE.parse(tagTemplateName).get("project");
+  }
+
+  /**
+   * Parses the location from the given fully-qualified path which represents a tag_template
+   * resource.
+   *
+   * @deprecated Use the {@link TagTemplateName} class instead.
+   */
+  @Deprecated
+  public static final String parseLocationFromTagTemplateName(String tagTemplateName) {
+    return TAG_TEMPLATE_PATH_TEMPLATE.parse(tagTemplateName).get("location");
+  }
+
+  /**
+   * Parses the tag_template from the given fully-qualified path which represents a tag_template
+   * resource.
+   *
+   * @deprecated Use the {@link TagTemplateName} class instead.
+   */
+  @Deprecated
+  public static final String parseTagTemplateFromTagTemplateName(String tagTemplateName) {
+    return TAG_TEMPLATE_PATH_TEMPLATE.parse(tagTemplateName).get("tag_template");
+  }
 
   /** Constructs an instance of DataCatalogClient with default settings. */
   public static final DataCatalogClient create() throws IOException {
@@ -181,7 +508,8 @@ public class DataCatalogClient implements BackgroundResource {
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
    *   SearchCatalogRequest.Scope scope = SearchCatalogRequest.Scope.newBuilder().build();
    *   String query = "";
-   *   for (SearchCatalogResult element : dataCatalogClient.searchCatalog(scope, query).iterateAll()) {
+   *   String orderBy = "";
+   *   for (SearchCatalogResult element : dataCatalogClient.searchCatalog(scope, query, orderBy).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -194,12 +522,21 @@ public class DataCatalogClient implements BackgroundResource {
    *     <p>Note: Query tokens need to have a minimum of 3 characters for substring matching to work
    *     correctly. See [Data Catalog Search Syntax](/data-catalog/docs/how-to/search-reference) for
    *     more information.
+   * @param orderBy Specifies the ordering of results, currently supported case-sensitive choices
+   *     are:
+   *     <p>&#42; `relevance`, only supports descending &#42; `last_modified_timestamp [asc|desc]`,
+   *     defaults to descending if not specified
+   *     <p>If not specified, defaults to `relevance` descending.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final SearchCatalogPagedResponse searchCatalog(
-      SearchCatalogRequest.Scope scope, String query) {
+      SearchCatalogRequest.Scope scope, String query, String orderBy) {
     SearchCatalogRequest request =
-        SearchCatalogRequest.newBuilder().setScope(scope).setQuery(query).build();
+        SearchCatalogRequest.newBuilder()
+            .setScope(scope)
+            .setQuery(query)
+            .setOrderBy(orderBy)
+            .build();
     return searchCatalog(request);
   }
 
@@ -325,27 +662,208 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
   /**
-   * Deletes an EntryGroup. Only entry groups that do not contain entries can be deleted. Users
-   * should enable the Data Catalog API in the project identified by the `name` parameter (see [Data
-   * Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more information).
+   * Creates an EntryGroup.
+   *
+   * <p>An entry group contains logically related entries together with Cloud Identity and Access
+   * Management policies that specify the users who can create, edit, and view entries within the
+   * entry group.
+   *
+   * <p>Data Catalog automatically creates an entry group for BigQuery entries
+   * ("{@literal @}bigquery") and Pub/Sub topics ("{@literal @}pubsub"). Users create their own
+   * entry group to contain Cloud Storage fileset entries or custom type entries, and the IAM
+   * policies associated with those entries. Entry groups, like entries, can be searched.
+   *
+   * <p>A maximum of 10,000 entry groups may be created per organization across all locations.
+   *
+   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
+   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
+   * information).
    *
    * <p>Sample code:
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   dataCatalogClient.deleteEntryGroup(name);
+   *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
+   *   String entryGroupId = "";
+   *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
+   *   EntryGroup response = dataCatalogClient.createEntryGroup(formattedParent, entryGroupId, entryGroup);
+   * }
+   * </code></pre>
+   *
+   * @param parent Required. The name of the project this entry group is in. Example:
+   *     <p>&#42; projects/{project_id}/locations/{location}
+   *     <p>Note that this EntryGroup and its child resources may not actually be stored in the
+   *     location in this name.
+   * @param entryGroupId Required. The id of the entry group to create. The id must begin with a
+   *     letter or underscore, contain only English letters, numbers and underscores, and be at most
+   *     64 characters.
+   * @param entryGroup The entry group to create. Defaults to an empty entry group.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final EntryGroup createEntryGroup(
+      String parent, String entryGroupId, EntryGroup entryGroup) {
+    LOCATION_PATH_TEMPLATE.validate(parent, "createEntryGroup");
+    CreateEntryGroupRequest request =
+        CreateEntryGroupRequest.newBuilder()
+            .setParent(parent)
+            .setEntryGroupId(entryGroupId)
+            .setEntryGroup(entryGroup)
+            .build();
+    return createEntryGroup(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Creates an EntryGroup.
+   *
+   * <p>An entry group contains logically related entries together with Cloud Identity and Access
+   * Management policies that specify the users who can create, edit, and view entries within the
+   * entry group.
+   *
+   * <p>Data Catalog automatically creates an entry group for BigQuery entries
+   * ("{@literal @}bigquery") and Pub/Sub topics ("{@literal @}pubsub"). Users create their own
+   * entry group to contain Cloud Storage fileset entries or custom type entries, and the IAM
+   * policies associated with those entries. Entry groups, like entries, can be searched.
+   *
+   * <p>A maximum of 10,000 entry groups may be created per organization across all locations.
+   *
+   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
+   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
+   * information).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
+   *   String entryGroupId = "";
+   *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
+   *   CreateEntryGroupRequest request = CreateEntryGroupRequest.newBuilder()
+   *     .setParent(formattedParent)
+   *     .setEntryGroupId(entryGroupId)
+   *     .setEntryGroup(entryGroup)
+   *     .build();
+   *   EntryGroup response = dataCatalogClient.createEntryGroup(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final EntryGroup createEntryGroup(CreateEntryGroupRequest request) {
+    return createEntryGroupCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Creates an EntryGroup.
+   *
+   * <p>An entry group contains logically related entries together with Cloud Identity and Access
+   * Management policies that specify the users who can create, edit, and view entries within the
+   * entry group.
+   *
+   * <p>Data Catalog automatically creates an entry group for BigQuery entries
+   * ("{@literal @}bigquery") and Pub/Sub topics ("{@literal @}pubsub"). Users create their own
+   * entry group to contain Cloud Storage fileset entries or custom type entries, and the IAM
+   * policies associated with those entries. Entry groups, like entries, can be searched.
+   *
+   * <p>A maximum of 10,000 entry groups may be created per organization across all locations.
+   *
+   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
+   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
+   * information).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
+   *   String entryGroupId = "";
+   *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
+   *   CreateEntryGroupRequest request = CreateEntryGroupRequest.newBuilder()
+   *     .setParent(formattedParent)
+   *     .setEntryGroupId(entryGroupId)
+   *     .setEntryGroup(entryGroup)
+   *     .build();
+   *   ApiFuture&lt;EntryGroup&gt; future = dataCatalogClient.createEntryGroupCallable().futureCall(request);
+   *   // Do something
+   *   EntryGroup response = future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<CreateEntryGroupRequest, EntryGroup> createEntryGroupCallable() {
+    return stub.createEntryGroupCallable();
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Gets an EntryGroup.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedName = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   FieldMask readMask = FieldMask.newBuilder().build();
+   *   EntryGroup response = dataCatalogClient.getEntryGroup(formattedName, readMask);
    * }
    * </code></pre>
    *
    * @param name Required. The name of the entry group. For example,
    *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
+   * @param readMask The fields to return. If not set or empty, all fields are returned.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
-  public final void deleteEntryGroup(EntryGroupName name) {
-    DeleteEntryGroupRequest request =
-        DeleteEntryGroupRequest.newBuilder().setName(name == null ? null : name.toString()).build();
-    deleteEntryGroup(request);
+  public final EntryGroup getEntryGroup(String name, FieldMask readMask) {
+    ENTRY_GROUP_PATH_TEMPLATE.validate(name, "getEntryGroup");
+    GetEntryGroupRequest request =
+        GetEntryGroupRequest.newBuilder().setName(name).setReadMask(readMask).build();
+    return getEntryGroup(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Gets an EntryGroup.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedName = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   GetEntryGroupRequest request = GetEntryGroupRequest.newBuilder()
+   *     .setName(formattedName)
+   *     .build();
+   *   EntryGroup response = dataCatalogClient.getEntryGroup(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final EntryGroup getEntryGroup(GetEntryGroupRequest request) {
+    return getEntryGroupCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Gets an EntryGroup.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedName = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   GetEntryGroupRequest request = GetEntryGroupRequest.newBuilder()
+   *     .setName(formattedName)
+   *     .build();
+   *   ApiFuture&lt;EntryGroup&gt; future = dataCatalogClient.getEntryGroupCallable().futureCall(request);
+   *   // Do something
+   *   EntryGroup response = future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<GetEntryGroupRequest, EntryGroup> getEntryGroupCallable() {
+    return stub.getEntryGroupCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -358,8 +876,8 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   dataCatalogClient.deleteEntryGroup(name.toString());
+   *   String formattedName = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   dataCatalogClient.deleteEntryGroup(formattedName);
    * }
    * </code></pre>
    *
@@ -368,6 +886,7 @@ public class DataCatalogClient implements BackgroundResource {
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final void deleteEntryGroup(String name) {
+    ENTRY_GROUP_PATH_TEMPLATE.validate(name, "deleteEntryGroup");
     DeleteEntryGroupRequest request = DeleteEntryGroupRequest.newBuilder().setName(name).build();
     deleteEntryGroup(request);
   }
@@ -382,9 +901,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   String formattedName = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
    *   DeleteEntryGroupRequest request = DeleteEntryGroupRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .build();
    *   dataCatalogClient.deleteEntryGroup(request);
    * }
@@ -407,9 +926,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   String formattedName = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
    *   DeleteEntryGroupRequest request = DeleteEntryGroupRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .build();
    *   ApiFuture&lt;Void&gt; future = dataCatalogClient.deleteEntryGroupCallable().futureCall(request);
    *   // Do something
@@ -423,30 +942,189 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
   /**
-   * Deletes an existing entry. Only entries created through
-   * [CreateEntry][google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntry] method can be deleted.
-   * Users should enable the Data Catalog API in the project identified by the `name` parameter (see
-   * [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
+   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
+   *
+   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
+   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
    * information).
+   *
+   * <p>A maximum of 100,000 entries may be created per entry group.
    *
    * <p>Sample code:
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   dataCatalogClient.deleteEntry(name);
+   *   String formattedParent = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   String entryId = "";
+   *   Entry entry = Entry.newBuilder().build();
+   *   Entry response = dataCatalogClient.createEntry(formattedParent, entryId, entry);
    * }
    * </code></pre>
    *
-   * @param name Required. The name of the entry. Example:
-   *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   * @param parent Required. The name of the entry group this entry is in. Example:
+   *     <p>&#42; projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
+   *     <p>Note that this Entry and its child resources may not actually be stored in the location
+   *     in this name.
+   * @param entryId Required. The id of the entry to create.
+   * @param entry Required. The entry to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
-  public final void deleteEntry(EntryName name) {
-    DeleteEntryRequest request =
-        DeleteEntryRequest.newBuilder().setName(name == null ? null : name.toString()).build();
-    deleteEntry(request);
+  public final Entry createEntry(String parent, String entryId, Entry entry) {
+    ENTRY_GROUP_PATH_TEMPLATE.validate(parent, "createEntry");
+    CreateEntryRequest request =
+        CreateEntryRequest.newBuilder()
+            .setParent(parent)
+            .setEntryId(entryId)
+            .setEntry(entry)
+            .build();
+    return createEntry(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
+   *
+   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
+   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
+   * information).
+   *
+   * <p>A maximum of 100,000 entries may be created per entry group.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedParent = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   String entryId = "";
+   *   Entry entry = Entry.newBuilder().build();
+   *   CreateEntryRequest request = CreateEntryRequest.newBuilder()
+   *     .setParent(formattedParent)
+   *     .setEntryId(entryId)
+   *     .setEntry(entry)
+   *     .build();
+   *   Entry response = dataCatalogClient.createEntry(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final Entry createEntry(CreateEntryRequest request) {
+    return createEntryCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
+   *
+   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
+   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
+   * information).
+   *
+   * <p>A maximum of 100,000 entries may be created per entry group.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedParent = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   String entryId = "";
+   *   Entry entry = Entry.newBuilder().build();
+   *   CreateEntryRequest request = CreateEntryRequest.newBuilder()
+   *     .setParent(formattedParent)
+   *     .setEntryId(entryId)
+   *     .setEntry(entry)
+   *     .build();
+   *   ApiFuture&lt;Entry&gt; future = dataCatalogClient.createEntryCallable().futureCall(request);
+   *   // Do something
+   *   Entry response = future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<CreateEntryRequest, Entry> createEntryCallable() {
+    return stub.createEntryCallable();
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Updates an existing entry. Users should enable the Data Catalog API in the project identified
+   * by the `entry.name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   Entry entry = Entry.newBuilder().build();
+   *   FieldMask updateMask = FieldMask.newBuilder().build();
+   *   Entry response = dataCatalogClient.updateEntry(entry, updateMask);
+   * }
+   * </code></pre>
+   *
+   * @param entry Required. The updated entry. The "name" field must be set.
+   * @param updateMask The fields to update on the entry. If absent or empty, all modifiable fields
+   *     are updated.
+   *     <p>The following fields are modifiable: &#42; For entries with type `DATA_STREAM`: &#42;
+   *     `schema` &#42; For entries with type `FILESET` &#42; `schema` &#42; `display_name` &#42;
+   *     `description` &#42; `gcs_fileset_spec` &#42; `gcs_fileset_spec.file_patterns` &#42; For
+   *     entries with `user_specified_type` &#42; `schema` &#42; `display_name` &#42; `description`
+   *     &#42; user_specified_type &#42; user_specified_system &#42; linked_resource &#42;
+   *     source_system_timestamps
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final Entry updateEntry(Entry entry, FieldMask updateMask) {
+    UpdateEntryRequest request =
+        UpdateEntryRequest.newBuilder().setEntry(entry).setUpdateMask(updateMask).build();
+    return updateEntry(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Updates an existing entry. Users should enable the Data Catalog API in the project identified
+   * by the `entry.name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   Entry entry = Entry.newBuilder().build();
+   *   UpdateEntryRequest request = UpdateEntryRequest.newBuilder()
+   *     .setEntry(entry)
+   *     .build();
+   *   Entry response = dataCatalogClient.updateEntry(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final Entry updateEntry(UpdateEntryRequest request) {
+    return updateEntryCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Updates an existing entry. Users should enable the Data Catalog API in the project identified
+   * by the `entry.name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   Entry entry = Entry.newBuilder().build();
+   *   UpdateEntryRequest request = UpdateEntryRequest.newBuilder()
+   *     .setEntry(entry)
+   *     .build();
+   *   ApiFuture&lt;Entry&gt; future = dataCatalogClient.updateEntryCallable().futureCall(request);
+   *   // Do something
+   *   Entry response = future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<UpdateEntryRequest, Entry> updateEntryCallable() {
+    return stub.updateEntryCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -461,8 +1139,8 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   dataCatalogClient.deleteEntry(name.toString());
+   *   String formattedName = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   dataCatalogClient.deleteEntry(formattedName);
    * }
    * </code></pre>
    *
@@ -472,6 +1150,7 @@ public class DataCatalogClient implements BackgroundResource {
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final void deleteEntry(String name) {
+    ENTRY_PATH_TEMPLATE.validate(name, "deleteEntry");
     DeleteEntryRequest request = DeleteEntryRequest.newBuilder().setName(name).build();
     deleteEntry(request);
   }
@@ -488,9 +1167,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedName = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
    *   DeleteEntryRequest request = DeleteEntryRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .build();
    *   dataCatalogClient.deleteEntry(request);
    * }
@@ -515,9 +1194,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedName = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
    *   DeleteEntryRequest request = DeleteEntryRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .build();
    *   ApiFuture&lt;Void&gt; future = dataCatalogClient.deleteEntryCallable().futureCall(request);
    *   // Do something
@@ -537,32 +1216,8 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   Entry response = dataCatalogClient.getEntry(name);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the entry. Example:
-   *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final Entry getEntry(EntryName name) {
-    GetEntryRequest request =
-        GetEntryRequest.newBuilder().setName(name == null ? null : name.toString()).build();
-    return getEntry(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Gets an entry.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   Entry response = dataCatalogClient.getEntry(name.toString());
+   *   String formattedName = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   Entry response = dataCatalogClient.getEntry(formattedName);
    * }
    * </code></pre>
    *
@@ -572,6 +1227,7 @@ public class DataCatalogClient implements BackgroundResource {
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final Entry getEntry(String name) {
+    ENTRY_PATH_TEMPLATE.validate(name, "getEntry");
     GetEntryRequest request = GetEntryRequest.newBuilder().setName(name).build();
     return getEntry(request);
   }
@@ -584,9 +1240,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedName = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
    *   GetEntryRequest request = GetEntryRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .build();
    *   Entry response = dataCatalogClient.getEntry(request);
    * }
@@ -607,9 +1263,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedName = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
    *   GetEntryRequest request = GetEntryRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .build();
    *   ApiFuture&lt;Entry&gt; future = dataCatalogClient.getEntryCallable().futureCall(request);
    *   // Do something
@@ -664,571 +1320,141 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
   /**
-   * Deletes a tag template and all tags using the template. Users should enable the Data Catalog
-   * API in the project identified by the `name` parameter (see [Data Catalog Resource Project]
-   * (/data-catalog/docs/concepts/resource-project) for more information).
+   * Lists entry groups.
    *
    * <p>Sample code:
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
-   *   boolean force = false;
-   *   dataCatalogClient.deleteTagTemplate(name, force);
+   *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
+   *   ListEntryGroupsResponse response = dataCatalogClient.listEntryGroups(formattedParent);
    * }
    * </code></pre>
    *
-   * @param name Required. The name of the tag template to delete. Example:
-   *     <p>&#42; projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
-   * @param force Required. Currently, this field must always be set to `true`. This confirms the
-   *     deletion of any possible tags using this template. `force = false` will be supported in the
-   *     future.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteTagTemplate(TagTemplateName name, boolean force) {
-    DeleteTagTemplateRequest request =
-        DeleteTagTemplateRequest.newBuilder()
-            .setName(name == null ? null : name.toString())
-            .setForce(force)
-            .build();
-    deleteTagTemplate(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a tag template and all tags using the template. Users should enable the Data Catalog
-   * API in the project identified by the `name` parameter (see [Data Catalog Resource Project]
-   * (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
-   *   boolean force = false;
-   *   dataCatalogClient.deleteTagTemplate(name.toString(), force);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the tag template to delete. Example:
-   *     <p>&#42; projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
-   * @param force Required. Currently, this field must always be set to `true`. This confirms the
-   *     deletion of any possible tags using this template. `force = false` will be supported in the
-   *     future.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteTagTemplate(String name, boolean force) {
-    DeleteTagTemplateRequest request =
-        DeleteTagTemplateRequest.newBuilder().setName(name).setForce(force).build();
-    deleteTagTemplate(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a tag template and all tags using the template. Users should enable the Data Catalog
-   * API in the project identified by the `name` parameter (see [Data Catalog Resource Project]
-   * (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
-   *   boolean force = false;
-   *   DeleteTagTemplateRequest request = DeleteTagTemplateRequest.newBuilder()
-   *     .setName(name.toString())
-   *     .setForce(force)
-   *     .build();
-   *   dataCatalogClient.deleteTagTemplate(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteTagTemplate(DeleteTagTemplateRequest request) {
-    deleteTagTemplateCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a tag template and all tags using the template. Users should enable the Data Catalog
-   * API in the project identified by the `name` parameter (see [Data Catalog Resource Project]
-   * (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
-   *   boolean force = false;
-   *   DeleteTagTemplateRequest request = DeleteTagTemplateRequest.newBuilder()
-   *     .setName(name.toString())
-   *     .setForce(force)
-   *     .build();
-   *   ApiFuture&lt;Void&gt; future = dataCatalogClient.deleteTagTemplateCallable().futureCall(request);
-   *   // Do something
-   *   future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<DeleteTagTemplateRequest, Empty> deleteTagTemplateCallable() {
-    return stub.deleteTagTemplateCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a field in a tag template and all uses of that field. Users should enable the Data
-   * Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource
-   * Project] (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
-   *   boolean force = false;
-   *   dataCatalogClient.deleteTagTemplateField(name, force);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the tag template field to delete. Example:
-   *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
-   * @param force Required. Currently, this field must always be set to `true`. This confirms the
-   *     deletion of this field from any tags using this field. `force = false` will be supported in
-   *     the future.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteTagTemplateField(TagTemplateFieldName name, boolean force) {
-    DeleteTagTemplateFieldRequest request =
-        DeleteTagTemplateFieldRequest.newBuilder()
-            .setName(name == null ? null : name.toString())
-            .setForce(force)
-            .build();
-    deleteTagTemplateField(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a field in a tag template and all uses of that field. Users should enable the Data
-   * Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource
-   * Project] (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
-   *   boolean force = false;
-   *   dataCatalogClient.deleteTagTemplateField(name.toString(), force);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the tag template field to delete. Example:
-   *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
-   * @param force Required. Currently, this field must always be set to `true`. This confirms the
-   *     deletion of this field from any tags using this field. `force = false` will be supported in
-   *     the future.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteTagTemplateField(String name, boolean force) {
-    DeleteTagTemplateFieldRequest request =
-        DeleteTagTemplateFieldRequest.newBuilder().setName(name).setForce(force).build();
-    deleteTagTemplateField(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a field in a tag template and all uses of that field. Users should enable the Data
-   * Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource
-   * Project] (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
-   *   boolean force = false;
-   *   DeleteTagTemplateFieldRequest request = DeleteTagTemplateFieldRequest.newBuilder()
-   *     .setName(name.toString())
-   *     .setForce(force)
-   *     .build();
-   *   dataCatalogClient.deleteTagTemplateField(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteTagTemplateField(DeleteTagTemplateFieldRequest request) {
-    deleteTagTemplateFieldCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a field in a tag template and all uses of that field. Users should enable the Data
-   * Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource
-   * Project] (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
-   *   boolean force = false;
-   *   DeleteTagTemplateFieldRequest request = DeleteTagTemplateFieldRequest.newBuilder()
-   *     .setName(name.toString())
-   *     .setForce(force)
-   *     .build();
-   *   ApiFuture&lt;Void&gt; future = dataCatalogClient.deleteTagTemplateFieldCallable().futureCall(request);
-   *   // Do something
-   *   future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<DeleteTagTemplateFieldRequest, Empty>
-      deleteTagTemplateFieldCallable() {
-    return stub.deleteTagTemplateFieldCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a tag.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   dataCatalogClient.deleteTag(name);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the tag to delete. Example:
-   *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteTag(EntryName name) {
-    DeleteTagRequest request =
-        DeleteTagRequest.newBuilder().setName(name == null ? null : name.toString()).build();
-    deleteTag(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a tag.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   dataCatalogClient.deleteTag(name.toString());
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the tag to delete. Example:
-   *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteTag(String name) {
-    DeleteTagRequest request = DeleteTagRequest.newBuilder().setName(name).build();
-    deleteTag(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a tag.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   DeleteTagRequest request = DeleteTagRequest.newBuilder()
-   *     .setName(name.toString())
-   *     .build();
-   *   dataCatalogClient.deleteTag(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final void deleteTag(DeleteTagRequest request) {
-    deleteTagCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Deletes a tag.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   DeleteTagRequest request = DeleteTagRequest.newBuilder()
-   *     .setName(name.toString())
-   *     .build();
-   *   ApiFuture&lt;Void&gt; future = dataCatalogClient.deleteTagCallable().futureCall(request);
-   *   // Do something
-   *   future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<DeleteTagRequest, Empty> deleteTagCallable() {
-    return stub.deleteTagCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Gets the access control policy for a resource. A `NOT_FOUND` error is returned if the resource
-   * does not exist. An empty policy is returned if the resource exists but does not have a policy
-   * set on it.
-   *
-   * <p>Supported resources are: - Tag templates. - Entries. - Entry groups. Note, this method
-   * cannot be used to manage policies for BigQuery, Cloud Pub/Sub and any external Google Cloud
-   * Platform resources synced to Cloud Data Catalog.
-   *
-   * <p>Callers must have following Google IAM permission - `datacatalog.tagTemplates.getIamPolicy`
-   * to get policies on tag templates. - `datacatalog.entries.getIamPolicy` to get policies on
-   * entries. - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   ResourceName resource = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   GetIamPolicyRequest request = GetIamPolicyRequest.newBuilder()
-   *     .setResource(resource.toString())
-   *     .build();
-   *   Policy response = dataCatalogClient.getIamPolicy(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final Policy getIamPolicy(GetIamPolicyRequest request) {
-    return getIamPolicyCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Gets the access control policy for a resource. A `NOT_FOUND` error is returned if the resource
-   * does not exist. An empty policy is returned if the resource exists but does not have a policy
-   * set on it.
-   *
-   * <p>Supported resources are: - Tag templates. - Entries. - Entry groups. Note, this method
-   * cannot be used to manage policies for BigQuery, Cloud Pub/Sub and any external Google Cloud
-   * Platform resources synced to Cloud Data Catalog.
-   *
-   * <p>Callers must have following Google IAM permission - `datacatalog.tagTemplates.getIamPolicy`
-   * to get policies on tag templates. - `datacatalog.entries.getIamPolicy` to get policies on
-   * entries. - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   ResourceName resource = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   GetIamPolicyRequest request = GetIamPolicyRequest.newBuilder()
-   *     .setResource(resource.toString())
-   *     .build();
-   *   ApiFuture&lt;Policy&gt; future = dataCatalogClient.getIamPolicyCallable().futureCall(request);
-   *   // Do something
-   *   Policy response = future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<GetIamPolicyRequest, Policy> getIamPolicyCallable() {
-    return stub.getIamPolicyCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates an EntryGroup.
-   *
-   * <p>An entry group contains logically related entries together with Cloud Identity and Access
-   * Management policies that specify the users who can create, edit, and view entries within the
-   * entry group.
-   *
-   * <p>Data Catalog automatically creates an entry group for BigQuery entries
-   * ("{@literal @}bigquery") and Pub/Sub topics ("{@literal @}pubsub"). Users create their own
-   * entry group to contain Cloud Storage fileset entries or custom type entries, and the IAM
-   * policies associated with those entries. Entry groups, like entries, can be searched.
-   *
-   * <p>A maximum of 10,000 entry groups may be created per organization across all locations.
-   *
-   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
-   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
-   * information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-   *   String entryGroupId = "";
-   *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
-   *   EntryGroup response = dataCatalogClient.createEntryGroup(parent, entryGroupId, entryGroup);
-   * }
-   * </code></pre>
-   *
-   * @param parent Required. The name of the project this entry group is in. Example:
+   * @param parent Required. The name of the location that contains the entry groups, which can be
+   *     provided in URL format. Example:
    *     <p>&#42; projects/{project_id}/locations/{location}
-   *     <p>Note that this EntryGroup and its child resources may not actually be stored in the
-   *     location in this name.
-   * @param entryGroupId Required. The id of the entry group to create. The id must begin with a
-   *     letter or underscore, contain only English letters, numbers and underscores, and be at most
-   *     64 characters.
-   * @param entryGroup The entry group to create. Defaults to an empty entry group.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
-  public final EntryGroup createEntryGroup(
-      LocationName parent, String entryGroupId, EntryGroup entryGroup) {
-    CreateEntryGroupRequest request =
-        CreateEntryGroupRequest.newBuilder()
-            .setParent(parent == null ? null : parent.toString())
-            .setEntryGroupId(entryGroupId)
-            .setEntryGroup(entryGroup)
-            .build();
-    return createEntryGroup(request);
+  public final ListEntryGroupsResponse listEntryGroups(String parent) {
+    LOCATION_PATH_TEMPLATE.validate(parent, "listEntryGroups");
+    ListEntryGroupsRequest request = ListEntryGroupsRequest.newBuilder().setParent(parent).build();
+    return listEntryGroups(request);
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
   /**
-   * Creates an EntryGroup.
-   *
-   * <p>An entry group contains logically related entries together with Cloud Identity and Access
-   * Management policies that specify the users who can create, edit, and view entries within the
-   * entry group.
-   *
-   * <p>Data Catalog automatically creates an entry group for BigQuery entries
-   * ("{@literal @}bigquery") and Pub/Sub topics ("{@literal @}pubsub"). Users create their own
-   * entry group to contain Cloud Storage fileset entries or custom type entries, and the IAM
-   * policies associated with those entries. Entry groups, like entries, can be searched.
-   *
-   * <p>A maximum of 10,000 entry groups may be created per organization across all locations.
-   *
-   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
-   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
-   * information).
+   * Lists entry groups.
    *
    * <p>Sample code:
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-   *   String entryGroupId = "";
-   *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
-   *   EntryGroup response = dataCatalogClient.createEntryGroup(parent.toString(), entryGroupId, entryGroup);
-   * }
-   * </code></pre>
-   *
-   * @param parent Required. The name of the project this entry group is in. Example:
-   *     <p>&#42; projects/{project_id}/locations/{location}
-   *     <p>Note that this EntryGroup and its child resources may not actually be stored in the
-   *     location in this name.
-   * @param entryGroupId Required. The id of the entry group to create. The id must begin with a
-   *     letter or underscore, contain only English letters, numbers and underscores, and be at most
-   *     64 characters.
-   * @param entryGroup The entry group to create. Defaults to an empty entry group.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final EntryGroup createEntryGroup(
-      String parent, String entryGroupId, EntryGroup entryGroup) {
-    CreateEntryGroupRequest request =
-        CreateEntryGroupRequest.newBuilder()
-            .setParent(parent)
-            .setEntryGroupId(entryGroupId)
-            .setEntryGroup(entryGroup)
-            .build();
-    return createEntryGroup(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates an EntryGroup.
-   *
-   * <p>An entry group contains logically related entries together with Cloud Identity and Access
-   * Management policies that specify the users who can create, edit, and view entries within the
-   * entry group.
-   *
-   * <p>Data Catalog automatically creates an entry group for BigQuery entries
-   * ("{@literal @}bigquery") and Pub/Sub topics ("{@literal @}pubsub"). Users create their own
-   * entry group to contain Cloud Storage fileset entries or custom type entries, and the IAM
-   * policies associated with those entries. Entry groups, like entries, can be searched.
-   *
-   * <p>A maximum of 10,000 entry groups may be created per organization across all locations.
-   *
-   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
-   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
-   * information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-   *   String entryGroupId = "";
-   *   CreateEntryGroupRequest request = CreateEntryGroupRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .setEntryGroupId(entryGroupId)
+   *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
+   *   ListEntryGroupsRequest request = ListEntryGroupsRequest.newBuilder()
+   *     .setParent(formattedParent)
    *     .build();
-   *   EntryGroup response = dataCatalogClient.createEntryGroup(request);
+   *   ListEntryGroupsResponse response = dataCatalogClient.listEntryGroups(request);
    * }
    * </code></pre>
    *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
-  public final EntryGroup createEntryGroup(CreateEntryGroupRequest request) {
-    return createEntryGroupCallable().call(request);
+  public final ListEntryGroupsResponse listEntryGroups(ListEntryGroupsRequest request) {
+    return listEntryGroupsCallable().call(request);
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
   /**
-   * Creates an EntryGroup.
-   *
-   * <p>An entry group contains logically related entries together with Cloud Identity and Access
-   * Management policies that specify the users who can create, edit, and view entries within the
-   * entry group.
-   *
-   * <p>Data Catalog automatically creates an entry group for BigQuery entries
-   * ("{@literal @}bigquery") and Pub/Sub topics ("{@literal @}pubsub"). Users create their own
-   * entry group to contain Cloud Storage fileset entries or custom type entries, and the IAM
-   * policies associated with those entries. Entry groups, like entries, can be searched.
-   *
-   * <p>A maximum of 10,000 entry groups may be created per organization across all locations.
-   *
-   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
-   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
-   * information).
+   * Lists entry groups.
    *
    * <p>Sample code:
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-   *   String entryGroupId = "";
-   *   CreateEntryGroupRequest request = CreateEntryGroupRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .setEntryGroupId(entryGroupId)
+   *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
+   *   ListEntryGroupsRequest request = ListEntryGroupsRequest.newBuilder()
+   *     .setParent(formattedParent)
    *     .build();
-   *   ApiFuture&lt;EntryGroup&gt; future = dataCatalogClient.createEntryGroupCallable().futureCall(request);
+   *   ApiFuture&lt;ListEntryGroupsResponse&gt; future = dataCatalogClient.listEntryGroupsCallable().futureCall(request);
    *   // Do something
-   *   EntryGroup response = future.get();
+   *   ListEntryGroupsResponse response = future.get();
    * }
    * </code></pre>
    */
-  public final UnaryCallable<CreateEntryGroupRequest, EntryGroup> createEntryGroupCallable() {
-    return stub.createEntryGroupCallable();
+  public final UnaryCallable<ListEntryGroupsRequest, ListEntryGroupsResponse>
+      listEntryGroupsCallable() {
+    return stub.listEntryGroupsCallable();
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Lists entries.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedParent = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   ListEntriesResponse response = dataCatalogClient.listEntries(formattedParent);
+   * }
+   * </code></pre>
+   *
+   * @param parent Required. The name of the entry group that contains the entries, which can be
+   *     provided in URL format. Example:
+   *     <p>&#42; projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final ListEntriesResponse listEntries(String parent) {
+    ENTRY_GROUP_PATH_TEMPLATE.validate(parent, "listEntries");
+    ListEntriesRequest request = ListEntriesRequest.newBuilder().setParent(parent).build();
+    return listEntries(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Lists entries.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedParent = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   ListEntriesRequest request = ListEntriesRequest.newBuilder()
+   *     .setParent(formattedParent)
+   *     .build();
+   *   ListEntriesResponse response = dataCatalogClient.listEntries(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final ListEntriesResponse listEntries(ListEntriesRequest request) {
+    return listEntriesCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Lists entries.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedParent = DataCatalogClient.formatEntryGroupName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   ListEntriesRequest request = ListEntriesRequest.newBuilder()
+   *     .setParent(formattedParent)
+   *     .build();
+   *   ApiFuture&lt;ListEntriesResponse&gt; future = dataCatalogClient.listEntriesCallable().futureCall(request);
+   *   // Do something
+   *   ListEntriesResponse response = future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<ListEntriesRequest, ListEntriesResponse> listEntriesCallable() {
+    return stub.listEntriesCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -1336,666 +1562,6 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
   /**
-   * Gets an EntryGroup.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   EntryGroup response = dataCatalogClient.getEntryGroup(name);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the entry group. For example,
-   *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final EntryGroup getEntryGroup(EntryGroupName name) {
-    GetEntryGroupRequest request =
-        GetEntryGroupRequest.newBuilder().setName(name == null ? null : name.toString()).build();
-    return getEntryGroup(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Gets an EntryGroup.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   EntryGroup response = dataCatalogClient.getEntryGroup(name.toString());
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the entry group. For example,
-   *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final EntryGroup getEntryGroup(String name) {
-    GetEntryGroupRequest request = GetEntryGroupRequest.newBuilder().setName(name).build();
-    return getEntryGroup(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Gets an EntryGroup.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   FieldMask readMask = FieldMask.newBuilder().build();
-   *   EntryGroup response = dataCatalogClient.getEntryGroup(name, readMask);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the entry group. For example,
-   *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
-   * @param readMask The fields to return. If not set or empty, all fields are returned.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final EntryGroup getEntryGroup(EntryGroupName name, FieldMask readMask) {
-    GetEntryGroupRequest request =
-        GetEntryGroupRequest.newBuilder()
-            .setName(name == null ? null : name.toString())
-            .setReadMask(readMask)
-            .build();
-    return getEntryGroup(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Gets an EntryGroup.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   FieldMask readMask = FieldMask.newBuilder().build();
-   *   EntryGroup response = dataCatalogClient.getEntryGroup(name.toString(), readMask);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the entry group. For example,
-   *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
-   * @param readMask The fields to return. If not set or empty, all fields are returned.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final EntryGroup getEntryGroup(String name, FieldMask readMask) {
-    GetEntryGroupRequest request =
-        GetEntryGroupRequest.newBuilder().setName(name).setReadMask(readMask).build();
-    return getEntryGroup(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Gets an EntryGroup.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   GetEntryGroupRequest request = GetEntryGroupRequest.newBuilder()
-   *     .setName(name.toString())
-   *     .build();
-   *   EntryGroup response = dataCatalogClient.getEntryGroup(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final EntryGroup getEntryGroup(GetEntryGroupRequest request) {
-    return getEntryGroupCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Gets an EntryGroup.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   GetEntryGroupRequest request = GetEntryGroupRequest.newBuilder()
-   *     .setName(name.toString())
-   *     .build();
-   *   ApiFuture&lt;EntryGroup&gt; future = dataCatalogClient.getEntryGroupCallable().futureCall(request);
-   *   // Do something
-   *   EntryGroup response = future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<GetEntryGroupRequest, EntryGroup> getEntryGroupCallable() {
-    return stub.getEntryGroupCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists entry groups.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   for (EntryGroup element : dataCatalogClient.listEntryGroups(parent).iterateAll()) {
-   *     // doThingsWith(element);
-   *   }
-   * }
-   * </code></pre>
-   *
-   * @param parent Required. The name of the location that contains the entry groups, which can be
-   *     provided in URL format. Example:
-   *     <p>&#42; projects/{project_id}/locations/{location}
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final ListEntryGroupsPagedResponse listEntryGroups(EntryGroupName parent) {
-    ListEntryGroupsRequest request =
-        ListEntryGroupsRequest.newBuilder()
-            .setParent(parent == null ? null : parent.toString())
-            .build();
-    return listEntryGroups(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists entry groups.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   for (EntryGroup element : dataCatalogClient.listEntryGroups(parent.toString()).iterateAll()) {
-   *     // doThingsWith(element);
-   *   }
-   * }
-   * </code></pre>
-   *
-   * @param parent Required. The name of the location that contains the entry groups, which can be
-   *     provided in URL format. Example:
-   *     <p>&#42; projects/{project_id}/locations/{location}
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final ListEntryGroupsPagedResponse listEntryGroups(String parent) {
-    ListEntryGroupsRequest request = ListEntryGroupsRequest.newBuilder().setParent(parent).build();
-    return listEntryGroups(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists entry groups.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   ListEntryGroupsRequest request = ListEntryGroupsRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .build();
-   *   for (EntryGroup element : dataCatalogClient.listEntryGroups(request).iterateAll()) {
-   *     // doThingsWith(element);
-   *   }
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final ListEntryGroupsPagedResponse listEntryGroups(ListEntryGroupsRequest request) {
-    return listEntryGroupsPagedCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists entry groups.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   ListEntryGroupsRequest request = ListEntryGroupsRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .build();
-   *   ApiFuture&lt;ListEntryGroupsPagedResponse&gt; future = dataCatalogClient.listEntryGroupsPagedCallable().futureCall(request);
-   *   // Do something
-   *   for (EntryGroup element : future.get().iterateAll()) {
-   *     // doThingsWith(element);
-   *   }
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<ListEntryGroupsRequest, ListEntryGroupsPagedResponse>
-      listEntryGroupsPagedCallable() {
-    return stub.listEntryGroupsPagedCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists entry groups.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   ListEntryGroupsRequest request = ListEntryGroupsRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .build();
-   *   while (true) {
-   *     ListEntryGroupsResponse response = dataCatalogClient.listEntryGroupsCallable().call(request);
-   *     for (EntryGroup element : response.getEntryGroupsList()) {
-   *       // doThingsWith(element);
-   *     }
-   *     String nextPageToken = response.getNextPageToken();
-   *     if (!Strings.isNullOrEmpty(nextPageToken)) {
-   *       request = request.toBuilder().setPageToken(nextPageToken).build();
-   *     } else {
-   *       break;
-   *     }
-   *   }
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<ListEntryGroupsRequest, ListEntryGroupsResponse>
-      listEntryGroupsCallable() {
-    return stub.listEntryGroupsCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
-   *
-   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
-   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
-   * information).
-   *
-   * <p>A maximum of 100,000 entries may be created per entry group.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   String entryId = "";
-   *   Entry entry = Entry.newBuilder().build();
-   *   Entry response = dataCatalogClient.createEntry(parent, entryId, entry);
-   * }
-   * </code></pre>
-   *
-   * @param parent Required. The name of the entry group this entry is in. Example:
-   *     <p>&#42; projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
-   *     <p>Note that this Entry and its child resources may not actually be stored in the location
-   *     in this name.
-   * @param entryId Required. The id of the entry to create.
-   * @param entry Required. The entry to create.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final Entry createEntry(EntryGroupName parent, String entryId, Entry entry) {
-    CreateEntryRequest request =
-        CreateEntryRequest.newBuilder()
-            .setParent(parent == null ? null : parent.toString())
-            .setEntryId(entryId)
-            .setEntry(entry)
-            .build();
-    return createEntry(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
-   *
-   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
-   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
-   * information).
-   *
-   * <p>A maximum of 100,000 entries may be created per entry group.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   String entryId = "";
-   *   Entry entry = Entry.newBuilder().build();
-   *   Entry response = dataCatalogClient.createEntry(parent.toString(), entryId, entry);
-   * }
-   * </code></pre>
-   *
-   * @param parent Required. The name of the entry group this entry is in. Example:
-   *     <p>&#42; projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
-   *     <p>Note that this Entry and its child resources may not actually be stored in the location
-   *     in this name.
-   * @param entryId Required. The id of the entry to create.
-   * @param entry Required. The entry to create.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final Entry createEntry(String parent, String entryId, Entry entry) {
-    CreateEntryRequest request =
-        CreateEntryRequest.newBuilder()
-            .setParent(parent)
-            .setEntryId(entryId)
-            .setEntry(entry)
-            .build();
-    return createEntry(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
-   *
-   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
-   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
-   * information).
-   *
-   * <p>A maximum of 100,000 entries may be created per entry group.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   String entryId = "";
-   *   Entry entry = Entry.newBuilder().build();
-   *   CreateEntryRequest request = CreateEntryRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .setEntryId(entryId)
-   *     .setEntry(entry)
-   *     .build();
-   *   Entry response = dataCatalogClient.createEntry(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final Entry createEntry(CreateEntryRequest request) {
-    return createEntryCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
-   *
-   * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
-   * (see [Data Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more
-   * information).
-   *
-   * <p>A maximum of 100,000 entries may be created per entry group.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   String entryId = "";
-   *   Entry entry = Entry.newBuilder().build();
-   *   CreateEntryRequest request = CreateEntryRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .setEntryId(entryId)
-   *     .setEntry(entry)
-   *     .build();
-   *   ApiFuture&lt;Entry&gt; future = dataCatalogClient.createEntryCallable().futureCall(request);
-   *   // Do something
-   *   Entry response = future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<CreateEntryRequest, Entry> createEntryCallable() {
-    return stub.createEntryCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates an existing entry. Users should enable the Data Catalog API in the project identified
-   * by the `entry.name` parameter (see [Data Catalog Resource Project]
-   * (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   Entry entry = Entry.newBuilder().build();
-   *   Entry response = dataCatalogClient.updateEntry(entry);
-   * }
-   * </code></pre>
-   *
-   * @param entry Required. The updated entry. The "name" field must be set.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final Entry updateEntry(Entry entry) {
-    UpdateEntryRequest request = UpdateEntryRequest.newBuilder().setEntry(entry).build();
-    return updateEntry(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates an existing entry. Users should enable the Data Catalog API in the project identified
-   * by the `entry.name` parameter (see [Data Catalog Resource Project]
-   * (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   Entry entry = Entry.newBuilder().build();
-   *   FieldMask updateMask = FieldMask.newBuilder().build();
-   *   Entry response = dataCatalogClient.updateEntry(entry, updateMask);
-   * }
-   * </code></pre>
-   *
-   * @param entry Required. The updated entry. The "name" field must be set.
-   * @param updateMask The fields to update on the entry. If absent or empty, all modifiable fields
-   *     are updated.
-   *     <p>The following fields are modifiable: &#42; For entries with type `DATA_STREAM`: &#42;
-   *     `schema` &#42; For entries with type `FILESET` &#42; `schema` &#42; `display_name` &#42;
-   *     `description` &#42; `gcs_fileset_spec` &#42; `gcs_fileset_spec.file_patterns` &#42; For
-   *     entries with `user_specified_type` &#42; `schema` &#42; `display_name` &#42; `description`
-   *     &#42; user_specified_type &#42; user_specified_system &#42; linked_resource &#42;
-   *     source_system_timestamps
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final Entry updateEntry(Entry entry, FieldMask updateMask) {
-    UpdateEntryRequest request =
-        UpdateEntryRequest.newBuilder().setEntry(entry).setUpdateMask(updateMask).build();
-    return updateEntry(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates an existing entry. Users should enable the Data Catalog API in the project identified
-   * by the `entry.name` parameter (see [Data Catalog Resource Project]
-   * (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   Entry entry = Entry.newBuilder().build();
-   *   UpdateEntryRequest request = UpdateEntryRequest.newBuilder()
-   *     .setEntry(entry)
-   *     .build();
-   *   Entry response = dataCatalogClient.updateEntry(request);
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final Entry updateEntry(UpdateEntryRequest request) {
-    return updateEntryCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates an existing entry. Users should enable the Data Catalog API in the project identified
-   * by the `entry.name` parameter (see [Data Catalog Resource Project]
-   * (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   Entry entry = Entry.newBuilder().build();
-   *   UpdateEntryRequest request = UpdateEntryRequest.newBuilder()
-   *     .setEntry(entry)
-   *     .build();
-   *   ApiFuture&lt;Entry&gt; future = dataCatalogClient.updateEntryCallable().futureCall(request);
-   *   // Do something
-   *   Entry response = future.get();
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<UpdateEntryRequest, Entry> updateEntryCallable() {
-    return stub.updateEntryCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists entries.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   for (Entry element : dataCatalogClient.listEntries(parent).iterateAll()) {
-   *     // doThingsWith(element);
-   *   }
-   * }
-   * </code></pre>
-   *
-   * @param parent Required. The name of the entry group that contains the entries, which can be
-   *     provided in URL format. Example:
-   *     <p>&#42; projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final ListEntriesPagedResponse listEntries(EntryGroupName parent) {
-    ListEntriesRequest request =
-        ListEntriesRequest.newBuilder()
-            .setParent(parent == null ? null : parent.toString())
-            .build();
-    return listEntries(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists entries.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   for (Entry element : dataCatalogClient.listEntries(parent.toString()).iterateAll()) {
-   *     // doThingsWith(element);
-   *   }
-   * }
-   * </code></pre>
-   *
-   * @param parent Required. The name of the entry group that contains the entries, which can be
-   *     provided in URL format. Example:
-   *     <p>&#42; projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final ListEntriesPagedResponse listEntries(String parent) {
-    ListEntriesRequest request = ListEntriesRequest.newBuilder().setParent(parent).build();
-    return listEntries(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists entries.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   ListEntriesRequest request = ListEntriesRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .build();
-   *   for (Entry element : dataCatalogClient.listEntries(request).iterateAll()) {
-   *     // doThingsWith(element);
-   *   }
-   * }
-   * </code></pre>
-   *
-   * @param request The request object containing all of the parameters for the API call.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final ListEntriesPagedResponse listEntries(ListEntriesRequest request) {
-    return listEntriesPagedCallable().call(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists entries.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   ListEntriesRequest request = ListEntriesRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .build();
-   *   ApiFuture&lt;ListEntriesPagedResponse&gt; future = dataCatalogClient.listEntriesPagedCallable().futureCall(request);
-   *   // Do something
-   *   for (Entry element : future.get().iterateAll()) {
-   *     // doThingsWith(element);
-   *   }
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<ListEntriesRequest, ListEntriesPagedResponse>
-      listEntriesPagedCallable() {
-    return stub.listEntriesPagedCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists entries.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-   *   ListEntriesRequest request = ListEntriesRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .build();
-   *   while (true) {
-   *     ListEntriesResponse response = dataCatalogClient.listEntriesCallable().call(request);
-   *     for (Entry element : response.getEntriesList()) {
-   *       // doThingsWith(element);
-   *     }
-   *     String nextPageToken = response.getNextPageToken();
-   *     if (!Strings.isNullOrEmpty(nextPageToken)) {
-   *       request = request.toBuilder().setPageToken(nextPageToken).build();
-   *     } else {
-   *       break;
-   *     }
-   *   }
-   * }
-   * </code></pre>
-   */
-  public final UnaryCallable<ListEntriesRequest, ListEntriesResponse> listEntriesCallable() {
-    return stub.listEntriesCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
    * Creates a tag template. The user should enable the Data Catalog API in the project identified
    * by the `parent` parameter (see [Data Catalog Resource
    * Project](/data-catalog/docs/concepts/resource-project) for more information).
@@ -2004,47 +1570,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
+   *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
    *   String tagTemplateId = "";
    *   TagTemplate tagTemplate = TagTemplate.newBuilder().build();
-   *   TagTemplate response = dataCatalogClient.createTagTemplate(parent, tagTemplateId, tagTemplate);
-   * }
-   * </code></pre>
-   *
-   * @param parent Required. The name of the project and the template location
-   *     [region](/compute/docs/regions-zones/#available). NOTE: Currently, only the `us-central1
-   *     region` is supported.
-   *     <p>Example:
-   *     <p>&#42; projects/{project_id}/locations/us-central1
-   * @param tagTemplateId Required. The id of the tag template to create.
-   * @param tagTemplate Required. The tag template to create.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final TagTemplate createTagTemplate(
-      LocationName parent, String tagTemplateId, TagTemplate tagTemplate) {
-    CreateTagTemplateRequest request =
-        CreateTagTemplateRequest.newBuilder()
-            .setParent(parent == null ? null : parent.toString())
-            .setTagTemplateId(tagTemplateId)
-            .setTagTemplate(tagTemplate)
-            .build();
-    return createTagTemplate(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Creates a tag template. The user should enable the Data Catalog API in the project identified
-   * by the `parent` parameter (see [Data Catalog Resource
-   * Project](/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-   *   String tagTemplateId = "";
-   *   TagTemplate tagTemplate = TagTemplate.newBuilder().build();
-   *   TagTemplate response = dataCatalogClient.createTagTemplate(parent.toString(), tagTemplateId, tagTemplate);
+   *   TagTemplate response = dataCatalogClient.createTagTemplate(formattedParent, tagTemplateId, tagTemplate);
    * }
    * </code></pre>
    *
@@ -2059,6 +1588,7 @@ public class DataCatalogClient implements BackgroundResource {
    */
   public final TagTemplate createTagTemplate(
       String parent, String tagTemplateId, TagTemplate tagTemplate) {
+    LOCATION_PATH_TEMPLATE.validate(parent, "createTagTemplate");
     CreateTagTemplateRequest request =
         CreateTagTemplateRequest.newBuilder()
             .setParent(parent)
@@ -2078,11 +1608,11 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
+   *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
    *   String tagTemplateId = "";
    *   TagTemplate tagTemplate = TagTemplate.newBuilder().build();
    *   CreateTagTemplateRequest request = CreateTagTemplateRequest.newBuilder()
-   *     .setParent(parent.toString())
+   *     .setParent(formattedParent)
    *     .setTagTemplateId(tagTemplateId)
    *     .setTagTemplate(tagTemplate)
    *     .build();
@@ -2107,11 +1637,11 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
+   *   String formattedParent = DataCatalogClient.formatLocationName("[PROJECT]", "[LOCATION]");
    *   String tagTemplateId = "";
    *   TagTemplate tagTemplate = TagTemplate.newBuilder().build();
    *   CreateTagTemplateRequest request = CreateTagTemplateRequest.newBuilder()
-   *     .setParent(parent.toString())
+   *     .setParent(formattedParent)
    *     .setTagTemplateId(tagTemplateId)
    *     .setTagTemplate(tagTemplate)
    *     .build();
@@ -2133,31 +1663,8 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
-   *   TagTemplate response = dataCatalogClient.getTagTemplate(name);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the tag template. Example:
-   *     <p>&#42; projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final TagTemplate getTagTemplate(TagTemplateName name) {
-    GetTagTemplateRequest request =
-        GetTagTemplateRequest.newBuilder().setName(name == null ? null : name.toString()).build();
-    return getTagTemplate(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Gets a tag template.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
-   *   TagTemplate response = dataCatalogClient.getTagTemplate(name.toString());
+   *   String formattedName = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   TagTemplate response = dataCatalogClient.getTagTemplate(formattedName);
    * }
    * </code></pre>
    *
@@ -2166,6 +1673,7 @@ public class DataCatalogClient implements BackgroundResource {
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplate getTagTemplate(String name) {
+    TAG_TEMPLATE_PATH_TEMPLATE.validate(name, "getTagTemplate");
     GetTagTemplateRequest request = GetTagTemplateRequest.newBuilder().setName(name).build();
     return getTagTemplate(request);
   }
@@ -2178,9 +1686,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   String formattedName = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
    *   GetTagTemplateRequest request = GetTagTemplateRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .build();
    *   TagTemplate response = dataCatalogClient.getTagTemplate(request);
    * }
@@ -2201,9 +1709,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   String formattedName = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
    *   GetTagTemplateRequest request = GetTagTemplateRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .build();
    *   ApiFuture&lt;TagTemplate&gt; future = dataCatalogClient.getTagTemplateCallable().futureCall(request);
    *   // Do something
@@ -2213,32 +1721,6 @@ public class DataCatalogClient implements BackgroundResource {
    */
   public final UnaryCallable<GetTagTemplateRequest, TagTemplate> getTagTemplateCallable() {
     return stub.getTagTemplateCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates a tag template. This method cannot be used to update the fields of a template. The tag
-   * template fields are represented as separate resources and should be updated using their own
-   * create/update/delete methods. Users should enable the Data Catalog API in the project
-   * identified by the `tag_template.name` parameter (see [Data Catalog Resource Project]
-   * (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplate tagTemplate = TagTemplate.newBuilder().build();
-   *   TagTemplate response = dataCatalogClient.updateTagTemplate(tagTemplate);
-   * }
-   * </code></pre>
-   *
-   * @param tagTemplate Required. The template to update. The "name" field must be set.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final TagTemplate updateTagTemplate(TagTemplate tagTemplate) {
-    UpdateTagTemplateRequest request =
-        UpdateTagTemplateRequest.newBuilder().setTagTemplate(tagTemplate).build();
-    return updateTagTemplate(request);
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -2330,42 +1812,85 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
   /**
-   * Creates a field in a tag template. The user should enable the Data Catalog API in the project
-   * identified by the `parent` parameter (see [Data Catalog Resource
-   * Project](/data-catalog/docs/concepts/resource-project) for more information).
+   * Deletes a tag template and all tags using the template. Users should enable the Data Catalog
+   * API in the project identified by the `name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>Sample code:
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName parent = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
-   *   String tagTemplateFieldId = "";
-   *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
-   *   TagTemplateField response = dataCatalogClient.createTagTemplateField(parent, tagTemplateFieldId, tagTemplateField);
+   *   String formattedName = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   boolean force = false;
+   *   dataCatalogClient.deleteTagTemplate(formattedName, force);
    * }
    * </code></pre>
    *
-   * @param parent Required. The name of the project and the template location
-   *     [region](/compute/docs/regions-zones/#available). NOTE: Currently, only the `us-central1
-   *     region` is supported.
-   *     <p>Example:
-   *     <p>&#42; projects/{project_id}/locations/us-central1/tagTemplates/{tag_template_id}
-   * @param tagTemplateFieldId Required. The ID of the tag template field to create. Field ids can
-   *     contain letters (both uppercase and lowercase), numbers (0-9), underscores (_) and dashes
-   *     (-). Field IDs must be at least 1 character long and at most 128 characters long. Field IDs
-   *     must also be unique within their template.
-   * @param tagTemplateField Required. The tag template field to create.
+   * @param name Required. The name of the tag template to delete. Example:
+   *     <p>&#42; projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
+   * @param force Required. Currently, this field must always be set to `true`. This confirms the
+   *     deletion of any possible tags using this template. `force = false` will be supported in the
+   *     future.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
-  public final TagTemplateField createTagTemplateField(
-      TagTemplateName parent, String tagTemplateFieldId, TagTemplateField tagTemplateField) {
-    CreateTagTemplateFieldRequest request =
-        CreateTagTemplateFieldRequest.newBuilder()
-            .setParent(parent == null ? null : parent.toString())
-            .setTagTemplateFieldId(tagTemplateFieldId)
-            .setTagTemplateField(tagTemplateField)
-            .build();
-    return createTagTemplateField(request);
+  public final void deleteTagTemplate(String name, boolean force) {
+    TAG_TEMPLATE_PATH_TEMPLATE.validate(name, "deleteTagTemplate");
+    DeleteTagTemplateRequest request =
+        DeleteTagTemplateRequest.newBuilder().setName(name).setForce(force).build();
+    deleteTagTemplate(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a tag template and all tags using the template. Users should enable the Data Catalog
+   * API in the project identified by the `name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedName = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   boolean force = false;
+   *   DeleteTagTemplateRequest request = DeleteTagTemplateRequest.newBuilder()
+   *     .setName(formattedName)
+   *     .setForce(force)
+   *     .build();
+   *   dataCatalogClient.deleteTagTemplate(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteTagTemplate(DeleteTagTemplateRequest request) {
+    deleteTagTemplateCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a tag template and all tags using the template. Users should enable the Data Catalog
+   * API in the project identified by the `name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedName = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   boolean force = false;
+   *   DeleteTagTemplateRequest request = DeleteTagTemplateRequest.newBuilder()
+   *     .setName(formattedName)
+   *     .setForce(force)
+   *     .build();
+   *   ApiFuture&lt;Void&gt; future = dataCatalogClient.deleteTagTemplateCallable().futureCall(request);
+   *   // Do something
+   *   future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<DeleteTagTemplateRequest, Empty> deleteTagTemplateCallable() {
+    return stub.deleteTagTemplateCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -2378,10 +1903,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName parent = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   String formattedParent = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
    *   String tagTemplateFieldId = "";
    *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
-   *   TagTemplateField response = dataCatalogClient.createTagTemplateField(parent.toString(), tagTemplateFieldId, tagTemplateField);
+   *   TagTemplateField response = dataCatalogClient.createTagTemplateField(formattedParent, tagTemplateFieldId, tagTemplateField);
    * }
    * </code></pre>
    *
@@ -2399,6 +1924,7 @@ public class DataCatalogClient implements BackgroundResource {
    */
   public final TagTemplateField createTagTemplateField(
       String parent, String tagTemplateFieldId, TagTemplateField tagTemplateField) {
+    TAG_TEMPLATE_PATH_TEMPLATE.validate(parent, "createTagTemplateField");
     CreateTagTemplateFieldRequest request =
         CreateTagTemplateFieldRequest.newBuilder()
             .setParent(parent)
@@ -2418,11 +1944,11 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName parent = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   String formattedParent = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
    *   String tagTemplateFieldId = "";
    *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
    *   CreateTagTemplateFieldRequest request = CreateTagTemplateFieldRequest.newBuilder()
-   *     .setParent(parent.toString())
+   *     .setParent(formattedParent)
    *     .setTagTemplateFieldId(tagTemplateFieldId)
    *     .setTagTemplateField(tagTemplateField)
    *     .build();
@@ -2447,11 +1973,11 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateName parent = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   String formattedParent = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
    *   String tagTemplateFieldId = "";
    *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
    *   CreateTagTemplateFieldRequest request = CreateTagTemplateFieldRequest.newBuilder()
-   *     .setParent(parent.toString())
+   *     .setParent(formattedParent)
    *     .setTagTemplateFieldId(tagTemplateFieldId)
    *     .setTagTemplateField(tagTemplateField)
    *     .build();
@@ -2476,115 +2002,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
-   *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
-   *   TagTemplateField response = dataCatalogClient.updateTagTemplateField(name, tagTemplateField);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the tag template field. Example:
-   *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
-   * @param tagTemplateField Required. The template to update.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final TagTemplateField updateTagTemplateField(
-      TagTemplateFieldName name, TagTemplateField tagTemplateField) {
-    UpdateTagTemplateFieldRequest request =
-        UpdateTagTemplateFieldRequest.newBuilder()
-            .setName(name == null ? null : name.toString())
-            .setTagTemplateField(tagTemplateField)
-            .build();
-    return updateTagTemplateField(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates a field in a tag template. This method cannot be used to update the field type. Users
-   * should enable the Data Catalog API in the project identified by the `name` parameter (see [Data
-   * Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
-   *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
-   *   TagTemplateField response = dataCatalogClient.updateTagTemplateField(name.toString(), tagTemplateField);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the tag template field. Example:
-   *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
-   * @param tagTemplateField Required. The template to update.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final TagTemplateField updateTagTemplateField(
-      String name, TagTemplateField tagTemplateField) {
-    UpdateTagTemplateFieldRequest request =
-        UpdateTagTemplateFieldRequest.newBuilder()
-            .setName(name)
-            .setTagTemplateField(tagTemplateField)
-            .build();
-    return updateTagTemplateField(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates a field in a tag template. This method cannot be used to update the field type. Users
-   * should enable the Data Catalog API in the project identified by the `name` parameter (see [Data
-   * Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   String formattedName = DataCatalogClient.formatFieldName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
    *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
    *   FieldMask updateMask = FieldMask.newBuilder().build();
-   *   TagTemplateField response = dataCatalogClient.updateTagTemplateField(name, tagTemplateField, updateMask);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the tag template field. Example:
-   *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
-   * @param tagTemplateField Required. The template to update.
-   * @param updateMask Optional. The field mask specifies the parts of the template to be updated.
-   *     Allowed fields:
-   *     <p>&#42; `display_name` &#42; `type.enum_type` &#42; `is_required`
-   *     <p>If `update_mask` is not set or empty, all of the allowed fields above will be updated.
-   *     <p>When updating an enum type, the provided values will be merged with the existing values.
-   *     Therefore, enum values can only be added, existing enum values cannot be deleted nor
-   *     renamed. Updating a template field from optional to required is NOT allowed.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final TagTemplateField updateTagTemplateField(
-      TagTemplateFieldName name, TagTemplateField tagTemplateField, FieldMask updateMask) {
-    UpdateTagTemplateFieldRequest request =
-        UpdateTagTemplateFieldRequest.newBuilder()
-            .setName(name == null ? null : name.toString())
-            .setTagTemplateField(tagTemplateField)
-            .setUpdateMask(updateMask)
-            .build();
-    return updateTagTemplateField(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates a field in a tag template. This method cannot be used to update the field type. Users
-   * should enable the Data Catalog API in the project identified by the `name` parameter (see [Data
-   * Catalog Resource Project] (/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
-   *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
-   *   FieldMask updateMask = FieldMask.newBuilder().build();
-   *   TagTemplateField response = dataCatalogClient.updateTagTemplateField(name.toString(), tagTemplateField, updateMask);
+   *   TagTemplateField response = dataCatalogClient.updateTagTemplateField(formattedName, tagTemplateField, updateMask);
    * }
    * </code></pre>
    *
@@ -2603,6 +2024,7 @@ public class DataCatalogClient implements BackgroundResource {
    */
   public final TagTemplateField updateTagTemplateField(
       String name, TagTemplateField tagTemplateField, FieldMask updateMask) {
+    FIELD_PATH_TEMPLATE.validate(name, "updateTagTemplateField");
     UpdateTagTemplateFieldRequest request =
         UpdateTagTemplateFieldRequest.newBuilder()
             .setName(name)
@@ -2622,10 +2044,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   String formattedName = DataCatalogClient.formatFieldName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
    *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
    *   UpdateTagTemplateFieldRequest request = UpdateTagTemplateFieldRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .setTagTemplateField(tagTemplateField)
    *     .build();
    *   TagTemplateField response = dataCatalogClient.updateTagTemplateField(request);
@@ -2649,10 +2071,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   String formattedName = DataCatalogClient.formatFieldName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
    *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
    *   UpdateTagTemplateFieldRequest request = UpdateTagTemplateFieldRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .setTagTemplateField(tagTemplateField)
    *     .build();
    *   ApiFuture&lt;TagTemplateField&gt; future = dataCatalogClient.updateTagTemplateFieldCallable().futureCall(request);
@@ -2676,42 +2098,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   String formattedName = DataCatalogClient.formatFieldName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
    *   String newTagTemplateFieldId = "";
-   *   TagTemplateField response = dataCatalogClient.renameTagTemplateField(name, newTagTemplateFieldId);
-   * }
-   * </code></pre>
-   *
-   * @param name Required. The name of the tag template. Example:
-   *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
-   * @param newTagTemplateFieldId Required. The new ID of this tag template field. For example,
-   *     `my_new_field`.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final TagTemplateField renameTagTemplateField(
-      TagTemplateFieldName name, String newTagTemplateFieldId) {
-    RenameTagTemplateFieldRequest request =
-        RenameTagTemplateFieldRequest.newBuilder()
-            .setName(name == null ? null : name.toString())
-            .setNewTagTemplateFieldId(newTagTemplateFieldId)
-            .build();
-    return renameTagTemplateField(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Renames a field in a tag template. The user should enable the Data Catalog API in the project
-   * identified by the `name` parameter (see [Data Catalog Resource
-   * Project](/data-catalog/docs/concepts/resource-project) for more information).
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
-   *   String newTagTemplateFieldId = "";
-   *   TagTemplateField response = dataCatalogClient.renameTagTemplateField(name.toString(), newTagTemplateFieldId);
+   *   TagTemplateField response = dataCatalogClient.renameTagTemplateField(formattedName, newTagTemplateFieldId);
    * }
    * </code></pre>
    *
@@ -2723,6 +2112,7 @@ public class DataCatalogClient implements BackgroundResource {
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplateField renameTagTemplateField(String name, String newTagTemplateFieldId) {
+    FIELD_PATH_TEMPLATE.validate(name, "renameTagTemplateField");
     RenameTagTemplateFieldRequest request =
         RenameTagTemplateFieldRequest.newBuilder()
             .setName(name)
@@ -2741,10 +2131,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   String formattedName = DataCatalogClient.formatFieldName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
    *   String newTagTemplateFieldId = "";
    *   RenameTagTemplateFieldRequest request = RenameTagTemplateFieldRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .setNewTagTemplateFieldId(newTagTemplateFieldId)
    *     .build();
    *   TagTemplateField response = dataCatalogClient.renameTagTemplateField(request);
@@ -2768,10 +2158,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagTemplateFieldName name = TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   String formattedName = DataCatalogClient.formatFieldName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
    *   String newTagTemplateFieldId = "";
    *   RenameTagTemplateFieldRequest request = RenameTagTemplateFieldRequest.newBuilder()
-   *     .setName(name.toString())
+   *     .setName(formattedName)
    *     .setNewTagTemplateFieldId(newTagTemplateFieldId)
    *     .build();
    *   ApiFuture&lt;TagTemplateField&gt; future = dataCatalogClient.renameTagTemplateFieldCallable().futureCall(request);
@@ -2787,39 +2177,87 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
   /**
-   * Creates a tag on an [Entry][google.cloud.datacatalog.v1beta1.Entry]. Note: The project
-   * identified by the `parent` parameter for the
-   * [tag](/data-catalog/docs/reference/rest/v1beta1/projects.locations.entryGroups.entries.tags/create#path-parameters)
-   * and the [tag
-   * template](/data-catalog/docs/reference/rest/v1beta1/projects.locations.tagTemplates/create#path-parameters)
-   * used to create the tag must be from the same organization.
+   * Deletes a field in a tag template and all uses of that field. Users should enable the Data
+   * Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource
+   * Project] (/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>Sample code:
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagName parent = TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]");
-   *   Tag tag = Tag.newBuilder().build();
-   *   Tag response = dataCatalogClient.createTag(parent, tag);
+   *   String formattedName = DataCatalogClient.formatFieldName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   boolean force = false;
+   *   dataCatalogClient.deleteTagTemplateField(formattedName, force);
    * }
    * </code></pre>
    *
-   * @param parent Required. The name of the resource to attach this tag to. Tags can be attached to
-   *     Entries. Example:
+   * @param name Required. The name of the tag template field to delete. Example:
    *     <p>&#42;
-   *     projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
-   *     <p>Note that this Tag and its child resources may not actually be stored in the location in
-   *     this name.
-   * @param tag Required. The tag to create.
+   *     projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
+   * @param force Required. Currently, this field must always be set to `true`. This confirms the
+   *     deletion of this field from any tags using this field. `force = false` will be supported in
+   *     the future.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
-  public final Tag createTag(TagName parent, Tag tag) {
-    CreateTagRequest request =
-        CreateTagRequest.newBuilder()
-            .setParent(parent == null ? null : parent.toString())
-            .setTag(tag)
-            .build();
-    return createTag(request);
+  public final void deleteTagTemplateField(String name, boolean force) {
+    FIELD_PATH_TEMPLATE.validate(name, "deleteTagTemplateField");
+    DeleteTagTemplateFieldRequest request =
+        DeleteTagTemplateFieldRequest.newBuilder().setName(name).setForce(force).build();
+    deleteTagTemplateField(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a field in a tag template and all uses of that field. Users should enable the Data
+   * Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource
+   * Project] (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedName = DataCatalogClient.formatFieldName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   boolean force = false;
+   *   DeleteTagTemplateFieldRequest request = DeleteTagTemplateFieldRequest.newBuilder()
+   *     .setName(formattedName)
+   *     .setForce(force)
+   *     .build();
+   *   dataCatalogClient.deleteTagTemplateField(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteTagTemplateField(DeleteTagTemplateFieldRequest request) {
+    deleteTagTemplateFieldCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a field in a tag template and all uses of that field. Users should enable the Data
+   * Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource
+   * Project] (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedName = DataCatalogClient.formatFieldName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   boolean force = false;
+   *   DeleteTagTemplateFieldRequest request = DeleteTagTemplateFieldRequest.newBuilder()
+   *     .setName(formattedName)
+   *     .setForce(force)
+   *     .build();
+   *   ApiFuture&lt;Void&gt; future = dataCatalogClient.deleteTagTemplateFieldCallable().futureCall(request);
+   *   // Do something
+   *   future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<DeleteTagTemplateFieldRequest, Empty>
+      deleteTagTemplateFieldCallable() {
+    return stub.deleteTagTemplateFieldCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -2835,9 +2273,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagName parent = TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]");
+   *   String formattedParent = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
    *   Tag tag = Tag.newBuilder().build();
-   *   Tag response = dataCatalogClient.createTag(parent.toString(), tag);
+   *   Tag response = dataCatalogClient.createTag(formattedParent, tag);
    * }
    * </code></pre>
    *
@@ -2851,6 +2289,7 @@ public class DataCatalogClient implements BackgroundResource {
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final Tag createTag(String parent, Tag tag) {
+    ENTRY_PATH_TEMPLATE.validate(parent, "createTag");
     CreateTagRequest request = CreateTagRequest.newBuilder().setParent(parent).setTag(tag).build();
     return createTag(request);
   }
@@ -2868,10 +2307,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagName parent = TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]");
+   *   String formattedParent = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
    *   Tag tag = Tag.newBuilder().build();
    *   CreateTagRequest request = CreateTagRequest.newBuilder()
-   *     .setParent(parent.toString())
+   *     .setParent(formattedParent)
    *     .setTag(tag)
    *     .build();
    *   Tag response = dataCatalogClient.createTag(request);
@@ -2898,10 +2337,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   TagName parent = TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]");
+   *   String formattedParent = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
    *   Tag tag = Tag.newBuilder().build();
    *   CreateTagRequest request = CreateTagRequest.newBuilder()
-   *     .setParent(parent.toString())
+   *     .setParent(formattedParent)
    *     .setTag(tag)
    *     .build();
    *   ApiFuture&lt;Tag&gt; future = dataCatalogClient.createTagCallable().futureCall(request);
@@ -2912,27 +2351,6 @@ public class DataCatalogClient implements BackgroundResource {
    */
   public final UnaryCallable<CreateTagRequest, Tag> createTagCallable() {
     return stub.createTagCallable();
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Updates an existing tag.
-   *
-   * <p>Sample code:
-   *
-   * <pre><code>
-   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   Tag tag = Tag.newBuilder().build();
-   *   Tag response = dataCatalogClient.updateTag(tag);
-   * }
-   * </code></pre>
-   *
-   * @param tag Required. The updated tag. The "name" field must be set.
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final Tag updateTag(Tag tag) {
-    UpdateTagRequest request = UpdateTagRequest.newBuilder().setTag(tag).build();
-    return updateTag(request);
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -3007,31 +2425,71 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
   /**
-   * Lists the tags on an [Entry][google.cloud.datacatalog.v1beta1.Entry].
+   * Deletes a tag.
    *
    * <p>Sample code:
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName parent = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   for (Tag element : dataCatalogClient.listTags(parent).iterateAll()) {
-   *     // doThingsWith(element);
-   *   }
+   *   String formattedName = DataCatalogClient.formatTagName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]");
+   *   dataCatalogClient.deleteTag(formattedName);
    * }
    * </code></pre>
    *
-   * @param parent Required. The name of the Data Catalog resource to list the tags of. The resource
-   *     could be an [Entry][google.cloud.datacatalog.v1beta1.Entry] or an
-   *     [EntryGroup][google.cloud.datacatalog.v1beta1.EntryGroup].
-   *     <p>Examples:
-   *     <p>&#42; projects/{project_id}/locations/{location}/entryGroups/{entry_group_id} &#42;
-   *     projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   * @param name Required. The name of the tag to delete. Example:
+   *     <p>&#42;
+   *     projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
-  public final ListTagsPagedResponse listTags(EntryName parent) {
-    ListTagsRequest request =
-        ListTagsRequest.newBuilder().setParent(parent == null ? null : parent.toString()).build();
-    return listTags(request);
+  public final void deleteTag(String name) {
+    TAG_PATH_TEMPLATE.validate(name, "deleteTag");
+    DeleteTagRequest request = DeleteTagRequest.newBuilder().setName(name).build();
+    deleteTag(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a tag.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedName = DataCatalogClient.formatTagName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]");
+   *   DeleteTagRequest request = DeleteTagRequest.newBuilder()
+   *     .setName(formattedName)
+   *     .build();
+   *   dataCatalogClient.deleteTag(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final void deleteTag(DeleteTagRequest request) {
+    deleteTagCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Deletes a tag.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedName = DataCatalogClient.formatTagName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]");
+   *   DeleteTagRequest request = DeleteTagRequest.newBuilder()
+   *     .setName(formattedName)
+   *     .build();
+   *   ApiFuture&lt;Void&gt; future = dataCatalogClient.deleteTagCallable().futureCall(request);
+   *   // Do something
+   *   future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<DeleteTagRequest, Empty> deleteTagCallable() {
+    return stub.deleteTagCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -3042,8 +2500,8 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName parent = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
-   *   for (Tag element : dataCatalogClient.listTags(parent.toString()).iterateAll()) {
+   *   String formattedParent = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   for (Tag element : dataCatalogClient.listTags(formattedParent).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -3058,6 +2516,7 @@ public class DataCatalogClient implements BackgroundResource {
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final ListTagsPagedResponse listTags(String parent) {
+    ENTRY_PATH_TEMPLATE.validate(parent, "listTags");
     ListTagsRequest request = ListTagsRequest.newBuilder().setParent(parent).build();
     return listTags(request);
   }
@@ -3070,9 +2529,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName parent = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedParent = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
    *   ListTagsRequest request = ListTagsRequest.newBuilder()
-   *     .setParent(parent.toString())
+   *     .setParent(formattedParent)
    *     .build();
    *   for (Tag element : dataCatalogClient.listTags(request).iterateAll()) {
    *     // doThingsWith(element);
@@ -3095,9 +2554,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName parent = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedParent = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
    *   ListTagsRequest request = ListTagsRequest.newBuilder()
-   *     .setParent(parent.toString())
+   *     .setParent(formattedParent)
    *     .build();
    *   ApiFuture&lt;ListTagsPagedResponse&gt; future = dataCatalogClient.listTagsPagedCallable().futureCall(request);
    *   // Do something
@@ -3119,9 +2578,9 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   EntryName parent = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedParent = DataCatalogClient.formatEntryName("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
    *   ListTagsRequest request = ListTagsRequest.newBuilder()
-   *     .setParent(parent.toString())
+   *     .setParent(formattedParent)
    *     .build();
    *   while (true) {
    *     ListTagsResponse response = dataCatalogClient.listTagsCallable().call(request);
@@ -3157,10 +2616,45 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   ResourceName resource = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedResource = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   Policy policy = Policy.newBuilder().build();
+   *   Policy response = dataCatalogClient.setIamPolicy(formattedResource, policy);
+   * }
+   * </code></pre>
+   *
+   * @param resource REQUIRED: The resource for which the policy is being specified. See the
+   *     operation documentation for the appropriate value for this field.
+   * @param policy REQUIRED: The complete policy to be applied to the `resource`. The size of the
+   *     policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud
+   *     Platform services (such as Projects) might reject them.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final Policy setIamPolicy(String resource, Policy policy) {
+    TAG_TEMPLATE_PATH_TEMPLATE.validate(resource, "setIamPolicy");
+    SetIamPolicyRequest request =
+        SetIamPolicyRequest.newBuilder().setResource(resource).setPolicy(policy).build();
+    return setIamPolicy(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Sets the access control policy for a resource. Replaces any existing policy. Supported
+   * resources are: - Tag templates. - Entries. - Entry groups. Note, this method cannot be used to
+   * manage policies for BigQuery, Cloud Pub/Sub and any external Google Cloud Platform resources
+   * synced to Cloud Data Catalog.
+   *
+   * <p>Callers must have following Google IAM permission - `datacatalog.tagTemplates.setIamPolicy`
+   * to set policies on tag templates. - `datacatalog.entries.setIamPolicy` to set policies on
+   * entries. - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedResource = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
    *   Policy policy = Policy.newBuilder().build();
    *   SetIamPolicyRequest request = SetIamPolicyRequest.newBuilder()
-   *     .setResource(resource.toString())
+   *     .setResource(formattedResource)
    *     .setPolicy(policy)
    *     .build();
    *   Policy response = dataCatalogClient.setIamPolicy(request);
@@ -3189,10 +2683,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   ResourceName resource = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedResource = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
    *   Policy policy = Policy.newBuilder().build();
    *   SetIamPolicyRequest request = SetIamPolicyRequest.newBuilder()
-   *     .setResource(resource.toString())
+   *     .setResource(formattedResource)
    *     .setPolicy(policy)
    *     .build();
    *   ApiFuture&lt;Policy&gt; future = dataCatalogClient.setIamPolicyCallable().futureCall(request);
@@ -3203,6 +2697,104 @@ public class DataCatalogClient implements BackgroundResource {
    */
   public final UnaryCallable<SetIamPolicyRequest, Policy> setIamPolicyCallable() {
     return stub.setIamPolicyCallable();
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Gets the access control policy for a resource. A `NOT_FOUND` error is returned if the resource
+   * does not exist. An empty policy is returned if the resource exists but does not have a policy
+   * set on it.
+   *
+   * <p>Supported resources are: - Tag templates. - Entries. - Entry groups. Note, this method
+   * cannot be used to manage policies for BigQuery, Cloud Pub/Sub and any external Google Cloud
+   * Platform resources synced to Cloud Data Catalog.
+   *
+   * <p>Callers must have following Google IAM permission - `datacatalog.tagTemplates.getIamPolicy`
+   * to get policies on tag templates. - `datacatalog.entries.getIamPolicy` to get policies on
+   * entries. - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedResource = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   Policy response = dataCatalogClient.getIamPolicy(formattedResource);
+   * }
+   * </code></pre>
+   *
+   * @param resource REQUIRED: The resource for which the policy is being requested. See the
+   *     operation documentation for the appropriate value for this field.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final Policy getIamPolicy(String resource) {
+    TAG_TEMPLATE_PATH_TEMPLATE.validate(resource, "getIamPolicy");
+    GetIamPolicyRequest request = GetIamPolicyRequest.newBuilder().setResource(resource).build();
+    return getIamPolicy(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Gets the access control policy for a resource. A `NOT_FOUND` error is returned if the resource
+   * does not exist. An empty policy is returned if the resource exists but does not have a policy
+   * set on it.
+   *
+   * <p>Supported resources are: - Tag templates. - Entries. - Entry groups. Note, this method
+   * cannot be used to manage policies for BigQuery, Cloud Pub/Sub and any external Google Cloud
+   * Platform resources synced to Cloud Data Catalog.
+   *
+   * <p>Callers must have following Google IAM permission - `datacatalog.tagTemplates.getIamPolicy`
+   * to get policies on tag templates. - `datacatalog.entries.getIamPolicy` to get policies on
+   * entries. - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedResource = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   GetIamPolicyRequest request = GetIamPolicyRequest.newBuilder()
+   *     .setResource(formattedResource)
+   *     .build();
+   *   Policy response = dataCatalogClient.getIamPolicy(request);
+   * }
+   * </code></pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final Policy getIamPolicy(GetIamPolicyRequest request) {
+    return getIamPolicyCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Gets the access control policy for a resource. A `NOT_FOUND` error is returned if the resource
+   * does not exist. An empty policy is returned if the resource exists but does not have a policy
+   * set on it.
+   *
+   * <p>Supported resources are: - Tag templates. - Entries. - Entry groups. Note, this method
+   * cannot be used to manage policies for BigQuery, Cloud Pub/Sub and any external Google Cloud
+   * Platform resources synced to Cloud Data Catalog.
+   *
+   * <p>Callers must have following Google IAM permission - `datacatalog.tagTemplates.getIamPolicy`
+   * to get policies on tag templates. - `datacatalog.entries.getIamPolicy` to get policies on
+   * entries. - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedResource = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   GetIamPolicyRequest request = GetIamPolicyRequest.newBuilder()
+   *     .setResource(formattedResource)
+   *     .build();
+   *   ApiFuture&lt;Policy&gt; future = dataCatalogClient.getIamPolicyCallable().futureCall(request);
+   *   // Do something
+   *   Policy response = future.get();
+   * }
+   * </code></pre>
+   */
+  public final UnaryCallable<GetIamPolicyRequest, Policy> getIamPolicyCallable() {
+    return stub.getIamPolicyCallable();
   }
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD
@@ -3220,10 +2812,49 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   ResourceName resource = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedResource = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   List&lt;String&gt; permissions = new ArrayList&lt;&gt;();
+   *   TestIamPermissionsResponse response = dataCatalogClient.testIamPermissions(formattedResource, permissions);
+   * }
+   * </code></pre>
+   *
+   * @param resource REQUIRED: The resource for which the policy detail is being requested. See the
+   *     operation documentation for the appropriate value for this field.
+   * @param permissions The set of permissions to check for the `resource`. Permissions with
+   *     wildcards (such as '&#42;' or 'storage.&#42;') are not allowed. For more information see
+   *     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final TestIamPermissionsResponse testIamPermissions(
+      String resource, List<String> permissions) {
+    TAG_TEMPLATE_PATH_TEMPLATE.validate(resource, "testIamPermissions");
+    TestIamPermissionsRequest request =
+        TestIamPermissionsRequest.newBuilder()
+            .setResource(resource)
+            .addAllPermissions(permissions)
+            .build();
+    return testIamPermissions(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Returns the caller's permissions on a resource. If the resource does not exist, an empty set of
+   * permissions is returned (We don't return a `NOT_FOUND` error).
+   *
+   * <p>Supported resources are: - Tag templates. - Entries. - Entry groups. Note, this method
+   * cannot be used to manage policies for BigQuery, Cloud Pub/Sub and any external Google Cloud
+   * Platform resources synced to Cloud Data Catalog.
+   *
+   * <p>A caller is not required to have Google IAM permission to make this request.
+   *
+   * <p>Sample code:
+   *
+   * <pre><code>
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String formattedResource = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
    *   List&lt;String&gt; permissions = new ArrayList&lt;&gt;();
    *   TestIamPermissionsRequest request = TestIamPermissionsRequest.newBuilder()
-   *     .setResource(resource.toString())
+   *     .setResource(formattedResource)
    *     .addAllPermissions(permissions)
    *     .build();
    *   TestIamPermissionsResponse response = dataCatalogClient.testIamPermissions(request);
@@ -3252,10 +2883,10 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <pre><code>
    * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-   *   ResourceName resource = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   String formattedResource = DataCatalogClient.formatTagTemplateName("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
    *   List&lt;String&gt; permissions = new ArrayList&lt;&gt;();
    *   TestIamPermissionsRequest request = TestIamPermissionsRequest.newBuilder()
-   *     .setResource(resource.toString())
+   *     .setResource(formattedResource)
    *     .addAllPermissions(permissions)
    *     .build();
    *   ApiFuture&lt;TestIamPermissionsResponse&gt; future = dataCatalogClient.testIamPermissionsCallable().futureCall(request);
@@ -3377,168 +3008,6 @@ public class DataCatalogClient implements BackgroundResource {
     protected SearchCatalogFixedSizeCollection createCollection(
         List<SearchCatalogPage> pages, int collectionSize) {
       return new SearchCatalogFixedSizeCollection(pages, collectionSize);
-    }
-  }
-
-  public static class ListEntryGroupsPagedResponse
-      extends AbstractPagedListResponse<
-          ListEntryGroupsRequest,
-          ListEntryGroupsResponse,
-          EntryGroup,
-          ListEntryGroupsPage,
-          ListEntryGroupsFixedSizeCollection> {
-
-    public static ApiFuture<ListEntryGroupsPagedResponse> createAsync(
-        PageContext<ListEntryGroupsRequest, ListEntryGroupsResponse, EntryGroup> context,
-        ApiFuture<ListEntryGroupsResponse> futureResponse) {
-      ApiFuture<ListEntryGroupsPage> futurePage =
-          ListEntryGroupsPage.createEmptyPage().createPageAsync(context, futureResponse);
-      return ApiFutures.transform(
-          futurePage,
-          new ApiFunction<ListEntryGroupsPage, ListEntryGroupsPagedResponse>() {
-            @Override
-            public ListEntryGroupsPagedResponse apply(ListEntryGroupsPage input) {
-              return new ListEntryGroupsPagedResponse(input);
-            }
-          },
-          MoreExecutors.directExecutor());
-    }
-
-    private ListEntryGroupsPagedResponse(ListEntryGroupsPage page) {
-      super(page, ListEntryGroupsFixedSizeCollection.createEmptyCollection());
-    }
-  }
-
-  public static class ListEntryGroupsPage
-      extends AbstractPage<
-          ListEntryGroupsRequest, ListEntryGroupsResponse, EntryGroup, ListEntryGroupsPage> {
-
-    private ListEntryGroupsPage(
-        PageContext<ListEntryGroupsRequest, ListEntryGroupsResponse, EntryGroup> context,
-        ListEntryGroupsResponse response) {
-      super(context, response);
-    }
-
-    private static ListEntryGroupsPage createEmptyPage() {
-      return new ListEntryGroupsPage(null, null);
-    }
-
-    @Override
-    protected ListEntryGroupsPage createPage(
-        PageContext<ListEntryGroupsRequest, ListEntryGroupsResponse, EntryGroup> context,
-        ListEntryGroupsResponse response) {
-      return new ListEntryGroupsPage(context, response);
-    }
-
-    @Override
-    public ApiFuture<ListEntryGroupsPage> createPageAsync(
-        PageContext<ListEntryGroupsRequest, ListEntryGroupsResponse, EntryGroup> context,
-        ApiFuture<ListEntryGroupsResponse> futureResponse) {
-      return super.createPageAsync(context, futureResponse);
-    }
-  }
-
-  public static class ListEntryGroupsFixedSizeCollection
-      extends AbstractFixedSizeCollection<
-          ListEntryGroupsRequest,
-          ListEntryGroupsResponse,
-          EntryGroup,
-          ListEntryGroupsPage,
-          ListEntryGroupsFixedSizeCollection> {
-
-    private ListEntryGroupsFixedSizeCollection(
-        List<ListEntryGroupsPage> pages, int collectionSize) {
-      super(pages, collectionSize);
-    }
-
-    private static ListEntryGroupsFixedSizeCollection createEmptyCollection() {
-      return new ListEntryGroupsFixedSizeCollection(null, 0);
-    }
-
-    @Override
-    protected ListEntryGroupsFixedSizeCollection createCollection(
-        List<ListEntryGroupsPage> pages, int collectionSize) {
-      return new ListEntryGroupsFixedSizeCollection(pages, collectionSize);
-    }
-  }
-
-  public static class ListEntriesPagedResponse
-      extends AbstractPagedListResponse<
-          ListEntriesRequest,
-          ListEntriesResponse,
-          Entry,
-          ListEntriesPage,
-          ListEntriesFixedSizeCollection> {
-
-    public static ApiFuture<ListEntriesPagedResponse> createAsync(
-        PageContext<ListEntriesRequest, ListEntriesResponse, Entry> context,
-        ApiFuture<ListEntriesResponse> futureResponse) {
-      ApiFuture<ListEntriesPage> futurePage =
-          ListEntriesPage.createEmptyPage().createPageAsync(context, futureResponse);
-      return ApiFutures.transform(
-          futurePage,
-          new ApiFunction<ListEntriesPage, ListEntriesPagedResponse>() {
-            @Override
-            public ListEntriesPagedResponse apply(ListEntriesPage input) {
-              return new ListEntriesPagedResponse(input);
-            }
-          },
-          MoreExecutors.directExecutor());
-    }
-
-    private ListEntriesPagedResponse(ListEntriesPage page) {
-      super(page, ListEntriesFixedSizeCollection.createEmptyCollection());
-    }
-  }
-
-  public static class ListEntriesPage
-      extends AbstractPage<ListEntriesRequest, ListEntriesResponse, Entry, ListEntriesPage> {
-
-    private ListEntriesPage(
-        PageContext<ListEntriesRequest, ListEntriesResponse, Entry> context,
-        ListEntriesResponse response) {
-      super(context, response);
-    }
-
-    private static ListEntriesPage createEmptyPage() {
-      return new ListEntriesPage(null, null);
-    }
-
-    @Override
-    protected ListEntriesPage createPage(
-        PageContext<ListEntriesRequest, ListEntriesResponse, Entry> context,
-        ListEntriesResponse response) {
-      return new ListEntriesPage(context, response);
-    }
-
-    @Override
-    public ApiFuture<ListEntriesPage> createPageAsync(
-        PageContext<ListEntriesRequest, ListEntriesResponse, Entry> context,
-        ApiFuture<ListEntriesResponse> futureResponse) {
-      return super.createPageAsync(context, futureResponse);
-    }
-  }
-
-  public static class ListEntriesFixedSizeCollection
-      extends AbstractFixedSizeCollection<
-          ListEntriesRequest,
-          ListEntriesResponse,
-          Entry,
-          ListEntriesPage,
-          ListEntriesFixedSizeCollection> {
-
-    private ListEntriesFixedSizeCollection(List<ListEntriesPage> pages, int collectionSize) {
-      super(pages, collectionSize);
-    }
-
-    private static ListEntriesFixedSizeCollection createEmptyCollection() {
-      return new ListEntriesFixedSizeCollection(null, 0);
-    }
-
-    @Override
-    protected ListEntriesFixedSizeCollection createCollection(
-        List<ListEntriesPage> pages, int collectionSize) {
-      return new ListEntriesFixedSizeCollection(pages, collectionSize);
     }
   }
 
