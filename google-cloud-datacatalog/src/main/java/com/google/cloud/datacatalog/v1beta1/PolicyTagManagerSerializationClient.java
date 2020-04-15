@@ -35,10 +35,7 @@ import javax.annotation.Generated;
  * <pre>
  * <code>
  * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient = PolicyTagManagerSerializationClient.create()) {
- *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
- *   ImportTaxonomiesRequest request = ImportTaxonomiesRequest.newBuilder()
- *     .setParent(parent.toString())
- *     .build();
+ *   ImportTaxonomiesRequest request = ImportTaxonomiesRequest.newBuilder().build();
  *   ImportTaxonomiesResponse response = policyTagManagerSerializationClient.importTaxonomies(request);
  * }
  * </code>
@@ -163,10 +160,7 @@ public class PolicyTagManagerSerializationClient implements BackgroundResource {
    *
    * <pre><code>
    * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient = PolicyTagManagerSerializationClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-   *   ImportTaxonomiesRequest request = ImportTaxonomiesRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .build();
+   *   ImportTaxonomiesRequest request = ImportTaxonomiesRequest.newBuilder().build();
    *   ImportTaxonomiesResponse response = policyTagManagerSerializationClient.importTaxonomies(request);
    * }
    * </code></pre>
@@ -188,10 +182,7 @@ public class PolicyTagManagerSerializationClient implements BackgroundResource {
    *
    * <pre><code>
    * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient = PolicyTagManagerSerializationClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-   *   ImportTaxonomiesRequest request = ImportTaxonomiesRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .build();
+   *   ImportTaxonomiesRequest request = ImportTaxonomiesRequest.newBuilder().build();
    *   ApiFuture&lt;ImportTaxonomiesResponse&gt; future = policyTagManagerSerializationClient.importTaxonomiesCallable().futureCall(request);
    *   // Do something
    *   ImportTaxonomiesResponse response = future.get();
@@ -214,12 +205,7 @@ public class PolicyTagManagerSerializationClient implements BackgroundResource {
    *
    * <pre><code>
    * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient = PolicyTagManagerSerializationClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-   *   List&lt;TaxonomyName&gt; taxonomies = new ArrayList&lt;&gt;();
-   *   ExportTaxonomiesRequest request = ExportTaxonomiesRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .addAllTaxonomies(TaxonomyName.toStringList(taxonomies))
-   *     .build();
+   *   ExportTaxonomiesRequest request = ExportTaxonomiesRequest.newBuilder().build();
    *   ExportTaxonomiesResponse response = policyTagManagerSerializationClient.exportTaxonomies(request);
    * }
    * </code></pre>
@@ -242,12 +228,7 @@ public class PolicyTagManagerSerializationClient implements BackgroundResource {
    *
    * <pre><code>
    * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient = PolicyTagManagerSerializationClient.create()) {
-   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-   *   List&lt;TaxonomyName&gt; taxonomies = new ArrayList&lt;&gt;();
-   *   ExportTaxonomiesRequest request = ExportTaxonomiesRequest.newBuilder()
-   *     .setParent(parent.toString())
-   *     .addAllTaxonomies(TaxonomyName.toStringList(taxonomies))
-   *     .build();
+   *   ExportTaxonomiesRequest request = ExportTaxonomiesRequest.newBuilder().build();
    *   ApiFuture&lt;ExportTaxonomiesResponse&gt; future = policyTagManagerSerializationClient.exportTaxonomiesCallable().futureCall(request);
    *   // Do something
    *   ExportTaxonomiesResponse response = future.get();
