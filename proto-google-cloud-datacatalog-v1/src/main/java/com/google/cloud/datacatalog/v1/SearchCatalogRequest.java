@@ -307,6 +307,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
      *  * asia-east2
      *  * asia-northeast1
      *  * asia-northeast2
+     *  * asia-northeast3
      *  * asia-south1
      *  * asia-southeast1
      *  * australia-southeast1
@@ -352,6 +353,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
      *  * asia-east2
      *  * asia-northeast1
      *  * asia-northeast2
+     *  * asia-northeast3
      *  * asia-south1
      *  * asia-southeast1
      *  * australia-southeast1
@@ -397,6 +399,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
      *  * asia-east2
      *  * asia-northeast1
      *  * asia-northeast2
+     *  * asia-northeast3
      *  * asia-south1
      *  * asia-southeast1
      *  * australia-southeast1
@@ -443,6 +446,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
      *  * asia-east2
      *  * asia-northeast1
      *  * asia-northeast2
+     *  * asia-northeast3
      *  * asia-south1
      *  * asia-southeast1
      *  * australia-southeast1
@@ -783,6 +787,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
      *  * asia-east2
      *  * asia-northeast1
      *  * asia-northeast2
+     *  * asia-northeast3
      *  * asia-south1
      *  * asia-southeast1
      *  * australia-southeast1
@@ -830,6 +835,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
      *  * asia-east2
      *  * asia-northeast1
      *  * asia-northeast2
+     *  * asia-northeast3
      *  * asia-south1
      *  * asia-southeast1
      *  * australia-southeast1
@@ -877,6 +883,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
      *  * asia-east2
      *  * asia-northeast1
      *  * asia-northeast2
+     *  * asia-northeast3
      *  * asia-south1
      *  * asia-southeast1
      *  * australia-southeast1
@@ -925,6 +932,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
      *  * asia-east2
      *  * asia-northeast1
      *  * asia-northeast2
+     *  * asia-northeast3
      *  * asia-south1
      *  * asia-southeast1
      *  * australia-southeast1
@@ -1842,6 +1850,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
        *  * asia-east2
        *  * asia-northeast1
        *  * asia-northeast2
+       *  * asia-northeast3
        *  * asia-south1
        *  * asia-southeast1
        *  * australia-southeast1
@@ -1889,6 +1898,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
        *  * asia-east2
        *  * asia-northeast1
        *  * asia-northeast2
+       *  * asia-northeast3
        *  * asia-south1
        *  * asia-southeast1
        *  * australia-southeast1
@@ -1936,6 +1946,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
        *  * asia-east2
        *  * asia-northeast1
        *  * asia-northeast2
+       *  * asia-northeast3
        *  * asia-south1
        *  * asia-southeast1
        *  * australia-southeast1
@@ -1984,6 +1995,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
        *  * asia-east2
        *  * asia-northeast1
        *  * asia-northeast2
+       *  * asia-northeast3
        *  * asia-south1
        *  * asia-southeast1
        *  * australia-southeast1
@@ -2032,6 +2044,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
        *  * asia-east2
        *  * asia-northeast1
        *  * asia-northeast2
+       *  * asia-northeast3
        *  * asia-south1
        *  * asia-southeast1
        *  * australia-southeast1
@@ -2087,6 +2100,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
        *  * asia-east2
        *  * asia-northeast1
        *  * asia-northeast2
+       *  * asia-northeast3
        *  * asia-south1
        *  * asia-southeast1
        *  * australia-southeast1
@@ -2141,6 +2155,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
        *  * asia-east2
        *  * asia-northeast1
        *  * asia-northeast2
+       *  * asia-northeast3
        *  * asia-south1
        *  * asia-southeast1
        *  * australia-southeast1
@@ -2192,6 +2207,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
        *  * asia-east2
        *  * asia-northeast1
        *  * asia-northeast2
+       *  * asia-northeast3
        *  * asia-south1
        *  * asia-southeast1
        *  * australia-southeast1
@@ -2242,6 +2258,7 @@ public final class SearchCatalogRequest extends com.google.protobuf.GeneratedMes
        *  * asia-east2
        *  * asia-northeast1
        *  * asia-northeast2
+       *  * asia-northeast3
        *  * asia-south1
        *  * asia-southeast1
        *  * australia-southeast1
