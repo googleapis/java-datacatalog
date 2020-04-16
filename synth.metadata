@@ -1,5 +1,4 @@
 {
-  "updateTime": "2020-04-09T09:15:29.203644Z",
   "sources": [
     {
       "git": {
@@ -12,16 +11,16 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d741cd976975c745d0199987aff0e908b8352992",
-        "internalRef": "305561906"
+        "sha": "c9942c00e8f35b5b37cd589ef7a0323aeda264e2",
+        "internalRef": "306297587"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d741cd976975c745d0199987aff0e908b8352992",
-        "internalRef": "305561906"
+        "sha": "c9942c00e8f35b5b37cd589ef7a0323aeda264e2",
+        "internalRef": "306297587"
       }
     },
     {
