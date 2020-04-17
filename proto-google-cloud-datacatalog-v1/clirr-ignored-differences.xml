@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- see http://www.mojohaus.org/clirr-maven-plugin/examples/ignored-differences.html -->
+<differences>
+  <difference>
+    <differenceType>7012</differenceType>
+    <className>com/google/cloud/datacatalog/v1/SearchCatalogRequest*OrBuilder</className>
+    <method>* getRestrictedLocation*(*)</method>
+  </difference>
+  <difference>
+    <differenceType>7012</differenceType>
+    <className>com/google/cloud/datacatalog/v1/SearchCatalogResponseOrBuilder</className>
+    <method>* getUnreachable*(*)</method>
+  </difference>
+  <difference>
+    <differenceType>7012</differenceType>
+    <className>com/google/cloud/datacatalog/v1/SearchCatalogResponseOrBuilder</className>
+    <method>* getUnreachableList()</method>
+  </difference>
+</differences>
