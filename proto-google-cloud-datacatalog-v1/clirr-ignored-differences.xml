@@ -3,17 +3,7 @@
 <differences>
   <difference>
     <differenceType>7012</differenceType>
-    <className>com/google/cloud/datacatalog/v1/SearchCatalogRequest*OrBuilder</className>
-    <method>* getRestrictedLocation*(*)</method>
-  </difference>
-  <difference>
-    <differenceType>7012</differenceType>
-    <className>com/google/cloud/datacatalog/v1/SearchCatalogResponseOrBuilder</className>
-    <method>* getUnreachable*(*)</method>
-  </difference>
-  <difference>
-    <differenceType>7012</differenceType>
-    <className>com/google/cloud/datacatalog/v1/SearchCatalogResponseOrBuilder</className>
-    <method>* getUnreachableList()</method>
+    <className>com/google/cloud/datacatalog/v1/*OrBuilder</className>
+    <method>* get*(*)</method>
   </difference>
 </differences>
