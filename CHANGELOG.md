@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.34.2](https://www.github.com/googleapis/java-datacatalog/compare/v0.34.1...v0.34.2) (2020-04-20)
+
+
+### Dependencies
+
+* update dependency com.google.guava:guava-bom to v29 ([#149](https://www.github.com/googleapis/java-datacatalog/issues/149)) ([4ab8c7d](https://www.github.com/googleapis/java-datacatalog/commit/4ab8c7d6dac9b9820187c0ebad749fa095ec6660))
+
 ### [0.34.1](https://www.github.com/googleapis/java-datacatalog/compare/v0.34.0...v0.34.1) (2020-04-06)
 
 
