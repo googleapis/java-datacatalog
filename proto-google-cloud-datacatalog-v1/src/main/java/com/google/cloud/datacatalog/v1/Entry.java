@@ -636,8 +636,8 @@ public final class Entry extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Output only. This field indicates the entry's source system that Data Catalog
-   * integrates with, such as BigQuery or Pub/Sub.
+   * Output only. This field indicates the entry's source system that Data
+   * Catalog integrates with, such as BigQuery or Pub/Sub.
    * </pre>
    *
    * <code>
@@ -656,8 +656,8 @@ public final class Entry extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Output only. This field indicates the entry's source system that Data Catalog
-   * integrates with, such as BigQuery or Pub/Sub.
+   * Output only. This field indicates the entry's source system that Data
+   * Catalog integrates with, such as BigQuery or Pub/Sub.
    * </pre>
    *
    * <code>
@@ -2325,8 +2325,8 @@ public final class Entry extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. This field indicates the entry's source system that Data Catalog
-     * integrates with, such as BigQuery or Pub/Sub.
+     * Output only. This field indicates the entry's source system that Data
+     * Catalog integrates with, such as BigQuery or Pub/Sub.
      * </pre>
      *
      * <code>
@@ -2345,8 +2345,8 @@ public final class Entry extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. This field indicates the entry's source system that Data Catalog
-     * integrates with, such as BigQuery or Pub/Sub.
+     * Output only. This field indicates the entry's source system that Data
+     * Catalog integrates with, such as BigQuery or Pub/Sub.
      * </pre>
      *
      * <code>
@@ -2366,8 +2366,8 @@ public final class Entry extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. This field indicates the entry's source system that Data Catalog
-     * integrates with, such as BigQuery or Pub/Sub.
+     * Output only. This field indicates the entry's source system that Data
+     * Catalog integrates with, such as BigQuery or Pub/Sub.
      * </pre>
      *
      * <code>
@@ -2391,8 +2391,8 @@ public final class Entry extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. This field indicates the entry's source system that Data Catalog
-     * integrates with, such as BigQuery or Pub/Sub.
+     * Output only. This field indicates the entry's source system that Data
+     * Catalog integrates with, such as BigQuery or Pub/Sub.
      * </pre>
      *
      * <code>
@@ -2415,8 +2415,8 @@ public final class Entry extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. This field indicates the entry's source system that Data Catalog
-     * integrates with, such as BigQuery or Pub/Sub.
+     * Output only. This field indicates the entry's source system that Data
+     * Catalog integrates with, such as BigQuery or Pub/Sub.
      * </pre>
      *
      * <code>
