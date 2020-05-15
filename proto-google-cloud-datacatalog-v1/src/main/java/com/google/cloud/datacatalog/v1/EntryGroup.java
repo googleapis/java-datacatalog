@@ -304,7 +304,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+   * Output only. Timestamps about this EntryGroup. Default value is empty
+   * timestamps.
    * </pre>
    *
    * <code>
@@ -320,7 +321,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+   * Output only. Timestamps about this EntryGroup. Default value is empty
+   * timestamps.
    * </pre>
    *
    * <code>
@@ -338,7 +340,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+   * Output only. Timestamps about this EntryGroup. Default value is empty
+   * timestamps.
    * </pre>
    *
    * <code>
@@ -1087,7 +1090,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+     * Output only. Timestamps about this EntryGroup. Default value is empty
+     * timestamps.
      * </pre>
      *
      * <code>
@@ -1103,7 +1107,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+     * Output only. Timestamps about this EntryGroup. Default value is empty
+     * timestamps.
      * </pre>
      *
      * <code>
@@ -1125,7 +1130,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+     * Output only. Timestamps about this EntryGroup. Default value is empty
+     * timestamps.
      * </pre>
      *
      * <code>
@@ -1150,7 +1156,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+     * Output only. Timestamps about this EntryGroup. Default value is empty
+     * timestamps.
      * </pre>
      *
      * <code>
@@ -1172,7 +1179,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+     * Output only. Timestamps about this EntryGroup. Default value is empty
+     * timestamps.
      * </pre>
      *
      * <code>
@@ -1201,7 +1209,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+     * Output only. Timestamps about this EntryGroup. Default value is empty
+     * timestamps.
      * </pre>
      *
      * <code>
@@ -1223,7 +1232,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+     * Output only. Timestamps about this EntryGroup. Default value is empty
+     * timestamps.
      * </pre>
      *
      * <code>
@@ -1240,7 +1250,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+     * Output only. Timestamps about this EntryGroup. Default value is empty
+     * timestamps.
      * </pre>
      *
      * <code>
@@ -1261,7 +1272,8 @@ public final class EntryGroup extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+     * Output only. Timestamps about this EntryGroup. Default value is empty
+     * timestamps.
      * </pre>
      *
      * <code>
