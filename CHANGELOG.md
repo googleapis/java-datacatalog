@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.36.1](https://www.github.com/googleapis/java-datacatalog/compare/v0.36.0...v0.36.1) (2020-06-16)
+
+
+### Dependencies
+
+* update core dependencies ([#213](https://www.github.com/googleapis/java-datacatalog/issues/213)) ([ac1cf8c](https://www.github.com/googleapis/java-datacatalog/commit/ac1cf8c64e899aaa2b3800d5e6f09a82ed5c9065))
+
 ## [0.36.0](https://www.github.com/googleapis/java-datacatalog/compare/v0.35.0...v0.36.0) (2020-06-11)
 
 
