@@ -22,14 +22,7 @@ import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
-/**
- *
- *
- * <pre>
- * Policy tag manager serialization API service allows clients to manipulate
- * their taxonomies and policy tags data with serialized format.
- * </pre>
- */
+/** */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler",
     comments = "Source: google/cloud/datacatalog/v1beta1/policytagmanagerserialization.proto")
@@ -184,27 +177,11 @@ public final class PolicyTagManagerSerializationGrpc {
     return PolicyTagManagerSerializationFutureStub.newStub(factory, channel);
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * Policy tag manager serialization API service allows clients to manipulate
-   * their taxonomies and policy tags data with serialized format.
-   * </pre>
-   */
+  /** */
   public abstract static class PolicyTagManagerSerializationImplBase
       implements io.grpc.BindableService {
 
-    /**
-     *
-     *
-     * <pre>
-     * Imports all taxonomies and their policy tags to a project as new
-     * taxonomies.
-     * This method provides a bulk taxonomy / policy tag creation using nested
-     * proto structure.
-     * </pre>
-     */
+    /** */
     public void importTaxonomies(
         com.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse>
@@ -212,15 +189,7 @@ public final class PolicyTagManagerSerializationGrpc {
       asyncUnimplementedUnaryCall(getImportTaxonomiesMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Exports all taxonomies and their policy tags in a project.
-     * This method generates SerializedTaxonomy protos with nested policy tags
-     * that can be used as an input for future ImportTaxonomies calls.
-     * </pre>
-     */
+    /** */
     public void exportTaxonomies(
         com.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse>
@@ -249,14 +218,7 @@ public final class PolicyTagManagerSerializationGrpc {
     }
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * Policy tag manager serialization API service allows clients to manipulate
-   * their taxonomies and policy tags data with serialized format.
-   * </pre>
-   */
+  /** */
   public static final class PolicyTagManagerSerializationStub
       extends io.grpc.stub.AbstractAsyncStub<PolicyTagManagerSerializationStub> {
     private PolicyTagManagerSerializationStub(
@@ -270,16 +232,7 @@ public final class PolicyTagManagerSerializationGrpc {
       return new PolicyTagManagerSerializationStub(channel, callOptions);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Imports all taxonomies and their policy tags to a project as new
-     * taxonomies.
-     * This method provides a bulk taxonomy / policy tag creation using nested
-     * proto structure.
-     * </pre>
-     */
+    /** */
     public void importTaxonomies(
         com.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse>
@@ -290,15 +243,7 @@ public final class PolicyTagManagerSerializationGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Exports all taxonomies and their policy tags in a project.
-     * This method generates SerializedTaxonomy protos with nested policy tags
-     * that can be used as an input for future ImportTaxonomies calls.
-     * </pre>
-     */
+    /** */
     public void exportTaxonomies(
         com.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse>
@@ -310,14 +255,7 @@ public final class PolicyTagManagerSerializationGrpc {
     }
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * Policy tag manager serialization API service allows clients to manipulate
-   * their taxonomies and policy tags data with serialized format.
-   * </pre>
-   */
+  /** */
   public static final class PolicyTagManagerSerializationBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<PolicyTagManagerSerializationBlockingStub> {
     private PolicyTagManagerSerializationBlockingStub(
@@ -331,31 +269,14 @@ public final class PolicyTagManagerSerializationGrpc {
       return new PolicyTagManagerSerializationBlockingStub(channel, callOptions);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Imports all taxonomies and their policy tags to a project as new
-     * taxonomies.
-     * This method provides a bulk taxonomy / policy tag creation using nested
-     * proto structure.
-     * </pre>
-     */
+    /** */
     public com.google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse importTaxonomies(
         com.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest request) {
       return blockingUnaryCall(
           getChannel(), getImportTaxonomiesMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Exports all taxonomies and their policy tags in a project.
-     * This method generates SerializedTaxonomy protos with nested policy tags
-     * that can be used as an input for future ImportTaxonomies calls.
-     * </pre>
-     */
+    /** */
     public com.google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse exportTaxonomies(
         com.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest request) {
       return blockingUnaryCall(
@@ -363,14 +284,7 @@ public final class PolicyTagManagerSerializationGrpc {
     }
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * Policy tag manager serialization API service allows clients to manipulate
-   * their taxonomies and policy tags data with serialized format.
-   * </pre>
-   */
+  /** */
   public static final class PolicyTagManagerSerializationFutureStub
       extends io.grpc.stub.AbstractFutureStub<PolicyTagManagerSerializationFutureStub> {
     private PolicyTagManagerSerializationFutureStub(
@@ -384,16 +298,7 @@ public final class PolicyTagManagerSerializationGrpc {
       return new PolicyTagManagerSerializationFutureStub(channel, callOptions);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Imports all taxonomies and their policy tags to a project as new
-     * taxonomies.
-     * This method provides a bulk taxonomy / policy tag creation using nested
-     * proto structure.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse>
         importTaxonomies(com.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest request) {
@@ -401,15 +306,7 @@ public final class PolicyTagManagerSerializationGrpc {
           getChannel().newCall(getImportTaxonomiesMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Exports all taxonomies and their policy tags in a project.
-     * This method generates SerializedTaxonomy protos with nested policy tags
-     * that can be used as an input for future ImportTaxonomies calls.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse>
         exportTaxonomies(com.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest request) {
