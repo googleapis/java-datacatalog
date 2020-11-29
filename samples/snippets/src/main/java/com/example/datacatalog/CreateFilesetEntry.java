@@ -16,7 +16,7 @@
 
 package com.example.datacatalog;
 
-// [START datacatalog_create_fileset_tag]
+// [START data_catalog_create_fileset]
 
 import com.google.api.gax.rpc.AlreadyExistsException;
 import com.google.cloud.datacatalog.v1.ColumnSchema;
@@ -115,4 +115,4 @@ public class CreateFilesetEntry {
     }
   }
 }
-// [END datacatalog_create_fileset_tag]
+// [END data_catalog_create_fileset]
