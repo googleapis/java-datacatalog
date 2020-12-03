@@ -22,14 +22,7 @@ import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
-/**
- *
- *
- * <pre>
- * The policy tag manager API service allows clients to manage their taxonomies
- * and policy tags.
- * </pre>
- */
+/** */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler",
     comments = "Source: google/cloud/datacatalog/v1beta1/policytagmanager.proto")
@@ -659,23 +652,10 @@ public final class PolicyTagManagerGrpc {
     return PolicyTagManagerFutureStub.newStub(factory, channel);
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * The policy tag manager API service allows clients to manage their taxonomies
-   * and policy tags.
-   * </pre>
-   */
+  /** */
   public abstract static class PolicyTagManagerImplBase implements io.grpc.BindableService {
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a taxonomy in the specified project.
-     * </pre>
-     */
+    /** */
     public void createTaxonomy(
         com.google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.Taxonomy>
@@ -683,27 +663,14 @@ public final class PolicyTagManagerGrpc {
       asyncUnimplementedUnaryCall(getCreateTaxonomyMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a taxonomy. This operation will also delete all
-     * policy tags in this taxonomy along with their associated policies.
-     * </pre>
-     */
+    /** */
     public void deleteTaxonomy(
         com.google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(getDeleteTaxonomyMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Updates a taxonomy.
-     * </pre>
-     */
+    /** */
     public void updateTaxonomy(
         com.google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.Taxonomy>
@@ -711,14 +678,7 @@ public final class PolicyTagManagerGrpc {
       asyncUnimplementedUnaryCall(getUpdateTaxonomyMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists all taxonomies in a project in a particular location that the caller
-     * has permission to view.
-     * </pre>
-     */
+    /** */
     public void listTaxonomies(
         com.google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse>
@@ -726,13 +686,7 @@ public final class PolicyTagManagerGrpc {
       asyncUnimplementedUnaryCall(getListTaxonomiesMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a taxonomy.
-     * </pre>
-     */
+    /** */
     public void getTaxonomy(
         com.google.cloud.datacatalog.v1beta1.GetTaxonomyRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.Taxonomy>
@@ -740,13 +694,7 @@ public final class PolicyTagManagerGrpc {
       asyncUnimplementedUnaryCall(getGetTaxonomyMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a policy tag in the specified taxonomy.
-     * </pre>
-     */
+    /** */
     public void createPolicyTag(
         com.google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.PolicyTag>
@@ -754,26 +702,14 @@ public final class PolicyTagManagerGrpc {
       asyncUnimplementedUnaryCall(getCreatePolicyTagMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a policy tag. Also deletes all of its descendant policy tags.
-     * </pre>
-     */
+    /** */
     public void deletePolicyTag(
         com.google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(getDeletePolicyTagMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Updates a policy tag.
-     * </pre>
-     */
+    /** */
     public void updatePolicyTag(
         com.google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.PolicyTag>
@@ -781,13 +717,7 @@ public final class PolicyTagManagerGrpc {
       asyncUnimplementedUnaryCall(getUpdatePolicyTagMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists all policy tags in a taxonomy.
-     * </pre>
-     */
+    /** */
     public void listPolicyTags(
         com.google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse>
@@ -795,13 +725,7 @@ public final class PolicyTagManagerGrpc {
       asyncUnimplementedUnaryCall(getListPolicyTagsMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a policy tag.
-     * </pre>
-     */
+    /** */
     public void getPolicyTag(
         com.google.cloud.datacatalog.v1beta1.GetPolicyTagRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.PolicyTag>
@@ -809,40 +733,21 @@ public final class PolicyTagManagerGrpc {
       asyncUnimplementedUnaryCall(getGetPolicyTagMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets the IAM policy for a taxonomy or a policy tag.
-     * </pre>
-     */
+    /** */
     public void getIamPolicy(
         com.google.iam.v1.GetIamPolicyRequest request,
         io.grpc.stub.StreamObserver<com.google.iam.v1.Policy> responseObserver) {
       asyncUnimplementedUnaryCall(getGetIamPolicyMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Sets the IAM policy for a taxonomy or a policy tag.
-     * </pre>
-     */
+    /** */
     public void setIamPolicy(
         com.google.iam.v1.SetIamPolicyRequest request,
         io.grpc.stub.StreamObserver<com.google.iam.v1.Policy> responseObserver) {
       asyncUnimplementedUnaryCall(getSetIamPolicyMethod(), responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Returns the permissions that a caller has on the specified taxonomy or
-     * policy tag.
-     * </pre>
-     */
+    /** */
     public void testIamPermissions(
         com.google.iam.v1.TestIamPermissionsRequest request,
         io.grpc.stub.StreamObserver<com.google.iam.v1.TestIamPermissionsResponse>
@@ -943,14 +848,7 @@ public final class PolicyTagManagerGrpc {
     }
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * The policy tag manager API service allows clients to manage their taxonomies
-   * and policy tags.
-   * </pre>
-   */
+  /** */
   public static final class PolicyTagManagerStub
       extends io.grpc.stub.AbstractAsyncStub<PolicyTagManagerStub> {
     private PolicyTagManagerStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
@@ -962,13 +860,7 @@ public final class PolicyTagManagerGrpc {
       return new PolicyTagManagerStub(channel, callOptions);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a taxonomy in the specified project.
-     * </pre>
-     */
+    /** */
     public void createTaxonomy(
         com.google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.Taxonomy>
@@ -979,14 +871,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a taxonomy. This operation will also delete all
-     * policy tags in this taxonomy along with their associated policies.
-     * </pre>
-     */
+    /** */
     public void deleteTaxonomy(
         com.google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
@@ -996,13 +881,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Updates a taxonomy.
-     * </pre>
-     */
+    /** */
     public void updateTaxonomy(
         com.google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.Taxonomy>
@@ -1013,14 +892,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists all taxonomies in a project in a particular location that the caller
-     * has permission to view.
-     * </pre>
-     */
+    /** */
     public void listTaxonomies(
         com.google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse>
@@ -1031,13 +903,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a taxonomy.
-     * </pre>
-     */
+    /** */
     public void getTaxonomy(
         com.google.cloud.datacatalog.v1beta1.GetTaxonomyRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.Taxonomy>
@@ -1048,13 +914,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a policy tag in the specified taxonomy.
-     * </pre>
-     */
+    /** */
     public void createPolicyTag(
         com.google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.PolicyTag>
@@ -1065,13 +925,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a policy tag. Also deletes all of its descendant policy tags.
-     * </pre>
-     */
+    /** */
     public void deletePolicyTag(
         com.google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
@@ -1081,13 +935,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Updates a policy tag.
-     * </pre>
-     */
+    /** */
     public void updatePolicyTag(
         com.google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.PolicyTag>
@@ -1098,13 +946,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists all policy tags in a taxonomy.
-     * </pre>
-     */
+    /** */
     public void listPolicyTags(
         com.google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse>
@@ -1115,13 +957,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a policy tag.
-     * </pre>
-     */
+    /** */
     public void getPolicyTag(
         com.google.cloud.datacatalog.v1beta1.GetPolicyTagRequest request,
         io.grpc.stub.StreamObserver<com.google.cloud.datacatalog.v1beta1.PolicyTag>
@@ -1132,13 +968,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets the IAM policy for a taxonomy or a policy tag.
-     * </pre>
-     */
+    /** */
     public void getIamPolicy(
         com.google.iam.v1.GetIamPolicyRequest request,
         io.grpc.stub.StreamObserver<com.google.iam.v1.Policy> responseObserver) {
@@ -1148,13 +978,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Sets the IAM policy for a taxonomy or a policy tag.
-     * </pre>
-     */
+    /** */
     public void setIamPolicy(
         com.google.iam.v1.SetIamPolicyRequest request,
         io.grpc.stub.StreamObserver<com.google.iam.v1.Policy> responseObserver) {
@@ -1164,14 +988,7 @@ public final class PolicyTagManagerGrpc {
           responseObserver);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Returns the permissions that a caller has on the specified taxonomy or
-     * policy tag.
-     * </pre>
-     */
+    /** */
     public void testIamPermissions(
         com.google.iam.v1.TestIamPermissionsRequest request,
         io.grpc.stub.StreamObserver<com.google.iam.v1.TestIamPermissionsResponse>
@@ -1183,14 +1000,7 @@ public final class PolicyTagManagerGrpc {
     }
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * The policy tag manager API service allows clients to manage their taxonomies
-   * and policy tags.
-   * </pre>
-   */
+  /** */
   public static final class PolicyTagManagerBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<PolicyTagManagerBlockingStub> {
     private PolicyTagManagerBlockingStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
@@ -1203,158 +1013,77 @@ public final class PolicyTagManagerGrpc {
       return new PolicyTagManagerBlockingStub(channel, callOptions);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a taxonomy in the specified project.
-     * </pre>
-     */
+    /** */
     public com.google.cloud.datacatalog.v1beta1.Taxonomy createTaxonomy(
         com.google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest request) {
       return blockingUnaryCall(getChannel(), getCreateTaxonomyMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a taxonomy. This operation will also delete all
-     * policy tags in this taxonomy along with their associated policies.
-     * </pre>
-     */
+    /** */
     public com.google.protobuf.Empty deleteTaxonomy(
         com.google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest request) {
       return blockingUnaryCall(getChannel(), getDeleteTaxonomyMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Updates a taxonomy.
-     * </pre>
-     */
+    /** */
     public com.google.cloud.datacatalog.v1beta1.Taxonomy updateTaxonomy(
         com.google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest request) {
       return blockingUnaryCall(getChannel(), getUpdateTaxonomyMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists all taxonomies in a project in a particular location that the caller
-     * has permission to view.
-     * </pre>
-     */
+    /** */
     public com.google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse listTaxonomies(
         com.google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest request) {
       return blockingUnaryCall(getChannel(), getListTaxonomiesMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a taxonomy.
-     * </pre>
-     */
+    /** */
     public com.google.cloud.datacatalog.v1beta1.Taxonomy getTaxonomy(
         com.google.cloud.datacatalog.v1beta1.GetTaxonomyRequest request) {
       return blockingUnaryCall(getChannel(), getGetTaxonomyMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a policy tag in the specified taxonomy.
-     * </pre>
-     */
+    /** */
     public com.google.cloud.datacatalog.v1beta1.PolicyTag createPolicyTag(
         com.google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest request) {
       return blockingUnaryCall(getChannel(), getCreatePolicyTagMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a policy tag. Also deletes all of its descendant policy tags.
-     * </pre>
-     */
+    /** */
     public com.google.protobuf.Empty deletePolicyTag(
         com.google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest request) {
       return blockingUnaryCall(getChannel(), getDeletePolicyTagMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Updates a policy tag.
-     * </pre>
-     */
+    /** */
     public com.google.cloud.datacatalog.v1beta1.PolicyTag updatePolicyTag(
         com.google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest request) {
       return blockingUnaryCall(getChannel(), getUpdatePolicyTagMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists all policy tags in a taxonomy.
-     * </pre>
-     */
+    /** */
     public com.google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse listPolicyTags(
         com.google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest request) {
       return blockingUnaryCall(getChannel(), getListPolicyTagsMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a policy tag.
-     * </pre>
-     */
+    /** */
     public com.google.cloud.datacatalog.v1beta1.PolicyTag getPolicyTag(
         com.google.cloud.datacatalog.v1beta1.GetPolicyTagRequest request) {
       return blockingUnaryCall(getChannel(), getGetPolicyTagMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets the IAM policy for a taxonomy or a policy tag.
-     * </pre>
-     */
+    /** */
     public com.google.iam.v1.Policy getIamPolicy(com.google.iam.v1.GetIamPolicyRequest request) {
       return blockingUnaryCall(getChannel(), getGetIamPolicyMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Sets the IAM policy for a taxonomy or a policy tag.
-     * </pre>
-     */
+    /** */
     public com.google.iam.v1.Policy setIamPolicy(com.google.iam.v1.SetIamPolicyRequest request) {
       return blockingUnaryCall(getChannel(), getSetIamPolicyMethod(), getCallOptions(), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Returns the permissions that a caller has on the specified taxonomy or
-     * policy tag.
-     * </pre>
-     */
+    /** */
     public com.google.iam.v1.TestIamPermissionsResponse testIamPermissions(
         com.google.iam.v1.TestIamPermissionsRequest request) {
       return blockingUnaryCall(
@@ -1362,14 +1091,7 @@ public final class PolicyTagManagerGrpc {
     }
   }
 
-  /**
-   *
-   *
-   * <pre>
-   * The policy tag manager API service allows clients to manage their taxonomies
-   * and policy tags.
-   * </pre>
-   */
+  /** */
   public static final class PolicyTagManagerFutureStub
       extends io.grpc.stub.AbstractFutureStub<PolicyTagManagerFutureStub> {
     private PolicyTagManagerFutureStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
@@ -1382,13 +1104,7 @@ public final class PolicyTagManagerGrpc {
       return new PolicyTagManagerFutureStub(channel, callOptions);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a taxonomy in the specified project.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.cloud.datacatalog.v1beta1.Taxonomy>
         createTaxonomy(com.google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest request) {
@@ -1396,27 +1112,14 @@ public final class PolicyTagManagerGrpc {
           getChannel().newCall(getCreateTaxonomyMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a taxonomy. This operation will also delete all
-     * policy tags in this taxonomy along with their associated policies.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty>
         deleteTaxonomy(com.google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getDeleteTaxonomyMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Updates a taxonomy.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.cloud.datacatalog.v1beta1.Taxonomy>
         updateTaxonomy(com.google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest request) {
@@ -1424,14 +1127,7 @@ public final class PolicyTagManagerGrpc {
           getChannel().newCall(getUpdateTaxonomyMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists all taxonomies in a project in a particular location that the caller
-     * has permission to view.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse>
         listTaxonomies(com.google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest request) {
@@ -1439,13 +1135,7 @@ public final class PolicyTagManagerGrpc {
           getChannel().newCall(getListTaxonomiesMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a taxonomy.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.cloud.datacatalog.v1beta1.Taxonomy>
         getTaxonomy(com.google.cloud.datacatalog.v1beta1.GetTaxonomyRequest request) {
@@ -1453,13 +1143,7 @@ public final class PolicyTagManagerGrpc {
           getChannel().newCall(getGetTaxonomyMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Creates a policy tag in the specified taxonomy.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.cloud.datacatalog.v1beta1.PolicyTag>
         createPolicyTag(com.google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest request) {
@@ -1467,26 +1151,14 @@ public final class PolicyTagManagerGrpc {
           getChannel().newCall(getCreatePolicyTagMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Deletes a policy tag. Also deletes all of its descendant policy tags.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty>
         deletePolicyTag(com.google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getDeletePolicyTagMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Updates a policy tag.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.cloud.datacatalog.v1beta1.PolicyTag>
         updatePolicyTag(com.google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest request) {
@@ -1494,13 +1166,7 @@ public final class PolicyTagManagerGrpc {
           getChannel().newCall(getUpdatePolicyTagMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Lists all policy tags in a taxonomy.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse>
         listPolicyTags(com.google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest request) {
@@ -1508,13 +1174,7 @@ public final class PolicyTagManagerGrpc {
           getChannel().newCall(getListPolicyTagsMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets a policy tag.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.cloud.datacatalog.v1beta1.PolicyTag>
         getPolicyTag(com.google.cloud.datacatalog.v1beta1.GetPolicyTagRequest request) {
@@ -1522,40 +1182,21 @@ public final class PolicyTagManagerGrpc {
           getChannel().newCall(getGetPolicyTagMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Gets the IAM policy for a taxonomy or a policy tag.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<com.google.iam.v1.Policy>
         getIamPolicy(com.google.iam.v1.GetIamPolicyRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getGetIamPolicyMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Sets the IAM policy for a taxonomy or a policy tag.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<com.google.iam.v1.Policy>
         setIamPolicy(com.google.iam.v1.SetIamPolicyRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getSetIamPolicyMethod(), getCallOptions()), request);
     }
 
-    /**
-     *
-     *
-     * <pre>
-     * Returns the permissions that a caller has on the specified taxonomy or
-     * policy tag.
-     * </pre>
-     */
+    /** */
     public com.google.common.util.concurrent.ListenableFuture<
             com.google.iam.v1.TestIamPermissionsResponse>
         testIamPermissions(com.google.iam.v1.TestIamPermissionsRequest request) {
