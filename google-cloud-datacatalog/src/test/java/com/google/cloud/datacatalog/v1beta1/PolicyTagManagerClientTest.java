@@ -94,7 +94,7 @@ public class PolicyTagManagerClientTest {
     Taxonomy expectedResponse =
         Taxonomy.newBuilder()
             .setName(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .addAllActivatedPolicyTypes(new ArrayList<Taxonomy.PolicyType>())
             .build();
@@ -138,7 +138,7 @@ public class PolicyTagManagerClientTest {
     Taxonomy expectedResponse =
         Taxonomy.newBuilder()
             .setName(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .addAllActivatedPolicyTypes(new ArrayList<Taxonomy.PolicyType>())
             .build();
@@ -250,7 +250,7 @@ public class PolicyTagManagerClientTest {
     Taxonomy expectedResponse =
         Taxonomy.newBuilder()
             .setName(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .addAllActivatedPolicyTypes(new ArrayList<Taxonomy.PolicyType>())
             .build();
@@ -379,7 +379,7 @@ public class PolicyTagManagerClientTest {
     Taxonomy expectedResponse =
         Taxonomy.newBuilder()
             .setName(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .addAllActivatedPolicyTypes(new ArrayList<Taxonomy.PolicyType>())
             .build();
@@ -420,7 +420,7 @@ public class PolicyTagManagerClientTest {
     Taxonomy expectedResponse =
         Taxonomy.newBuilder()
             .setName(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .addAllActivatedPolicyTypes(new ArrayList<Taxonomy.PolicyType>())
             .build();
@@ -463,9 +463,9 @@ public class PolicyTagManagerClientTest {
             .setName(
                 PolicyTagName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]", "[POLICY_TAG]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
-            .setParentPolicyTag("parent_policy_tag2071382466")
+            .setParentPolicyTag("parentPolicyTag973173630")
             .addAllChildPolicyTags(new ArrayList<String>())
             .build();
     mockPolicyTagManager.addResponse(expectedResponse);
@@ -510,9 +510,9 @@ public class PolicyTagManagerClientTest {
             .setName(
                 PolicyTagName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]", "[POLICY_TAG]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
-            .setParentPolicyTag("parent_policy_tag2071382466")
+            .setParentPolicyTag("parentPolicyTag973173630")
             .addAllChildPolicyTags(new ArrayList<String>())
             .build();
     mockPolicyTagManager.addResponse(expectedResponse);
@@ -626,9 +626,9 @@ public class PolicyTagManagerClientTest {
             .setName(
                 PolicyTagName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]", "[POLICY_TAG]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
-            .setParentPolicyTag("parent_policy_tag2071382466")
+            .setParentPolicyTag("parentPolicyTag973173630")
             .addAllChildPolicyTags(new ArrayList<String>())
             .build();
     mockPolicyTagManager.addResponse(expectedResponse);
@@ -758,9 +758,9 @@ public class PolicyTagManagerClientTest {
             .setName(
                 PolicyTagName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]", "[POLICY_TAG]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
-            .setParentPolicyTag("parent_policy_tag2071382466")
+            .setParentPolicyTag("parentPolicyTag973173630")
             .addAllChildPolicyTags(new ArrayList<String>())
             .build();
     mockPolicyTagManager.addResponse(expectedResponse);
@@ -803,9 +803,9 @@ public class PolicyTagManagerClientTest {
             .setName(
                 PolicyTagName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]", "[POLICY_TAG]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
-            .setParentPolicyTag("parent_policy_tag2071382466")
+            .setParentPolicyTag("parentPolicyTag973173630")
             .addAllChildPolicyTags(new ArrayList<String>())
             .build();
     mockPolicyTagManager.addResponse(expectedResponse);
