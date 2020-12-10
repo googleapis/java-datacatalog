@@ -270,10 +270,10 @@ public class DataCatalogClient implements BackgroundResource {
    *     </ul>
    *     <p>Note that this EntryGroup and its child resources may not actually be stored in the
    *     location in this name.
-   * @param entry_group_id Required. The id of the entry group to create. The id must begin with a
+   * @param entryGroupId Required. The id of the entry group to create. The id must begin with a
    *     letter or underscore, contain only English letters, numbers and underscores, and be at most
    *     64 characters.
-   * @param entry_group The entry group to create. Defaults to an empty entry group.
+   * @param entryGroup The entry group to create. Defaults to an empty entry group.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final EntryGroup createEntryGroup(
@@ -301,10 +301,10 @@ public class DataCatalogClient implements BackgroundResource {
    *     </ul>
    *     <p>Note that this EntryGroup and its child resources may not actually be stored in the
    *     location in this name.
-   * @param entry_group_id Required. The id of the entry group to create. The id must begin with a
+   * @param entryGroupId Required. The id of the entry group to create. The id must begin with a
    *     letter or underscore, contain only English letters, numbers and underscores, and be at most
    *     64 characters.
-   * @param entry_group The entry group to create. Defaults to an empty entry group.
+   * @param entryGroup The entry group to create. Defaults to an empty entry group.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final EntryGroup createEntryGroup(
@@ -353,7 +353,7 @@ public class DataCatalogClient implements BackgroundResource {
    * the `entry_group.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
-   * @param entry_group Required. The updated entry group. "name" field must be set.
+   * @param entryGroup Required. The updated entry group. "name" field must be set.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final EntryGroup updateEntryGroup(EntryGroup entryGroup) {
@@ -368,8 +368,8 @@ public class DataCatalogClient implements BackgroundResource {
    * the `entry_group.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
-   * @param entry_group Required. The updated entry group. "name" field must be set.
-   * @param update_mask The fields to update on the entry group. If absent or empty, all modifiable
+   * @param entryGroup Required. The updated entry group. "name" field must be set.
+   * @param updateMask The fields to update on the entry group. If absent or empty, all modifiable
    *     fields are updated.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -440,7 +440,7 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * @param name Required. The name of the entry group. For example,
    *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
-   * @param read_mask The fields to return. If not set or empty, all fields are returned.
+   * @param readMask The fields to return. If not set or empty, all fields are returned.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final EntryGroup getEntryGroup(EntryGroupName name, FieldMask readMask) {
@@ -458,7 +458,7 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * @param name Required. The name of the entry group. For example,
    *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
-   * @param read_mask The fields to return. If not set or empty, all fields are returned.
+   * @param readMask The fields to return. If not set or empty, all fields are returned.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final EntryGroup getEntryGroup(String name, FieldMask readMask) {
@@ -634,7 +634,7 @@ public class DataCatalogClient implements BackgroundResource {
    *     </ul>
    *     <p>Note that this Entry and its child resources may not actually be stored in the location
    *     in this name.
-   * @param entry_id Required. The id of the entry to create.
+   * @param entryId Required. The id of the entry to create.
    * @param entry Required. The entry to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -664,7 +664,7 @@ public class DataCatalogClient implements BackgroundResource {
    *     </ul>
    *     <p>Note that this Entry and its child resources may not actually be stored in the location
    *     in this name.
-   * @param entry_id Required. The id of the entry to create.
+   * @param entryId Required. The id of the entry to create.
    * @param entry Required. The entry to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -732,7 +732,7 @@ public class DataCatalogClient implements BackgroundResource {
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
    * @param entry Required. The updated entry. The "name" field must be set.
-   * @param update_mask The fields to update on the entry. If absent or empty, all modifiable fields
+   * @param updateMask The fields to update on the entry. If absent or empty, all modifiable fields
    *     are updated.
    *     <p>The following fields are modifiable:
    *     <ul>
@@ -1007,8 +1007,8 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/us-central1
    *     </ul>
    *
-   * @param tag_template_id Required. The id of the tag template to create.
-   * @param tag_template Required. The tag template to create.
+   * @param tagTemplateId Required. The id of the tag template to create.
+   * @param tagTemplate Required. The tag template to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplate createTagTemplate(
@@ -1036,8 +1036,8 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/us-central1
    *     </ul>
    *
-   * @param tag_template_id Required. The id of the tag template to create.
-   * @param tag_template Required. The tag template to create.
+   * @param tagTemplateId Required. The id of the tag template to create.
+   * @param tagTemplate Required. The tag template to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplate createTagTemplate(
@@ -1140,7 +1140,7 @@ public class DataCatalogClient implements BackgroundResource {
    * identified by the `tag_template.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
-   * @param tag_template Required. The template to update. The "name" field must be set.
+   * @param tagTemplate Required. The template to update. The "name" field must be set.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplate updateTagTemplate(TagTemplate tagTemplate) {
@@ -1157,8 +1157,8 @@ public class DataCatalogClient implements BackgroundResource {
    * identified by the `tag_template.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
-   * @param tag_template Required. The template to update. The "name" field must be set.
-   * @param update_mask The field mask specifies the parts of the template to overwrite.
+   * @param tagTemplate Required. The template to update. The "name" field must be set.
+   * @param updateMask The field mask specifies the parts of the template to overwrite.
    *     <p>Allowed fields:
    *     <p>&#42; `display_name`
    *     <p>If absent or empty, all of the allowed fields above will be updated.
@@ -1288,11 +1288,11 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/us-central1/tagTemplates/{tag_template_id}
    *     </ul>
    *
-   * @param tag_template_field_id Required. The ID of the tag template field to create. Field ids
-   *     can contain letters (both uppercase and lowercase), numbers (0-9), underscores (_) and
-   *     dashes (-). Field IDs must be at least 1 character long and at most 128 characters long.
-   *     Field IDs must also be unique within their template.
-   * @param tag_template_field Required. The tag template field to create.
+   * @param tagTemplateFieldId Required. The ID of the tag template field to create. Field ids can
+   *     contain letters (both uppercase and lowercase), numbers (0-9), underscores (_) and dashes
+   *     (-). Field IDs must be at least 1 character long and at most 128 characters long. Field IDs
+   *     must also be unique within their template.
+   * @param tagTemplateField Required. The tag template field to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplateField createTagTemplateField(
@@ -1320,11 +1320,11 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/us-central1/tagTemplates/{tag_template_id}
    *     </ul>
    *
-   * @param tag_template_field_id Required. The ID of the tag template field to create. Field ids
-   *     can contain letters (both uppercase and lowercase), numbers (0-9), underscores (_) and
-   *     dashes (-). Field IDs must be at least 1 character long and at most 128 characters long.
-   *     Field IDs must also be unique within their template.
-   * @param tag_template_field Required. The tag template field to create.
+   * @param tagTemplateFieldId Required. The ID of the tag template field to create. Field ids can
+   *     contain letters (both uppercase and lowercase), numbers (0-9), underscores (_) and dashes
+   *     (-). Field IDs must be at least 1 character long and at most 128 characters long. Field IDs
+   *     must also be unique within their template.
+   * @param tagTemplateField Required. The tag template field to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplateField createTagTemplateField(
@@ -1378,7 +1378,7 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    *     </ul>
    *
-   * @param tag_template_field Required. The template to update.
+   * @param tagTemplateField Required. The template to update.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplateField updateTagTemplateField(
@@ -1403,7 +1403,7 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    *     </ul>
    *
-   * @param tag_template_field Required. The template to update.
+   * @param tagTemplateField Required. The template to update.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplateField updateTagTemplateField(
@@ -1428,8 +1428,8 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    *     </ul>
    *
-   * @param tag_template_field Required. The template to update.
-   * @param update_mask Optional. The field mask specifies the parts of the template to be updated.
+   * @param tagTemplateField Required. The template to update.
+   * @param updateMask Optional. The field mask specifies the parts of the template to be updated.
    *     Allowed fields:
    *     <p>&#42; `display_name` &#42; `type.enum_type` &#42; `is_required`
    *     <p>If `update_mask` is not set or empty, all of the allowed fields above will be updated.
@@ -1461,8 +1461,8 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    *     </ul>
    *
-   * @param tag_template_field Required. The template to update.
-   * @param update_mask Optional. The field mask specifies the parts of the template to be updated.
+   * @param tagTemplateField Required. The template to update.
+   * @param updateMask Optional. The field mask specifies the parts of the template to be updated.
    *     Allowed fields:
    *     <p>&#42; `display_name` &#42; `type.enum_type` &#42; `is_required`
    *     <p>If `update_mask` is not set or empty, all of the allowed fields above will be updated.
@@ -1522,7 +1522,7 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    *     </ul>
    *
-   * @param new_tag_template_field_id Required. The new ID of this tag template field. For example,
+   * @param newTagTemplateFieldId Required. The new ID of this tag template field. For example,
    *     `my_new_field`.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1548,7 +1548,7 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    *     </ul>
    *
-   * @param new_tag_template_field_id Required. The new ID of this tag template field. For example,
+   * @param newTagTemplateFieldId Required. The new ID of this tag template field. For example,
    *     `my_new_field`.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1766,7 +1766,7 @@ public class DataCatalogClient implements BackgroundResource {
    * Updates an existing tag.
    *
    * @param tag Required. The updated tag. The "name" field must be set.
-   * @param update_mask The fields to update on the Tag. If absent or empty, all modifiable fields
+   * @param updateMask The fields to update on the Tag. If absent or empty, all modifiable fields
    *     are updated. Currently the only modifiable field is the field `fields`.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */

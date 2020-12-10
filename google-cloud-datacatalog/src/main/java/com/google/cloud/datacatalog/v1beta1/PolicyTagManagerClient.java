@@ -406,7 +406,7 @@ public class PolicyTagManagerClient implements BackgroundResource {
    * Creates a policy tag in the specified taxonomy.
    *
    * @param parent Required. Resource name of the taxonomy that the policy tag will belong to.
-   * @param policy_tag The policy tag to be created.
+   * @param policyTag The policy tag to be created.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final PolicyTag createPolicyTag(TaxonomyName parent, PolicyTag policyTag) {
@@ -423,7 +423,7 @@ public class PolicyTagManagerClient implements BackgroundResource {
    * Creates a policy tag in the specified taxonomy.
    *
    * @param parent Required. Resource name of the taxonomy that the policy tag will belong to.
-   * @param policy_tag The policy tag to be created.
+   * @param policyTag The policy tag to be created.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final PolicyTag createPolicyTag(String parent, PolicyTag policyTag) {
@@ -505,7 +505,7 @@ public class PolicyTagManagerClient implements BackgroundResource {
   /**
    * Updates a policy tag.
    *
-   * @param policy_tag The policy tag to update. Only the description, display_name, and
+   * @param policyTag The policy tag to update. Only the description, display_name, and
    *     parent_policy_tag fields can be updated.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */

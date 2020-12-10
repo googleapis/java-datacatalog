@@ -96,12 +96,22 @@ public class GrpcPolicyTagManagerSerializationStub extends PolicyTagManagerSeria
         callableFactory);
   }
 
+  /**
+   * Constructs an instance of GrpcPolicyTagManagerSerializationStub, using the given settings. This
+   * is protected so that it is easy to make a subclass, but otherwise, the static factory methods
+   * should be preferred.
+   */
   protected GrpcPolicyTagManagerSerializationStub(
       PolicyTagManagerSerializationStubSettings settings, ClientContext clientContext)
       throws IOException {
     this(settings, clientContext, new GrpcPolicyTagManagerSerializationCallableFactory());
   }
 
+  /**
+   * Constructs an instance of GrpcPolicyTagManagerSerializationStub, using the given settings. This
+   * is protected so that it is easy to make a subclass, but otherwise, the static factory methods
+   * should be preferred.
+   */
   protected GrpcPolicyTagManagerSerializationStub(
       PolicyTagManagerSerializationStubSettings settings,
       ClientContext clientContext,
