@@ -145,14 +145,14 @@ public class DataCatalogClientTest {
     EntryGroup expectedResponse =
         EntryGroup.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setDataCatalogTimestamps(SystemTimestamps.newBuilder().build())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
 
     LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-    String entryGroupId = "entry_group_id-43122680";
+    String entryGroupId = "entryGroupId1228924712";
     EntryGroup entryGroup = EntryGroup.newBuilder().build();
 
     EntryGroup actualResponse = client.createEntryGroup(parent, entryGroupId, entryGroup);
@@ -178,7 +178,7 @@ public class DataCatalogClientTest {
 
     try {
       LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-      String entryGroupId = "entry_group_id-43122680";
+      String entryGroupId = "entryGroupId1228924712";
       EntryGroup entryGroup = EntryGroup.newBuilder().build();
       client.createEntryGroup(parent, entryGroupId, entryGroup);
       Assert.fail("No exception raised");
@@ -192,14 +192,14 @@ public class DataCatalogClientTest {
     EntryGroup expectedResponse =
         EntryGroup.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setDataCatalogTimestamps(SystemTimestamps.newBuilder().build())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
 
     String parent = "parent-995424086";
-    String entryGroupId = "entry_group_id-43122680";
+    String entryGroupId = "entryGroupId1228924712";
     EntryGroup entryGroup = EntryGroup.newBuilder().build();
 
     EntryGroup actualResponse = client.createEntryGroup(parent, entryGroupId, entryGroup);
@@ -225,7 +225,7 @@ public class DataCatalogClientTest {
 
     try {
       String parent = "parent-995424086";
-      String entryGroupId = "entry_group_id-43122680";
+      String entryGroupId = "entryGroupId1228924712";
       EntryGroup entryGroup = EntryGroup.newBuilder().build();
       client.createEntryGroup(parent, entryGroupId, entryGroup);
       Assert.fail("No exception raised");
@@ -239,7 +239,7 @@ public class DataCatalogClientTest {
     EntryGroup expectedResponse =
         EntryGroup.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setDataCatalogTimestamps(SystemTimestamps.newBuilder().build())
             .build();
@@ -280,7 +280,7 @@ public class DataCatalogClientTest {
     EntryGroup expectedResponse =
         EntryGroup.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setDataCatalogTimestamps(SystemTimestamps.newBuilder().build())
             .build();
@@ -324,7 +324,7 @@ public class DataCatalogClientTest {
     EntryGroup expectedResponse =
         EntryGroup.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setDataCatalogTimestamps(SystemTimestamps.newBuilder().build())
             .build();
@@ -365,7 +365,7 @@ public class DataCatalogClientTest {
     EntryGroup expectedResponse =
         EntryGroup.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setDataCatalogTimestamps(SystemTimestamps.newBuilder().build())
             .build();
@@ -406,7 +406,7 @@ public class DataCatalogClientTest {
     EntryGroup expectedResponse =
         EntryGroup.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setDataCatalogTimestamps(SystemTimestamps.newBuilder().build())
             .build();
@@ -450,7 +450,7 @@ public class DataCatalogClientTest {
     EntryGroup expectedResponse =
         EntryGroup.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setDataCatalogTimestamps(SystemTimestamps.newBuilder().build())
             .build();
@@ -650,8 +650,8 @@ public class DataCatalogClientTest {
     Entry expectedResponse =
         Entry.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setLinkedResource("linked_resource1544625012")
-            .setDisplayName("display_name1615086568")
+            .setLinkedResource("linkedResource-495606457")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setSchema(Schema.newBuilder().build())
             .setSourceSystemTimestamps(SystemTimestamps.newBuilder().build())
@@ -659,7 +659,7 @@ public class DataCatalogClientTest {
     mockDataCatalog.addResponse(expectedResponse);
 
     EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-    String entryId = "entry_id-2093663224";
+    String entryId = "entryId-1591558867";
     Entry entry = Entry.newBuilder().build();
 
     Entry actualResponse = client.createEntry(parent, entryId, entry);
@@ -685,7 +685,7 @@ public class DataCatalogClientTest {
 
     try {
       EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
-      String entryId = "entry_id-2093663224";
+      String entryId = "entryId-1591558867";
       Entry entry = Entry.newBuilder().build();
       client.createEntry(parent, entryId, entry);
       Assert.fail("No exception raised");
@@ -699,8 +699,8 @@ public class DataCatalogClientTest {
     Entry expectedResponse =
         Entry.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setLinkedResource("linked_resource1544625012")
-            .setDisplayName("display_name1615086568")
+            .setLinkedResource("linkedResource-495606457")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setSchema(Schema.newBuilder().build())
             .setSourceSystemTimestamps(SystemTimestamps.newBuilder().build())
@@ -708,7 +708,7 @@ public class DataCatalogClientTest {
     mockDataCatalog.addResponse(expectedResponse);
 
     String parent = "parent-995424086";
-    String entryId = "entry_id-2093663224";
+    String entryId = "entryId-1591558867";
     Entry entry = Entry.newBuilder().build();
 
     Entry actualResponse = client.createEntry(parent, entryId, entry);
@@ -734,7 +734,7 @@ public class DataCatalogClientTest {
 
     try {
       String parent = "parent-995424086";
-      String entryId = "entry_id-2093663224";
+      String entryId = "entryId-1591558867";
       Entry entry = Entry.newBuilder().build();
       client.createEntry(parent, entryId, entry);
       Assert.fail("No exception raised");
@@ -748,8 +748,8 @@ public class DataCatalogClientTest {
     Entry expectedResponse =
         Entry.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setLinkedResource("linked_resource1544625012")
-            .setDisplayName("display_name1615086568")
+            .setLinkedResource("linkedResource-495606457")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setSchema(Schema.newBuilder().build())
             .setSourceSystemTimestamps(SystemTimestamps.newBuilder().build())
@@ -791,8 +791,8 @@ public class DataCatalogClientTest {
     Entry expectedResponse =
         Entry.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setLinkedResource("linked_resource1544625012")
-            .setDisplayName("display_name1615086568")
+            .setLinkedResource("linkedResource-495606457")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setSchema(Schema.newBuilder().build())
             .setSourceSystemTimestamps(SystemTimestamps.newBuilder().build())
@@ -905,8 +905,8 @@ public class DataCatalogClientTest {
     Entry expectedResponse =
         Entry.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setLinkedResource("linked_resource1544625012")
-            .setDisplayName("display_name1615086568")
+            .setLinkedResource("linkedResource-495606457")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setSchema(Schema.newBuilder().build())
             .setSourceSystemTimestamps(SystemTimestamps.newBuilder().build())
@@ -948,8 +948,8 @@ public class DataCatalogClientTest {
     Entry expectedResponse =
         Entry.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setLinkedResource("linked_resource1544625012")
-            .setDisplayName("display_name1615086568")
+            .setLinkedResource("linkedResource-495606457")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setSchema(Schema.newBuilder().build())
             .setSourceSystemTimestamps(SystemTimestamps.newBuilder().build())
@@ -991,8 +991,8 @@ public class DataCatalogClientTest {
     Entry expectedResponse =
         Entry.newBuilder()
             .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
-            .setLinkedResource("linked_resource1544625012")
-            .setDisplayName("display_name1615086568")
+            .setLinkedResource("linkedResource-495606457")
+            .setDisplayName("displayName1714148973")
             .setDescription("description-1724546052")
             .setSchema(Schema.newBuilder().build())
             .setSourceSystemTimestamps(SystemTimestamps.newBuilder().build())
@@ -1123,13 +1123,13 @@ public class DataCatalogClientTest {
     TagTemplate expectedResponse =
         TagTemplate.newBuilder()
             .setName(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .putAllFields(new HashMap<String, TagTemplateField>())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
 
     LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-    String tagTemplateId = "tag_template_id-2020335141";
+    String tagTemplateId = "tagTemplateId-1438776721";
     TagTemplate tagTemplate = TagTemplate.newBuilder().build();
 
     TagTemplate actualResponse = client.createTagTemplate(parent, tagTemplateId, tagTemplate);
@@ -1155,7 +1155,7 @@ public class DataCatalogClientTest {
 
     try {
       LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
-      String tagTemplateId = "tag_template_id-2020335141";
+      String tagTemplateId = "tagTemplateId-1438776721";
       TagTemplate tagTemplate = TagTemplate.newBuilder().build();
       client.createTagTemplate(parent, tagTemplateId, tagTemplate);
       Assert.fail("No exception raised");
@@ -1169,13 +1169,13 @@ public class DataCatalogClientTest {
     TagTemplate expectedResponse =
         TagTemplate.newBuilder()
             .setName(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .putAllFields(new HashMap<String, TagTemplateField>())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
 
     String parent = "parent-995424086";
-    String tagTemplateId = "tag_template_id-2020335141";
+    String tagTemplateId = "tagTemplateId-1438776721";
     TagTemplate tagTemplate = TagTemplate.newBuilder().build();
 
     TagTemplate actualResponse = client.createTagTemplate(parent, tagTemplateId, tagTemplate);
@@ -1201,7 +1201,7 @@ public class DataCatalogClientTest {
 
     try {
       String parent = "parent-995424086";
-      String tagTemplateId = "tag_template_id-2020335141";
+      String tagTemplateId = "tagTemplateId-1438776721";
       TagTemplate tagTemplate = TagTemplate.newBuilder().build();
       client.createTagTemplate(parent, tagTemplateId, tagTemplate);
       Assert.fail("No exception raised");
@@ -1215,7 +1215,7 @@ public class DataCatalogClientTest {
     TagTemplate expectedResponse =
         TagTemplate.newBuilder()
             .setName(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .putAllFields(new HashMap<String, TagTemplateField>())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
@@ -1255,7 +1255,7 @@ public class DataCatalogClientTest {
     TagTemplate expectedResponse =
         TagTemplate.newBuilder()
             .setName(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .putAllFields(new HashMap<String, TagTemplateField>())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
@@ -1295,7 +1295,7 @@ public class DataCatalogClientTest {
     TagTemplate expectedResponse =
         TagTemplate.newBuilder()
             .setName(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .putAllFields(new HashMap<String, TagTemplateField>())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
@@ -1335,7 +1335,7 @@ public class DataCatalogClientTest {
     TagTemplate expectedResponse =
         TagTemplate.newBuilder()
             .setName(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .putAllFields(new HashMap<String, TagTemplateField>())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
@@ -1454,7 +1454,7 @@ public class DataCatalogClientTest {
             .setName(
                 TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setType(FieldType.newBuilder().build())
             .setIsRequired(true)
             .setOrder(106006350)
@@ -1462,7 +1462,7 @@ public class DataCatalogClientTest {
     mockDataCatalog.addResponse(expectedResponse);
 
     TagTemplateName parent = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
-    String tagTemplateFieldId = "tag_template_field_id-92144832";
+    String tagTemplateFieldId = "tagTemplateFieldId-1556835615";
     TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
 
     TagTemplateField actualResponse =
@@ -1490,7 +1490,7 @@ public class DataCatalogClientTest {
 
     try {
       TagTemplateName parent = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
-      String tagTemplateFieldId = "tag_template_field_id-92144832";
+      String tagTemplateFieldId = "tagTemplateFieldId-1556835615";
       TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
       client.createTagTemplateField(parent, tagTemplateFieldId, tagTemplateField);
       Assert.fail("No exception raised");
@@ -1506,7 +1506,7 @@ public class DataCatalogClientTest {
             .setName(
                 TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setType(FieldType.newBuilder().build())
             .setIsRequired(true)
             .setOrder(106006350)
@@ -1514,7 +1514,7 @@ public class DataCatalogClientTest {
     mockDataCatalog.addResponse(expectedResponse);
 
     String parent = "parent-995424086";
-    String tagTemplateFieldId = "tag_template_field_id-92144832";
+    String tagTemplateFieldId = "tagTemplateFieldId-1556835615";
     TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
 
     TagTemplateField actualResponse =
@@ -1542,7 +1542,7 @@ public class DataCatalogClientTest {
 
     try {
       String parent = "parent-995424086";
-      String tagTemplateFieldId = "tag_template_field_id-92144832";
+      String tagTemplateFieldId = "tagTemplateFieldId-1556835615";
       TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
       client.createTagTemplateField(parent, tagTemplateFieldId, tagTemplateField);
       Assert.fail("No exception raised");
@@ -1558,7 +1558,7 @@ public class DataCatalogClientTest {
             .setName(
                 TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setType(FieldType.newBuilder().build())
             .setIsRequired(true)
             .setOrder(106006350)
@@ -1608,7 +1608,7 @@ public class DataCatalogClientTest {
             .setName(
                 TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setType(FieldType.newBuilder().build())
             .setIsRequired(true)
             .setOrder(106006350)
@@ -1656,7 +1656,7 @@ public class DataCatalogClientTest {
             .setName(
                 TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setType(FieldType.newBuilder().build())
             .setIsRequired(true)
             .setOrder(106006350)
@@ -1710,7 +1710,7 @@ public class DataCatalogClientTest {
             .setName(
                 TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setType(FieldType.newBuilder().build())
             .setIsRequired(true)
             .setOrder(106006350)
@@ -1762,7 +1762,7 @@ public class DataCatalogClientTest {
             .setName(
                 TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setType(FieldType.newBuilder().build())
             .setIsRequired(true)
             .setOrder(106006350)
@@ -1771,7 +1771,7 @@ public class DataCatalogClientTest {
 
     TagTemplateFieldName name =
         TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
-    String newTagTemplateFieldId = "new_tag_template_field_id-1668354591";
+    String newTagTemplateFieldId = "newTagTemplateFieldId2008993953";
 
     TagTemplateField actualResponse = client.renameTagTemplateField(name, newTagTemplateFieldId);
     Assert.assertEquals(expectedResponse, actualResponse);
@@ -1797,7 +1797,7 @@ public class DataCatalogClientTest {
     try {
       TagTemplateFieldName name =
           TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
-      String newTagTemplateFieldId = "new_tag_template_field_id-1668354591";
+      String newTagTemplateFieldId = "newTagTemplateFieldId2008993953";
       client.renameTagTemplateField(name, newTagTemplateFieldId);
       Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
@@ -1812,7 +1812,7 @@ public class DataCatalogClientTest {
             .setName(
                 TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
                     .toString())
-            .setDisplayName("display_name1615086568")
+            .setDisplayName("displayName1714148973")
             .setType(FieldType.newBuilder().build())
             .setIsRequired(true)
             .setOrder(106006350)
@@ -1820,7 +1820,7 @@ public class DataCatalogClientTest {
     mockDataCatalog.addResponse(expectedResponse);
 
     String name = "name3373707";
-    String newTagTemplateFieldId = "new_tag_template_field_id-1668354591";
+    String newTagTemplateFieldId = "newTagTemplateFieldId2008993953";
 
     TagTemplateField actualResponse = client.renameTagTemplateField(name, newTagTemplateFieldId);
     Assert.assertEquals(expectedResponse, actualResponse);
@@ -1845,7 +1845,7 @@ public class DataCatalogClientTest {
 
     try {
       String name = "name3373707";
-      String newTagTemplateFieldId = "new_tag_template_field_id-1668354591";
+      String newTagTemplateFieldId = "newTagTemplateFieldId2008993953";
       client.renameTagTemplateField(name, newTagTemplateFieldId);
       Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
@@ -1939,7 +1939,7 @@ public class DataCatalogClientTest {
                 TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
                     .toString())
             .setTemplate("template-1321546630")
-            .setTemplateDisplayName("template_display_name-532252787")
+            .setTemplateDisplayName("templateDisplayName713818515")
             .putAllFields(new HashMap<String, TagField>())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
@@ -1985,7 +1985,7 @@ public class DataCatalogClientTest {
                 TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
                     .toString())
             .setTemplate("template-1321546630")
-            .setTemplateDisplayName("template_display_name-532252787")
+            .setTemplateDisplayName("templateDisplayName713818515")
             .putAllFields(new HashMap<String, TagField>())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
@@ -2031,7 +2031,7 @@ public class DataCatalogClientTest {
                 TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
                     .toString())
             .setTemplate("template-1321546630")
-            .setTemplateDisplayName("template_display_name-532252787")
+            .setTemplateDisplayName("templateDisplayName713818515")
             .putAllFields(new HashMap<String, TagField>())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
@@ -2074,7 +2074,7 @@ public class DataCatalogClientTest {
                 TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
                     .toString())
             .setTemplate("template-1321546630")
-            .setTemplateDisplayName("template_display_name-532252787")
+            .setTemplateDisplayName("templateDisplayName713818515")
             .putAllFields(new HashMap<String, TagField>())
             .build();
     mockDataCatalog.addResponse(expectedResponse);
