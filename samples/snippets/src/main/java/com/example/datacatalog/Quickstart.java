@@ -17,11 +17,9 @@
 package com.example.datacatalog;
 
 // [START data_catalog_quickstart]
-
 import com.google.cloud.datacatalog.v1.CreateTagRequest;
 import com.google.cloud.datacatalog.v1.CreateTagTemplateRequest;
 import com.google.cloud.datacatalog.v1.DataCatalogClient;
-import com.google.cloud.datacatalog.v1.DeleteTagTemplateRequest;
 import com.google.cloud.datacatalog.v1.Entry;
 import com.google.cloud.datacatalog.v1.FieldType;
 import com.google.cloud.datacatalog.v1.FieldType.EnumType;
@@ -33,18 +31,18 @@ import com.google.cloud.datacatalog.v1.Tag;
 import com.google.cloud.datacatalog.v1.TagField;
 import com.google.cloud.datacatalog.v1.TagTemplate;
 import com.google.cloud.datacatalog.v1.TagTemplateField;
-import com.google.cloud.datacatalog.v1.TagTemplateName;
+import java.io.IOException;
 
-public class CreateTags {
+public class Quickstart {
 
-  public static void createTags() {
+  public static void main(String[] args) throws IOException {
     // TODO(developer): Replace these variables before running the sample.
     String projectId = "my-project";
     String tagTemplateId = "my_tag_template";
     createTags(projectId, tagTemplateId);
   }
 
-  public static void createTags(String projectId, String tagTemplateId) {
+  public static void createTags(String projectId, String tagTemplateId) throws IOException {
     // Currently, Data Catalog stores metadata in the us-central1 region.
     String location = "us-central1";
 
@@ -110,34 +108,12 @@ public class CreateTags {
                       .setLocation(location)
                       .build()
                       .toString())
-              .setTagTemplateId("demo_tag_template")
+              .setTagTemplateId(tagTemplateId)
               .setTagTemplate(tagTemplate)
               .build();
 
-      String expectedTemplateName =
-          TagTemplateName.newBuilder()
-              .setProject(projectId)
-              .setLocation(location)
-              .setTagTemplate("demo_tag_template")
-              .build()
-              .toString();
-
-      // Delete any pre-existing Template with the same name.
-      try {
-        dataCatalogClient.deleteTagTemplate(
-            DeleteTagTemplateRequest.newBuilder()
-                .setName(expectedTemplateName)
-                .setForce(true)
-                .build());
-
-        System.out.println(String.format("Deleted template: %s", expectedTemplateName));
-      } catch (Exception e) {
-        System.out.println(String.format("Cannot delete template: %s", expectedTemplateName));
-      }
-
       // Create the Tag Template.
       tagTemplate = dataCatalogClient.createTagTemplate(createTagTemplateRequest);
-      System.out.println(String.format("Template created with name: %s", tagTemplate.getName()));
 
       // -------------------------------
       // Lookup Data Catalog's Entry referring to the table.
@@ -175,9 +151,7 @@ public class CreateTags {
           CreateTagRequest.newBuilder().setParent(tableEntry.getName()).setTag(tag).build();
 
       dataCatalogClient.createTag(createTagRequest);
-
-    } catch (Exception e) {
-      System.out.print("Error during CreateTags:\n" + e.toString());
+      System.out.printf("Tag created successfully");
     }
   }
 }

@@ -17,25 +17,23 @@
 package com.example.datacatalog;
 
 // [START datacatalog_create_entry_group_tag]
-
-import com.google.api.gax.rpc.AlreadyExistsException;
 import com.google.cloud.datacatalog.v1.CreateEntryGroupRequest;
 import com.google.cloud.datacatalog.v1.DataCatalogClient;
 import com.google.cloud.datacatalog.v1.EntryGroup;
 import com.google.cloud.datacatalog.v1.LocationName;
 import java.io.IOException;
 
+// Sample to create entry group
 public class CreateEntryGroup {
 
-  public static void createEntryGroup() {
+  public static void main(String[] args) throws IOException {
     // TODO(developer): Replace these variables before running the sample.
     String projectId = "my-project-id";
     String entryGroupId = "fileset_entry_group";
     createEntryGroup(projectId, entryGroupId);
   }
 
-  // Create Entry Group.
-  public static void createEntryGroup(String projectId, String entryGroupId) {
+  public static void createEntryGroup(String projectId, String entryGroupId) throws IOException {
     // Currently, Data Catalog stores metadata in the us-central1 region.
     String location = "us-central1";
 
@@ -60,12 +58,7 @@ public class CreateEntryGroup {
 
       // Use the client to send the API request.
       EntryGroup entryGroupResponse = dataCatalogClient.createEntryGroup(entryGroupRequest);
-      System.out.printf("\nEntry Group created with name: %s\n", entryGroupResponse.getName());
-    } catch (AlreadyExistsException | IOException e) {
-      // AlreadyExistsException's are thrown if EntryGroup or Entry already exists.
-      // IOException's are thrown when unable to create the DataCatalogClient,
-      // for example an invalid Service Account path.
-      System.out.println("Error in create entry process:\n" + e.toString());
+      System.out.printf("Entry Group created with name: %s", entryGroupResponse.getName());
     }
   }
 }

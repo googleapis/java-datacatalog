@@ -17,44 +17,29 @@
 package com.example.datacatalog;
 
 // [START data_catalog_create_custom_entry]
-
-import com.google.api.gax.rpc.AlreadyExistsException;
-import com.google.api.gax.rpc.NotFoundException;
-import com.google.api.gax.rpc.PermissionDeniedException;
 import com.google.cloud.datacatalog.v1.ColumnSchema;
 import com.google.cloud.datacatalog.v1.CreateEntryGroupRequest;
 import com.google.cloud.datacatalog.v1.CreateEntryRequest;
-import com.google.cloud.datacatalog.v1.CreateTagRequest;
-import com.google.cloud.datacatalog.v1.CreateTagTemplateRequest;
 import com.google.cloud.datacatalog.v1.DataCatalogClient;
-import com.google.cloud.datacatalog.v1.DeleteTagTemplateRequest;
 import com.google.cloud.datacatalog.v1.Entry;
 import com.google.cloud.datacatalog.v1.EntryGroup;
-import com.google.cloud.datacatalog.v1.EntryGroupName;
-import com.google.cloud.datacatalog.v1.EntryName;
-import com.google.cloud.datacatalog.v1.FieldType;
 import com.google.cloud.datacatalog.v1.LocationName;
 import com.google.cloud.datacatalog.v1.Schema;
-import com.google.cloud.datacatalog.v1.Tag;
-import com.google.cloud.datacatalog.v1.TagField;
-import com.google.cloud.datacatalog.v1.TagTemplate;
-import com.google.cloud.datacatalog.v1.TagTemplateField;
-import com.google.cloud.datacatalog.v1.TagTemplateName;
 import java.io.IOException;
 
-public class CreateCustomType {
+// Sample to create custom entry
+public class CreateCustomEntry {
 
-  public static void createCustomType() {
+  public static void main(String[] args) throws IOException {
     // TODO(developer): Replace these variables before running the sample.
     String projectId = "my-project";
     String entryGroupId = "onprem_entry_group";
     String entryId = "onprem_entry_id";
-    String tagTemplateId = "onprem_tag_template";
-    createCustomType(projectId, entryGroupId, entryId, tagTemplateId);
+    createCustomEntry(projectId, entryGroupId, entryId);
   }
 
-  public static void createCustomType(String projectId, String entryGroupId, String entryId,
-      String tagTemplateId) {
+  public static void createCustomEntry(String projectId, String entryGroupId, String entryId)
+      throws IOException {
     // Currently, Data Catalog stores metadata in the us-central1 region.
     String location = "us-central1";
 
@@ -62,54 +47,6 @@ public class CreateCustomType {
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.
     try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-
-      // 1. Environment cleanup: delete pre-existing data.
-      // Delete any pre-existing Entry with the same name
-      // that will be used in step 3.
-      try {
-        String entryName = EntryName.of(projectId, location, entryGroupId, entryId).toString();
-        dataCatalogClient.deleteEntry(entryName);
-        System.out.printf("\nDeleted Entry: %s", entryName);
-      } catch (PermissionDeniedException | NotFoundException e) {
-        // PermissionDeniedException or NotFoundException are thrown if
-        // Entry does not exist.
-        System.out.println("Entry does not exist.");
-      }
-
-      // Delete any pre-existing Entry Group with the same name
-      // that will be used in step 2.
-      try {
-        String entryGroupName = EntryGroupName.of(projectId, location, entryGroupId).toString();
-        dataCatalogClient.deleteEntryGroup(entryGroupName);
-        System.out.printf("\nDeleted Entry Group: %s", entryGroupName);
-      } catch (PermissionDeniedException | NotFoundException e) {
-        // PermissionDeniedException or NotFoundException are thrown if
-        // Entry Group does not exist.
-        System.out.println("Entry Group does not exist.");
-      }
-
-      String tagTemplateName =
-          TagTemplateName.newBuilder()
-              .setProject(projectId)
-              .setLocation(location)
-              .setTagTemplate(tagTemplateId)
-              .build()
-              .toString();
-
-      // Delete any pre-existing Template with the same name
-      // that will be used in step 4.
-      try {
-        dataCatalogClient.deleteTagTemplate(
-            DeleteTagTemplateRequest.newBuilder()
-                .setName(tagTemplateName)
-                .setForce(true)
-                .build());
-        System.out.printf("\nDeleted template: %s", tagTemplateName);
-      } catch (Exception e) {
-        System.out.printf("\nCannot delete template: %s", tagTemplateName);
-      }
-
-      // 2. Create an Entry Group.
       // Construct the EntryGroup for the EntryGroup request.
       EntryGroup entryGroup =
           EntryGroup.newBuilder()
@@ -128,9 +65,6 @@ public class CreateCustomType {
       // Use the client to send the API request.
       EntryGroup createdEntryGroup = dataCatalogClient.createEntryGroup(entryGroupRequest);
 
-      System.out.printf("\nEntry Group created with name: %s", createdEntryGroup.getName());
-
-      // 3. Create an Entry.
       // Construct the Entry for the Entry request.
       Entry entry =
           Entry.newBuilder()
@@ -168,60 +102,7 @@ public class CreateCustomType {
 
       // Use the client to send the API request.
       Entry createdEntry = dataCatalogClient.createEntry(entryRequest);
-      System.out.printf("\nEntry created with name: %s", createdEntry.getName());
-
-      // 4. Create a Tag Template.
-      // For more field types, including ENUM, please refer to
-      // https://cloud.google.com/data-catalog/docs/quickstarts/quickstart-search-tag#data-catalog-quickstart-java.
-      TagTemplateField sourceField =
-          TagTemplateField.newBuilder()
-              .setDisplayName("Source of data asset")
-              .setType(FieldType.newBuilder().setPrimitiveType(
-                  FieldType.PrimitiveType.STRING).build())
-              .build();
-
-      TagTemplate tagTemplate =
-          TagTemplate.newBuilder()
-              .setDisplayName("Demo Tag Template")
-              .putFields("source", sourceField)
-              .build();
-
-      CreateTagTemplateRequest createTagTemplateRequest =
-          CreateTagTemplateRequest.newBuilder()
-              .setParent(
-                  LocationName.newBuilder()
-                      .setProject(projectId)
-                      .setLocation(location)
-                      .build()
-                      .toString())
-              .setTagTemplateId(tagTemplateId)
-              .setTagTemplate(tagTemplate)
-              .build();
-
-      TagTemplate createdTagTemplate = dataCatalogClient
-          .createTagTemplate(createTagTemplateRequest);
-      System.out.printf("\nTemplate created with name: %s", createdTagTemplate.getName());
-
-      TagField sourceValue =
-          TagField.newBuilder().setStringValue("On-premises system name").build();
-
-      Tag tag =
-          Tag.newBuilder()
-              .setTemplate(createdTagTemplate.getName())
-              .putFields("source", sourceValue)
-              .build();
-
-      CreateTagRequest createTagRequest =
-          CreateTagRequest.newBuilder().setParent(createdEntry.getName()).setTag(tag).build();
-
-      Tag createdTag = dataCatalogClient.createTag(createTagRequest);
-      System.out.printf("\nCreated tag: %s", createdTag.getName());
-
-    } catch (AlreadyExistsException | IOException e) {
-      // AlreadyExistsException is thrown if the EntryGroup or Entry already exists.
-      // IOException is thrown when unable to create the DataCatalogClient,
-      // for example an invalid Service Account path.
-      System.out.println("Error creating entry:\n" + e.toString());
+      System.out.printf("Custom entry created with name: %s", createdEntry.getName());
     }
   }
 }

@@ -17,33 +17,25 @@
 package com.example.datacatalog;
 
 // [START data_catalog_grant_tag_template_user_role]
-
 import com.google.cloud.datacatalog.v1.DataCatalogClient;
 import com.google.cloud.datacatalog.v1.TagTemplateName;
 import com.google.iam.v1.Binding;
 import com.google.iam.v1.Policy;
 import com.google.iam.v1.SetIamPolicyRequest;
+import java.io.IOException;
 
-public class AllowMemberUseTemplate {
+// Sample to grant tag access on template
+public class GrantTagTemplateUserRole {
 
-  public static void grantTagTemplateUserRole() {
+  public static void main(String[] args) throws IOException {
     // TODO(developer): Replace these variables before running the sample.
     String projectId = "my-project";
     String tagTemplateId = "my_tag_template";
-    String memberId = "user:test-user@gmail.com";
-    grantTagTemplateUserRole(projectId, tagTemplateId, memberId);
+    grantTagTemplateUserRole(projectId, tagTemplateId);
   }
 
-  /**
-   * Grant a project member the Tag Template User role for a given template.
-   *
-   * @param projectId  The project ID to which the Template belongs, e.g. 'my-project'.
-   * @param templateId The template ID to grant access, e.g. 'my_template'.
-   * @param memberId   The member ID who access will be granted to, e.g. 'user:test-user@gmail.com'.
-   */
-  public static void grantTagTemplateUserRole(
-      String projectId, String templateId, String memberId) {
-
+  public static void grantTagTemplateUserRole(String projectId, String templateId)
+      throws IOException {
     // Currently, Data Catalog stores metadata in the us-central1 region.
     String location = "us-central1";
 
@@ -65,25 +57,21 @@ public class AllowMemberUseTemplate {
       Binding binding =
           Binding.newBuilder()
               .setRole("roles/datacatalog.tagTemplateUser")
-              .addMembers(memberId)
+              .addMembers("group:example-analyst-group@google.com")
               .build();
 
       // Create a Policy object to update Template's IAM policy by adding the new binding.
-      Policy policyUpdate =
-          Policy.newBuilder()
-              .addBindings(binding)
-              .build();
+      Policy policyUpdate = Policy.newBuilder().addBindings(binding).build();
 
-      SetIamPolicyRequest request = SetIamPolicyRequest.newBuilder().setPolicy(policyUpdate)
-          .setResource(templateName).build();
+      SetIamPolicyRequest request =
+          SetIamPolicyRequest.newBuilder()
+              .setPolicy(policyUpdate)
+              .setResource(templateName)
+              .build();
 
       // Update Template's policy.
       dataCatalogClient.setIamPolicy(request);
-
-      System.out.println(String.format("Role successfully granted to %s", memberId));
-
-    } catch (Exception e) {
-      System.out.print("Error during AllowMemberUseTemplate:\n" + e.toString());
+      System.out.println("Role successfully granted");
     }
   }
 }
