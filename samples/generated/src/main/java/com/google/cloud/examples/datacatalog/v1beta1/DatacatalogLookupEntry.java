@@ -17,7 +17,9 @@
 // sample-metadata:
 //   title:
 //   description: Lookup Entry
-//   usage: gradle run -PmainClass=com.google.cloud.examples.datacatalog.v1beta1.DatacatalogLookupEntry [--args='[--resource_name "[Full Resource Name]"]']
+//   usage: gradle run
+// -PmainClass=com.google.cloud.examples.datacatalog.v1beta1.DatacatalogLookupEntry
+// [--args='[--resource_name "[Full Resource Name]"]']
 
 package com.google.cloud.examples.datacatalog.v1beta1;
 
