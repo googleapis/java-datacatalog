@@ -1,10 +1,10 @@
-# Copyright 2018 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#   http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,20 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""This script is used to synthesize generated parts of this library."""
+docker:
+  image: gcr.io/repo-automation-bots/owlbot-java:latest
 
-import synthtool.languages.java as java
+deep-remove-regex:
+- /(proto|grpc|gapic)-.*/src
 
-AUTOSYNTH_MULTIPLE_COMMITS = True
+deep-copy-regex:
+- source: /google/cloud/datacatalog/v.*/.*-java/((proto|grpc|gapic)-.*)-java/src
+  dest: /$1/src
 
-versions = ['v1beta1', 'v1']
-service = 'datacatalog'
+begin-after-commit-hash: 0e809e6f6db01ccdcc3f3861ccebec975b228509
 
-for version in versions:
-  java.bazel_library(
-      service=service,
-      version=version,
-      bazel_target=f'//google/cloud/{service}/{version}:google-cloud-{service}-{version}-java',
-  )
-
-java.common_templates()
