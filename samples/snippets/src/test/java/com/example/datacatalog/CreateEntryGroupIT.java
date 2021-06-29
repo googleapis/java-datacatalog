@@ -79,6 +79,6 @@ public class CreateEntryGroupIT {
   @Test
   public void testCreateEntryGroup() throws IOException {
     CreateEntryGroup.createEntryGroup(PROJECT_ID, LOCATION, entryGroup);
-    assertThat(bout.toString()).contains("Entry Group created successfully");
+    assertThat(bout.toString()).contains("Entry Group created");
   }
 }
