@@ -55,7 +55,7 @@ public class CreateEntryGroup {
               .build();
 
       dataCatalogClient.createEntryGroup(entryGroupRequest);
-      System.out.println("Entry Group created");
+      System.out.println("Entry Group created successfully");
     }
   }
 }
