@@ -117,7 +117,7 @@ public class CreateCustomType {
               .setDescription("This Entry Group represents an external system")
               .build();
 
-      // Construct the EntryGroup request to be sent by the client.
+      // Construct the create EntryGroup request to be sent by the client.
       CreateEntryGroupRequest entryGroupRequest =
           CreateEntryGroupRequest.newBuilder()
               .setParent(LocationName.of(projectId, location).toString())
