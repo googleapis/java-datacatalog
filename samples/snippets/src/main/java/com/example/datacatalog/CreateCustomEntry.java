@@ -105,7 +105,7 @@ public class CreateCustomType {
                 .setForce(true)
                 .build());
         System.out.println("Deleted template: " + tagTemplateName);
-      } catch (Exception e) {
+      } catch (ApiException e) {
         System.out.println("Cannot delete template: " + tagTemplateName);
       }
 
