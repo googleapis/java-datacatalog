@@ -69,7 +69,7 @@ public class CreateFilesetEntryIT {
     out = new PrintStream(bout);
     originalPrintStream = System.out;
     System.setOut(out);
-    CreateEntryGroup.createEntryGroup(PROJECT_ID, entryGroup);
+    CreateEntryGroup.createEntryGroup(PROJECT_ID, LOCATION, entryGroup);
   }
 
   @After
