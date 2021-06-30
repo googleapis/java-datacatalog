@@ -86,8 +86,8 @@ public class CreateEntryTests {
     String entryId = "fileset_entry_id_" + getUuid8Chars();
 
     // Must create a Entry Group before creating the entry.
-    CreateEntryGroup.createEntryGroup(PROJECT_ID, entryGroupId);
-    CreateFilesetEntry.createFilesetEntry(PROJECT_ID, entryGroupId, entryId);
+    CreateEntryGroup.createEntryGroup(PROJECT_ID, LOCATION, entryGroupId);
+    CreateFilesetEntry.createEntry(PROJECT_ID, entryGroupId, entryId);
 
     // Store names for clean up on teardown
     String expectedEntryGroupName =
@@ -108,7 +108,7 @@ public class CreateEntryTests {
   public void testCreateEntryGroup() throws IOException {
     String entryGroupId = "entry_group_no_children_" + getUuid8Chars();
 
-    CreateEntryGroup.createEntryGroup(PROJECT_ID, entryGroupId);
+    CreateEntryGroup.createEntryGroup(PROJECT_ID, LOCATION, entryGroupId);
 
     // Store names for clean up on teardown
     String expectedEntryGroupName =
@@ -117,7 +117,7 @@ public class CreateEntryTests {
 
     String output = bout.toString();
 
-    String entryGroupTemplate = "Entry Group created with name: %s";
+    String entryGroupTemplate = "Entry Group created successfully";
     assertThat(
         output,
         CoreMatchers.containsString(String.format(entryGroupTemplate, expectedEntryGroupName)));

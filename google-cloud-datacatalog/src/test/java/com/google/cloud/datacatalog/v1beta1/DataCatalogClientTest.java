@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,8 +59,8 @@ import org.junit.Test;
 public class DataCatalogClientTest {
   private static MockDataCatalog mockDataCatalog;
   private static MockServiceHelper mockServiceHelper;
-  private DataCatalogClient client;
   private LocalChannelProvider channelProvider;
+  private DataCatalogClient client;
 
   @BeforeClass
   public static void startStaticServer() {

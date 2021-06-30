@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,18 @@ import javax.annotation.Generated;
  *
  * <p>This class provides the ability to make remote calls to the backing service through method
  * calls that map to API methods. Sample code to get started:
+ *
+ * <pre>{@code
+ * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient =
+ *     PolicyTagManagerSerializationClient.create()) {
+ *   ImportTaxonomiesRequest request =
+ *       ImportTaxonomiesRequest.newBuilder()
+ *           .setParent(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+ *           .build();
+ *   ImportTaxonomiesResponse response =
+ *       policyTagManagerSerializationClient.importTaxonomies(request);
+ * }
+ * }</pre>
  *
  * <p>Note: close() needs to be called on the PolicyTagManagerSerializationClient object to clean up
  * resources such as threads. In the example above, try-with-resources is used, which automatically
@@ -83,7 +95,7 @@ import javax.annotation.Generated;
  * <p>Please refer to the GitHub repository's samples for more quickstart code snippets.
  */
 @BetaApi
-@Generated("by gapic-generator")
+@Generated("by gapic-generator-java")
 public class PolicyTagManagerSerializationClient implements BackgroundResource {
   private final PolicyTagManagerSerializationSettings settings;
   private final PolicyTagManagerSerializationStub stub;
@@ -146,6 +158,20 @@ public class PolicyTagManagerSerializationClient implements BackgroundResource {
    *
    * <p>This method provides a bulk taxonomy / policy tag creation using nested proto structure.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient =
+   *     PolicyTagManagerSerializationClient.create()) {
+   *   ImportTaxonomiesRequest request =
+   *       ImportTaxonomiesRequest.newBuilder()
+   *           .setParent(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+   *           .build();
+   *   ImportTaxonomiesResponse response =
+   *       policyTagManagerSerializationClient.importTaxonomies(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -160,6 +186,20 @@ public class PolicyTagManagerSerializationClient implements BackgroundResource {
    * <p>This method provides a bulk taxonomy / policy tag creation using nested proto structure.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient =
+   *     PolicyTagManagerSerializationClient.create()) {
+   *   ImportTaxonomiesRequest request =
+   *       ImportTaxonomiesRequest.newBuilder()
+   *           .setParent(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+   *           .build();
+   *   ApiFuture<ImportTaxonomiesResponse> future =
+   *       policyTagManagerSerializationClient.importTaxonomiesCallable().futureCall(request);
+   *   // Do something.
+   *   ImportTaxonomiesResponse response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<ImportTaxonomiesRequest, ImportTaxonomiesResponse>
       importTaxonomiesCallable() {
@@ -172,6 +212,21 @@ public class PolicyTagManagerSerializationClient implements BackgroundResource {
    *
    * <p>This method generates SerializedTaxonomy protos with nested policy tags that can be used as
    * an input for future ImportTaxonomies calls.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient =
+   *     PolicyTagManagerSerializationClient.create()) {
+   *   ExportTaxonomiesRequest request =
+   *       ExportTaxonomiesRequest.newBuilder()
+   *           .setParent(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+   *           .addAllTaxonomies(new ArrayList<String>())
+   *           .build();
+   *   ExportTaxonomiesResponse response =
+   *       policyTagManagerSerializationClient.exportTaxonomies(request);
+   * }
+   * }</pre>
    *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -188,6 +243,21 @@ public class PolicyTagManagerSerializationClient implements BackgroundResource {
    * an input for future ImportTaxonomies calls.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (PolicyTagManagerSerializationClient policyTagManagerSerializationClient =
+   *     PolicyTagManagerSerializationClient.create()) {
+   *   ExportTaxonomiesRequest request =
+   *       ExportTaxonomiesRequest.newBuilder()
+   *           .setParent(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+   *           .addAllTaxonomies(new ArrayList<String>())
+   *           .build();
+   *   ApiFuture<ExportTaxonomiesResponse> future =
+   *       policyTagManagerSerializationClient.exportTaxonomiesCallable().futureCall(request);
+   *   // Do something.
+   *   ExportTaxonomiesResponse response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<ExportTaxonomiesRequest, ExportTaxonomiesResponse>
       exportTaxonomiesCallable() {

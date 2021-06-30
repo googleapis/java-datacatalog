@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -215,9 +215,9 @@ public class TagTemplateName implements ResourceName {
     }
 
     private Builder(TagTemplateName tagTemplateName) {
-      project = tagTemplateName.project;
-      location = tagTemplateName.location;
-      tagTemplate = tagTemplateName.tagTemplate;
+      this.project = tagTemplateName.project;
+      this.location = tagTemplateName.location;
+      this.tagTemplate = tagTemplateName.tagTemplate;
     }
 
     public TagTemplateName build() {

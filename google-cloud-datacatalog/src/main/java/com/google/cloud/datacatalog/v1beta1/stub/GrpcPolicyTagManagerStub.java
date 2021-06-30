@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.google.cloud.datacatalog.v1beta1.stub;
 import static com.google.cloud.datacatalog.v1beta1.PolicyTagManagerClient.ListPolicyTagsPagedResponse;
 import static com.google.cloud.datacatalog.v1beta1.PolicyTagManagerClient.ListTaxonomiesPagedResponse;
 
+import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
 import com.google.api.gax.core.BackgroundResourceAggregation;
 import com.google.api.gax.grpc.GrpcCallSettings;
@@ -61,6 +62,7 @@ import javax.annotation.Generated;
  *
  * <p>This class is for advanced usage and reflects the underlying API directly.
  */
+@BetaApi
 @Generated("by gapic-generator-java")
 public class GrpcPolicyTagManagerStub extends PolicyTagManagerStub {
   private static final MethodDescriptor<CreateTaxonomyRequest, Taxonomy>
@@ -485,64 +487,79 @@ public class GrpcPolicyTagManagerStub extends PolicyTagManagerStub {
     return operationsStub;
   }
 
+  @Override
   public UnaryCallable<CreateTaxonomyRequest, Taxonomy> createTaxonomyCallable() {
     return createTaxonomyCallable;
   }
 
+  @Override
   public UnaryCallable<DeleteTaxonomyRequest, Empty> deleteTaxonomyCallable() {
     return deleteTaxonomyCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateTaxonomyRequest, Taxonomy> updateTaxonomyCallable() {
     return updateTaxonomyCallable;
   }
 
+  @Override
   public UnaryCallable<ListTaxonomiesRequest, ListTaxonomiesResponse> listTaxonomiesCallable() {
     return listTaxonomiesCallable;
   }
 
+  @Override
   public UnaryCallable<ListTaxonomiesRequest, ListTaxonomiesPagedResponse>
       listTaxonomiesPagedCallable() {
     return listTaxonomiesPagedCallable;
   }
 
+  @Override
   public UnaryCallable<GetTaxonomyRequest, Taxonomy> getTaxonomyCallable() {
     return getTaxonomyCallable;
   }
 
+  @Override
   public UnaryCallable<CreatePolicyTagRequest, PolicyTag> createPolicyTagCallable() {
     return createPolicyTagCallable;
   }
 
+  @Override
   public UnaryCallable<DeletePolicyTagRequest, Empty> deletePolicyTagCallable() {
     return deletePolicyTagCallable;
   }
 
+  @Override
   public UnaryCallable<UpdatePolicyTagRequest, PolicyTag> updatePolicyTagCallable() {
     return updatePolicyTagCallable;
   }
 
+  @Override
   public UnaryCallable<ListPolicyTagsRequest, ListPolicyTagsResponse> listPolicyTagsCallable() {
     return listPolicyTagsCallable;
   }
 
+  @Override
   public UnaryCallable<ListPolicyTagsRequest, ListPolicyTagsPagedResponse>
       listPolicyTagsPagedCallable() {
     return listPolicyTagsPagedCallable;
   }
 
+  @Override
   public UnaryCallable<GetPolicyTagRequest, PolicyTag> getPolicyTagCallable() {
     return getPolicyTagCallable;
   }
 
+  @Override
   public UnaryCallable<GetIamPolicyRequest, Policy> getIamPolicyCallable() {
     return getIamPolicyCallable;
   }
 
+  @Override
   public UnaryCallable<SetIamPolicyRequest, Policy> setIamPolicyCallable() {
     return setIamPolicyCallable;
   }
 
+  @Override
   public UnaryCallable<TestIamPermissionsRequest, TestIamPermissionsResponse>
       testIamPermissionsCallable() {
     return testIamPermissionsCallable;

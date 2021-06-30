@@ -83,6 +83,13 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
               targetName_ = s;
               break;
             }
+          case 42:
+            {
+              java.lang.String s = input.readStringRequireUtf8();
+              targetNameCase_ = 5;
+              targetName_ = s;
+              break;
+            }
           default:
             {
               if (!parseUnknownField(input, unknownFields, extensionRegistry, tag)) {
@@ -126,6 +133,7 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     LINKED_RESOURCE(1),
     SQL_RESOURCE(3),
+    FULLY_QUALIFIED_NAME(5),
     TARGETNAME_NOT_SET(0);
     private final int value;
 
@@ -148,6 +156,8 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
           return LINKED_RESOURCE;
         case 3:
           return SQL_RESOURCE;
+        case 5:
+          return FULLY_QUALIFIED_NAME;
         case 0:
           return TARGETNAME_NOT_SET;
         default:
@@ -165,6 +175,26 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
   }
 
   public static final int LINKED_RESOURCE_FIELD_NUMBER = 1;
+  /**
+   *
+   *
+   * <pre>
+   * The full name of the Google Cloud Platform resource the Data Catalog
+   * entry represents. See:
+   * https://cloud.google.com/apis/design/resource_names#full_resource_name.
+   * Full names are case-sensitive.
+   * Examples:
+   *  * //bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId
+   *  * //pubsub.googleapis.com/projects/projectId/topics/topicId
+   * </pre>
+   *
+   * <code>string linked_resource = 1;</code>
+   *
+   * @return Whether the linkedResource field is set.
+   */
+  public boolean hasLinkedResource() {
+    return targetNameCase_ == 1;
+  }
   /**
    *
    *
@@ -244,7 +274,29 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
    *   * `bigquery.table.project_id.dataset_id.table_id`
    *   * `bigquery.dataset.project_id.dataset_id`
    *   * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
-   * `*_id`s shoud satisfy the standard SQL rules for identifiers.
+   * `*_id`s should satisfy the standard SQL rules for identifiers.
+   * https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
+   * </pre>
+   *
+   * <code>string sql_resource = 3;</code>
+   *
+   * @return Whether the sqlResource field is set.
+   */
+  public boolean hasSqlResource() {
+    return targetNameCase_ == 3;
+  }
+  /**
+   *
+   *
+   * <pre>
+   * The SQL name of the entry. SQL names are case-sensitive.
+   * Examples:
+   *   * `pubsub.project_id.topic_id`
+   *   * ``pubsub.project_id.`topic.id.with.dots` ``
+   *   * `bigquery.table.project_id.dataset_id.table_id`
+   *   * `bigquery.dataset.project_id.dataset_id`
+   *   * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
+   * `*_id`s should satisfy the standard SQL rules for identifiers.
    * https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
    * </pre>
    *
@@ -279,7 +331,7 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
    *   * `bigquery.table.project_id.dataset_id.table_id`
    *   * `bigquery.dataset.project_id.dataset_id`
    *   * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
-   * `*_id`s shoud satisfy the standard SQL rules for identifiers.
+   * `*_id`s should satisfy the standard SQL rules for identifiers.
    * https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
    * </pre>
    *
@@ -296,6 +348,97 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
       com.google.protobuf.ByteString b =
           com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
       if (targetNameCase_ == 3) {
+        targetName_ = b;
+      }
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int FULLY_QUALIFIED_NAME_FIELD_NUMBER = 5;
+  /**
+   *
+   *
+   * <pre>
+   * Fully qualified name (FQN) of the resource.
+   * FQNs take two forms:
+   * * For non-regionalized resources:
+   *   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+   * * For regionalized resources:
+   *   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+   * Example for a DPMS table:
+   * `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+   * </pre>
+   *
+   * <code>string fully_qualified_name = 5;</code>
+   *
+   * @return Whether the fullyQualifiedName field is set.
+   */
+  public boolean hasFullyQualifiedName() {
+    return targetNameCase_ == 5;
+  }
+  /**
+   *
+   *
+   * <pre>
+   * Fully qualified name (FQN) of the resource.
+   * FQNs take two forms:
+   * * For non-regionalized resources:
+   *   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+   * * For regionalized resources:
+   *   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+   * Example for a DPMS table:
+   * `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+   * </pre>
+   *
+   * <code>string fully_qualified_name = 5;</code>
+   *
+   * @return The fullyQualifiedName.
+   */
+  public java.lang.String getFullyQualifiedName() {
+    java.lang.Object ref = "";
+    if (targetNameCase_ == 5) {
+      ref = targetName_;
+    }
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      if (targetNameCase_ == 5) {
+        targetName_ = s;
+      }
+      return s;
+    }
+  }
+  /**
+   *
+   *
+   * <pre>
+   * Fully qualified name (FQN) of the resource.
+   * FQNs take two forms:
+   * * For non-regionalized resources:
+   *   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+   * * For regionalized resources:
+   *   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+   * Example for a DPMS table:
+   * `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+   * </pre>
+   *
+   * <code>string fully_qualified_name = 5;</code>
+   *
+   * @return The bytes for fullyQualifiedName.
+   */
+  public com.google.protobuf.ByteString getFullyQualifiedNameBytes() {
+    java.lang.Object ref = "";
+    if (targetNameCase_ == 5) {
+      ref = targetName_;
+    }
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b =
+          com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
+      if (targetNameCase_ == 5) {
         targetName_ = b;
       }
       return b;
@@ -324,6 +467,9 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
     if (targetNameCase_ == 3) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, targetName_);
     }
+    if (targetNameCase_ == 5) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, targetName_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -338,6 +484,9 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
     }
     if (targetNameCase_ == 3) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, targetName_);
+    }
+    if (targetNameCase_ == 5) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, targetName_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -363,6 +512,9 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
       case 3:
         if (!getSqlResource().equals(other.getSqlResource())) return false;
         break;
+      case 5:
+        if (!getFullyQualifiedName().equals(other.getFullyQualifiedName())) return false;
+        break;
       case 0:
       default:
     }
@@ -385,6 +537,10 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
       case 3:
         hash = (37 * hash) + SQL_RESOURCE_FIELD_NUMBER;
         hash = (53 * hash) + getSqlResource().hashCode();
+        break;
+      case 5:
+        hash = (37 * hash) + FULLY_QUALIFIED_NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getFullyQualifiedName().hashCode();
         break;
       case 0:
       default:
@@ -570,6 +726,9 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
       if (targetNameCase_ == 3) {
         result.targetName_ = targetName_;
       }
+      if (targetNameCase_ == 5) {
+        result.targetName_ = targetName_;
+      }
       result.targetNameCase_ = targetNameCase_;
       onBuilt();
       return result;
@@ -636,6 +795,13 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
             onChanged();
             break;
           }
+        case FULLY_QUALIFIED_NAME:
+          {
+            targetNameCase_ = 5;
+            targetName_ = other.targetName_;
+            onChanged();
+            break;
+          }
         case TARGETNAME_NOT_SET:
           {
             break;
@@ -685,6 +851,27 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
       return this;
     }
 
+    /**
+     *
+     *
+     * <pre>
+     * The full name of the Google Cloud Platform resource the Data Catalog
+     * entry represents. See:
+     * https://cloud.google.com/apis/design/resource_names#full_resource_name.
+     * Full names are case-sensitive.
+     * Examples:
+     *  * //bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId
+     *  * //pubsub.googleapis.com/projects/projectId/topics/topicId
+     * </pre>
+     *
+     * <code>string linked_resource = 1;</code>
+     *
+     * @return Whether the linkedResource field is set.
+     */
+    @java.lang.Override
+    public boolean hasLinkedResource() {
+      return targetNameCase_ == 1;
+    }
     /**
      *
      *
@@ -845,7 +1032,30 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
      *   * `bigquery.table.project_id.dataset_id.table_id`
      *   * `bigquery.dataset.project_id.dataset_id`
      *   * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
-     * `*_id`s shoud satisfy the standard SQL rules for identifiers.
+     * `*_id`s should satisfy the standard SQL rules for identifiers.
+     * https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
+     * </pre>
+     *
+     * <code>string sql_resource = 3;</code>
+     *
+     * @return Whether the sqlResource field is set.
+     */
+    @java.lang.Override
+    public boolean hasSqlResource() {
+      return targetNameCase_ == 3;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * The SQL name of the entry. SQL names are case-sensitive.
+     * Examples:
+     *   * `pubsub.project_id.topic_id`
+     *   * ``pubsub.project_id.`topic.id.with.dots` ``
+     *   * `bigquery.table.project_id.dataset_id.table_id`
+     *   * `bigquery.dataset.project_id.dataset_id`
+     *   * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
+     * `*_id`s should satisfy the standard SQL rules for identifiers.
      * https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
      * </pre>
      *
@@ -881,7 +1091,7 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
      *   * `bigquery.table.project_id.dataset_id.table_id`
      *   * `bigquery.dataset.project_id.dataset_id`
      *   * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
-     * `*_id`s shoud satisfy the standard SQL rules for identifiers.
+     * `*_id`s should satisfy the standard SQL rules for identifiers.
      * https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
      * </pre>
      *
@@ -917,7 +1127,7 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
      *   * `bigquery.table.project_id.dataset_id.table_id`
      *   * `bigquery.dataset.project_id.dataset_id`
      *   * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
-     * `*_id`s shoud satisfy the standard SQL rules for identifiers.
+     * `*_id`s should satisfy the standard SQL rules for identifiers.
      * https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
      * </pre>
      *
@@ -946,7 +1156,7 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
      *   * `bigquery.table.project_id.dataset_id.table_id`
      *   * `bigquery.dataset.project_id.dataset_id`
      *   * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
-     * `*_id`s shoud satisfy the standard SQL rules for identifiers.
+     * `*_id`s should satisfy the standard SQL rules for identifiers.
      * https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
      * </pre>
      *
@@ -973,7 +1183,7 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
      *   * `bigquery.table.project_id.dataset_id.table_id`
      *   * `bigquery.dataset.project_id.dataset_id`
      *   * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
-     * `*_id`s shoud satisfy the standard SQL rules for identifiers.
+     * `*_id`s should satisfy the standard SQL rules for identifiers.
      * https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
      * </pre>
      *
@@ -988,6 +1198,182 @@ public final class LookupEntryRequest extends com.google.protobuf.GeneratedMessa
       }
       checkByteStringIsUtf8(value);
       targetNameCase_ = 3;
+      targetName_ = value;
+      onChanged();
+      return this;
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * Fully qualified name (FQN) of the resource.
+     * FQNs take two forms:
+     * * For non-regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * * For regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * Example for a DPMS table:
+     * `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+     * </pre>
+     *
+     * <code>string fully_qualified_name = 5;</code>
+     *
+     * @return Whether the fullyQualifiedName field is set.
+     */
+    @java.lang.Override
+    public boolean hasFullyQualifiedName() {
+      return targetNameCase_ == 5;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Fully qualified name (FQN) of the resource.
+     * FQNs take two forms:
+     * * For non-regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * * For regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * Example for a DPMS table:
+     * `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+     * </pre>
+     *
+     * <code>string fully_qualified_name = 5;</code>
+     *
+     * @return The fullyQualifiedName.
+     */
+    @java.lang.Override
+    public java.lang.String getFullyQualifiedName() {
+      java.lang.Object ref = "";
+      if (targetNameCase_ == 5) {
+        ref = targetName_;
+      }
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (targetNameCase_ == 5) {
+          targetName_ = s;
+        }
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Fully qualified name (FQN) of the resource.
+     * FQNs take two forms:
+     * * For non-regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * * For regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * Example for a DPMS table:
+     * `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+     * </pre>
+     *
+     * <code>string fully_qualified_name = 5;</code>
+     *
+     * @return The bytes for fullyQualifiedName.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString getFullyQualifiedNameBytes() {
+      java.lang.Object ref = "";
+      if (targetNameCase_ == 5) {
+        ref = targetName_;
+      }
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
+            com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
+        if (targetNameCase_ == 5) {
+          targetName_ = b;
+        }
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Fully qualified name (FQN) of the resource.
+     * FQNs take two forms:
+     * * For non-regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * * For regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * Example for a DPMS table:
+     * `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+     * </pre>
+     *
+     * <code>string fully_qualified_name = 5;</code>
+     *
+     * @param value The fullyQualifiedName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFullyQualifiedName(java.lang.String value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      targetNameCase_ = 5;
+      targetName_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Fully qualified name (FQN) of the resource.
+     * FQNs take two forms:
+     * * For non-regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * * For regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * Example for a DPMS table:
+     * `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+     * </pre>
+     *
+     * <code>string fully_qualified_name = 5;</code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearFullyQualifiedName() {
+      if (targetNameCase_ == 5) {
+        targetNameCase_ = 0;
+        targetName_ = null;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Fully qualified name (FQN) of the resource.
+     * FQNs take two forms:
+     * * For non-regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * * For regionalized resources:
+     *   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+     * Example for a DPMS table:
+     * `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+     * </pre>
+     *
+     * <code>string fully_qualified_name = 5;</code>
+     *
+     * @param value The bytes for fullyQualifiedName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFullyQualifiedNameBytes(com.google.protobuf.ByteString value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      checkByteStringIsUtf8(value);
+      targetNameCase_ = 5;
       targetName_ = value;
       onChanged();
       return this;

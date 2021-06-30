@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@ import com.google.cloud.datacatalog.v1.ListEntryGroupsResponse;
 import com.google.cloud.datacatalog.v1.ListTagsRequest;
 import com.google.cloud.datacatalog.v1.ListTagsResponse;
 import com.google.cloud.datacatalog.v1.LookupEntryRequest;
+import com.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest;
 import com.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest;
 import com.google.cloud.datacatalog.v1.SearchCatalogRequest;
 import com.google.cloud.datacatalog.v1.SearchCatalogResponse;
@@ -70,7 +71,7 @@ import javax.annotation.Generated;
  *
  * <p>This class is for advanced usage and reflects the underlying API directly.
  */
-@Generated("by gapic-generator")
+@Generated("by gapic-generator-java")
 public abstract class DataCatalogStub implements BackgroundResource {
 
   public UnaryCallable<SearchCatalogRequest, SearchCatalogPagedResponse>
@@ -164,6 +165,12 @@ public abstract class DataCatalogStub implements BackgroundResource {
   public UnaryCallable<RenameTagTemplateFieldRequest, TagTemplateField>
       renameTagTemplateFieldCallable() {
     throw new UnsupportedOperationException("Not implemented: renameTagTemplateFieldCallable()");
+  }
+
+  public UnaryCallable<RenameTagTemplateFieldEnumValueRequest, TagTemplateField>
+      renameTagTemplateFieldEnumValueCallable() {
+    throw new UnsupportedOperationException(
+        "Not implemented: renameTagTemplateFieldEnumValueCallable()");
   }
 
   public UnaryCallable<DeleteTagTemplateFieldRequest, Empty> deleteTagTemplateFieldCallable() {

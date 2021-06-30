@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -246,10 +246,10 @@ public class EntryName implements ResourceName {
     }
 
     private Builder(EntryName entryName) {
-      project = entryName.project;
-      location = entryName.location;
-      entryGroup = entryName.entryGroup;
-      entry = entryName.entry;
+      this.project = entryName.project;
+      this.location = entryName.location;
+      this.entryGroup = entryName.entryGroup;
+      this.entry = entryName.entry;
     }
 
     public EntryName build() {

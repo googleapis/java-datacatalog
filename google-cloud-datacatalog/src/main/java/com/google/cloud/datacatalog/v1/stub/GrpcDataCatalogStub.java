@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,6 +50,7 @@ import com.google.cloud.datacatalog.v1.ListEntryGroupsResponse;
 import com.google.cloud.datacatalog.v1.ListTagsRequest;
 import com.google.cloud.datacatalog.v1.ListTagsResponse;
 import com.google.cloud.datacatalog.v1.LookupEntryRequest;
+import com.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest;
 import com.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest;
 import com.google.cloud.datacatalog.v1.SearchCatalogRequest;
 import com.google.cloud.datacatalog.v1.SearchCatalogResponse;
@@ -266,6 +267,18 @@ public class GrpcDataCatalogStub extends DataCatalogStub {
               .setResponseMarshaller(ProtoUtils.marshaller(TagTemplateField.getDefaultInstance()))
               .build();
 
+  private static final MethodDescriptor<RenameTagTemplateFieldEnumValueRequest, TagTemplateField>
+      renameTagTemplateFieldEnumValueMethodDescriptor =
+          MethodDescriptor.<RenameTagTemplateFieldEnumValueRequest, TagTemplateField>newBuilder()
+              .setType(MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(
+                  "google.cloud.datacatalog.v1.DataCatalog/RenameTagTemplateFieldEnumValue")
+              .setRequestMarshaller(
+                  ProtoUtils.marshaller(
+                      RenameTagTemplateFieldEnumValueRequest.getDefaultInstance()))
+              .setResponseMarshaller(ProtoUtils.marshaller(TagTemplateField.getDefaultInstance()))
+              .build();
+
   private static final MethodDescriptor<DeleteTagTemplateFieldRequest, Empty>
       deleteTagTemplateFieldMethodDescriptor =
           MethodDescriptor.<DeleteTagTemplateFieldRequest, Empty>newBuilder()
@@ -365,6 +378,8 @@ public class GrpcDataCatalogStub extends DataCatalogStub {
       updateTagTemplateFieldCallable;
   private final UnaryCallable<RenameTagTemplateFieldRequest, TagTemplateField>
       renameTagTemplateFieldCallable;
+  private final UnaryCallable<RenameTagTemplateFieldEnumValueRequest, TagTemplateField>
+      renameTagTemplateFieldEnumValueCallable;
   private final UnaryCallable<DeleteTagTemplateFieldRequest, Empty> deleteTagTemplateFieldCallable;
   private final UnaryCallable<CreateTagRequest, Tag> createTagCallable;
   private final UnaryCallable<UpdateTagRequest, Tag> updateTagCallable;
@@ -653,6 +668,21 @@ public class GrpcDataCatalogStub extends DataCatalogStub {
                       }
                     })
                 .build();
+    GrpcCallSettings<RenameTagTemplateFieldEnumValueRequest, TagTemplateField>
+        renameTagTemplateFieldEnumValueTransportSettings =
+            GrpcCallSettings.<RenameTagTemplateFieldEnumValueRequest, TagTemplateField>newBuilder()
+                .setMethodDescriptor(renameTagTemplateFieldEnumValueMethodDescriptor)
+                .setParamsExtractor(
+                    new RequestParamsExtractor<RenameTagTemplateFieldEnumValueRequest>() {
+                      @Override
+                      public Map<String, String> extract(
+                          RenameTagTemplateFieldEnumValueRequest request) {
+                        ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+                        params.put("name", String.valueOf(request.getName()));
+                        return params.build();
+                      }
+                    })
+                .build();
     GrpcCallSettings<DeleteTagTemplateFieldRequest, Empty> deleteTagTemplateFieldTransportSettings =
         GrpcCallSettings.<DeleteTagTemplateFieldRequest, Empty>newBuilder()
             .setMethodDescriptor(deleteTagTemplateFieldMethodDescriptor)
@@ -837,6 +867,11 @@ public class GrpcDataCatalogStub extends DataCatalogStub {
             renameTagTemplateFieldTransportSettings,
             settings.renameTagTemplateFieldSettings(),
             clientContext);
+    this.renameTagTemplateFieldEnumValueCallable =
+        callableFactory.createUnaryCallable(
+            renameTagTemplateFieldEnumValueTransportSettings,
+            settings.renameTagTemplateFieldEnumValueSettings(),
+            clientContext);
     this.deleteTagTemplateFieldCallable =
         callableFactory.createUnaryCallable(
             deleteTagTemplateFieldTransportSettings,
@@ -877,131 +912,168 @@ public class GrpcDataCatalogStub extends DataCatalogStub {
     return operationsStub;
   }
 
+  @Override
   public UnaryCallable<SearchCatalogRequest, SearchCatalogResponse> searchCatalogCallable() {
     return searchCatalogCallable;
   }
 
+  @Override
   public UnaryCallable<SearchCatalogRequest, SearchCatalogPagedResponse>
       searchCatalogPagedCallable() {
     return searchCatalogPagedCallable;
   }
 
+  @Override
   public UnaryCallable<CreateEntryGroupRequest, EntryGroup> createEntryGroupCallable() {
     return createEntryGroupCallable;
   }
 
+  @Override
   public UnaryCallable<GetEntryGroupRequest, EntryGroup> getEntryGroupCallable() {
     return getEntryGroupCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateEntryGroupRequest, EntryGroup> updateEntryGroupCallable() {
     return updateEntryGroupCallable;
   }
 
+  @Override
   public UnaryCallable<DeleteEntryGroupRequest, Empty> deleteEntryGroupCallable() {
     return deleteEntryGroupCallable;
   }
 
+  @Override
   public UnaryCallable<ListEntryGroupsRequest, ListEntryGroupsResponse> listEntryGroupsCallable() {
     return listEntryGroupsCallable;
   }
 
+  @Override
   public UnaryCallable<ListEntryGroupsRequest, ListEntryGroupsPagedResponse>
       listEntryGroupsPagedCallable() {
     return listEntryGroupsPagedCallable;
   }
 
+  @Override
   public UnaryCallable<CreateEntryRequest, Entry> createEntryCallable() {
     return createEntryCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateEntryRequest, Entry> updateEntryCallable() {
     return updateEntryCallable;
   }
 
+  @Override
   public UnaryCallable<DeleteEntryRequest, Empty> deleteEntryCallable() {
     return deleteEntryCallable;
   }
 
+  @Override
   public UnaryCallable<GetEntryRequest, Entry> getEntryCallable() {
     return getEntryCallable;
   }
 
+  @Override
   public UnaryCallable<LookupEntryRequest, Entry> lookupEntryCallable() {
     return lookupEntryCallable;
   }
 
+  @Override
   public UnaryCallable<ListEntriesRequest, ListEntriesResponse> listEntriesCallable() {
     return listEntriesCallable;
   }
 
+  @Override
   public UnaryCallable<ListEntriesRequest, ListEntriesPagedResponse> listEntriesPagedCallable() {
     return listEntriesPagedCallable;
   }
 
+  @Override
   public UnaryCallable<CreateTagTemplateRequest, TagTemplate> createTagTemplateCallable() {
     return createTagTemplateCallable;
   }
 
+  @Override
   public UnaryCallable<GetTagTemplateRequest, TagTemplate> getTagTemplateCallable() {
     return getTagTemplateCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateTagTemplateRequest, TagTemplate> updateTagTemplateCallable() {
     return updateTagTemplateCallable;
   }
 
+  @Override
   public UnaryCallable<DeleteTagTemplateRequest, Empty> deleteTagTemplateCallable() {
     return deleteTagTemplateCallable;
   }
 
+  @Override
   public UnaryCallable<CreateTagTemplateFieldRequest, TagTemplateField>
       createTagTemplateFieldCallable() {
     return createTagTemplateFieldCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateTagTemplateFieldRequest, TagTemplateField>
       updateTagTemplateFieldCallable() {
     return updateTagTemplateFieldCallable;
   }
 
+  @Override
   public UnaryCallable<RenameTagTemplateFieldRequest, TagTemplateField>
       renameTagTemplateFieldCallable() {
     return renameTagTemplateFieldCallable;
   }
 
+  @Override
+  public UnaryCallable<RenameTagTemplateFieldEnumValueRequest, TagTemplateField>
+      renameTagTemplateFieldEnumValueCallable() {
+    return renameTagTemplateFieldEnumValueCallable;
+  }
+
+  @Override
   public UnaryCallable<DeleteTagTemplateFieldRequest, Empty> deleteTagTemplateFieldCallable() {
     return deleteTagTemplateFieldCallable;
   }
 
+  @Override
   public UnaryCallable<CreateTagRequest, Tag> createTagCallable() {
     return createTagCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateTagRequest, Tag> updateTagCallable() {
     return updateTagCallable;
   }
 
+  @Override
   public UnaryCallable<DeleteTagRequest, Empty> deleteTagCallable() {
     return deleteTagCallable;
   }
 
+  @Override
   public UnaryCallable<ListTagsRequest, ListTagsResponse> listTagsCallable() {
     return listTagsCallable;
   }
 
+  @Override
   public UnaryCallable<ListTagsRequest, ListTagsPagedResponse> listTagsPagedCallable() {
     return listTagsPagedCallable;
   }
 
+  @Override
   public UnaryCallable<SetIamPolicyRequest, Policy> setIamPolicyCallable() {
     return setIamPolicyCallable;
   }
 
+  @Override
   public UnaryCallable<GetIamPolicyRequest, Policy> getIamPolicyCallable() {
     return getIamPolicyCallable;
   }
 
+  @Override
   public UnaryCallable<TestIamPermissionsRequest, TestIamPermissionsResponse>
       testIamPermissionsCallable() {
     return testIamPermissionsCallable;

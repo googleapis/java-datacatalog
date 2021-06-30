@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -247,10 +247,10 @@ public class TagTemplateFieldName implements ResourceName {
     }
 
     private Builder(TagTemplateFieldName tagTemplateFieldName) {
-      project = tagTemplateFieldName.project;
-      location = tagTemplateFieldName.location;
-      tagTemplate = tagTemplateFieldName.tagTemplate;
-      field = tagTemplateFieldName.field;
+      this.project = tagTemplateFieldName.project;
+      this.location = tagTemplateFieldName.location;
+      this.tagTemplate = tagTemplateFieldName.tagTemplate;
+      this.field = tagTemplateFieldName.field;
     }
 
     public TagTemplateFieldName build() {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google Inc.
+ * Copyright 2020 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,39 +16,37 @@
 
 package com.example.datacatalog;
 
-// [START datacatalog_create_entry_group_tag]
+// [START data_catalog_create_entry_group]
 import com.google.cloud.datacatalog.v1.CreateEntryGroupRequest;
 import com.google.cloud.datacatalog.v1.DataCatalogClient;
 import com.google.cloud.datacatalog.v1.EntryGroup;
 import com.google.cloud.datacatalog.v1.LocationName;
 import java.io.IOException;
 
-// Sample to create entry group
+// Sample to create an entry group
 public class CreateEntryGroup {
 
   public static void main(String[] args) throws IOException {
     // TODO(developer): Replace these variables before running the sample.
-    String projectId = "my-project-id";
-    String entryGroupId = "fileset_entry_group";
-    createEntryGroup(projectId, entryGroupId);
+    String projectId = "MY_PROJECT_ID";
+    String location = "us-central1";
+    String entryGroupId = "MY_ENTRY_GROUP_ID";
+    createEntryGroup(projectId, location, entryGroupId);
   }
 
-  public static void createEntryGroup(String projectId, String entryGroupId) throws IOException {
-    // Currently, Data Catalog stores metadata in the us-central1 region.
-    String location = "us-central1";
-
+  // Create Entry Group.
+  public static void createEntryGroup(String projectId, String location, String entryGroupId)
+      throws IOException {
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.
     try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
-      // Construct the EntryGroup for the EntryGroup request.
       EntryGroup entryGroup =
           EntryGroup.newBuilder()
-              .setDisplayName("My Fileset Entry Group")
+              .setDisplayName("MY Entry Group")
               .setDescription("This Entry Group consists of ....")
               .build();
 
-      // Construct the EntryGroup request to be sent by the client.
       CreateEntryGroupRequest entryGroupRequest =
           CreateEntryGroupRequest.newBuilder()
               .setParent(LocationName.of(projectId, location).toString())
@@ -56,10 +54,9 @@ public class CreateEntryGroup {
               .setEntryGroup(entryGroup)
               .build();
 
-      // Use the client to send the API request.
-      EntryGroup entryGroupResponse = dataCatalogClient.createEntryGroup(entryGroupRequest);
-      System.out.printf("Entry Group created with name: %s", entryGroupResponse.getName());
+      dataCatalogClient.createEntryGroup(entryGroupRequest);
+      System.out.println("Entry Group created successfully");
     }
   }
 }
-// [END datacatalog_create_entry_group_tag]
+// [END data_catalog_create_entry_group]

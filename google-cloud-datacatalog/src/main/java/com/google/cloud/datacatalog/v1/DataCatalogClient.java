@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,6 +50,15 @@ import javax.annotation.Generated;
  * <p>This class provides the ability to make remote calls to the backing service through method
  * calls that map to API methods. Sample code to get started:
  *
+ * <pre>{@code
+ * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+ *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
+ *   String entryGroupId = "entryGroupId1228924712";
+ *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
+ *   EntryGroup response = dataCatalogClient.createEntryGroup(parent, entryGroupId, entryGroup);
+ * }
+ * }</pre>
+ *
  * <p>Note: close() needs to be called on the DataCatalogClient object to clean up resources such as
  * threads. In the example above, try-with-resources is used, which automatically calls close().
  *
@@ -96,8 +105,7 @@ import javax.annotation.Generated;
  *
  * <p>Please refer to the GitHub repository's samples for more quickstart code snippets.
  */
-@BetaApi
-@Generated("by gapic-generator")
+@Generated("by gapic-generator-java")
 public class DataCatalogClient implements BackgroundResource {
   private final DataCatalogSettings settings;
   private final DataCatalogStub stub;
@@ -155,7 +163,7 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <p>This is a custom method (https://cloud.google.com/apis/design/custom_methods) and does not
    * return the complete resource, only the resource identifier and high level fields. Clients can
-   * subsequentally call `Get` methods.
+   * subsequently call `Get` methods.
    *
    * <p>Note that Data Catalog search queries do not guarantee full recall. Query results that match
    * your query may not be returned, even in subsequent result pages. Also note that results
@@ -165,10 +173,24 @@ public class DataCatalogClient implements BackgroundResource {
    * Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference) for more
    * information.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   SearchCatalogRequest.Scope scope = SearchCatalogRequest.Scope.newBuilder().build();
+   *   String query = "query107944136";
+   *   for (SearchCatalogResult element :
+   *       dataCatalogClient.searchCatalog(scope, query).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
+   *
    * @param scope Required. The scope of this search request. A `scope` that has empty
    *     `include_org_ids`, `include_project_ids` AND false `include_gcp_public_datasets` is
    *     considered invalid. Data Catalog will return an error in such a case.
-   * @param query Required. The query string in search query syntax. The query must be non-empty.
+   * @param query Optional. The query string in search query syntax. An empty query string will
+   *     result in all data assets (in the specified scope) that the user has access to.
    *     <p>Query strings can be simple as "x" or more qualified as:
    *     <ul>
    *       <li>name:x
@@ -194,7 +216,7 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <p>This is a custom method (https://cloud.google.com/apis/design/custom_methods) and does not
    * return the complete resource, only the resource identifier and high level fields. Clients can
-   * subsequentally call `Get` methods.
+   * subsequently call `Get` methods.
    *
    * <p>Note that Data Catalog search queries do not guarantee full recall. Query results that match
    * your query may not be returned, even in subsequent result pages. Also note that results
@@ -203,6 +225,24 @@ public class DataCatalogClient implements BackgroundResource {
    * <p>See [Data Catalog Search
    * Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference) for more
    * information.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   SearchCatalogRequest request =
+   *       SearchCatalogRequest.newBuilder()
+   *           .setScope(SearchCatalogRequest.Scope.newBuilder().build())
+   *           .setQuery("query107944136")
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .setOrderBy("orderBy-1207110587")
+   *           .build();
+   *   for (SearchCatalogResult element : dataCatalogClient.searchCatalog(request).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
    *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -217,7 +257,7 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <p>This is a custom method (https://cloud.google.com/apis/design/custom_methods) and does not
    * return the complete resource, only the resource identifier and high level fields. Clients can
-   * subsequentally call `Get` methods.
+   * subsequently call `Get` methods.
    *
    * <p>Note that Data Catalog search queries do not guarantee full recall. Query results that match
    * your query may not be returned, even in subsequent result pages. Also note that results
@@ -228,6 +268,25 @@ public class DataCatalogClient implements BackgroundResource {
    * information.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   SearchCatalogRequest request =
+   *       SearchCatalogRequest.newBuilder()
+   *           .setScope(SearchCatalogRequest.Scope.newBuilder().build())
+   *           .setQuery("query107944136")
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .setOrderBy("orderBy-1207110587")
+   *           .build();
+   *   ApiFuture<SearchCatalogResult> future =
+   *       dataCatalogClient.searchCatalogPagedCallable().futureCall(request);
+   *   // Do something.
+   *   for (SearchCatalogResult element : future.get().iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
    */
   public final UnaryCallable<SearchCatalogRequest, SearchCatalogPagedResponse>
       searchCatalogPagedCallable() {
@@ -240,7 +299,7 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <p>This is a custom method (https://cloud.google.com/apis/design/custom_methods) and does not
    * return the complete resource, only the resource identifier and high level fields. Clients can
-   * subsequentally call `Get` methods.
+   * subsequently call `Get` methods.
    *
    * <p>Note that Data Catalog search queries do not guarantee full recall. Query results that match
    * your query may not be returned, even in subsequent result pages. Also note that results
@@ -251,6 +310,31 @@ public class DataCatalogClient implements BackgroundResource {
    * information.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   SearchCatalogRequest request =
+   *       SearchCatalogRequest.newBuilder()
+   *           .setScope(SearchCatalogRequest.Scope.newBuilder().build())
+   *           .setQuery("query107944136")
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .setOrderBy("orderBy-1207110587")
+   *           .build();
+   *   while (true) {
+   *     SearchCatalogResponse response = dataCatalogClient.searchCatalogCallable().call(request);
+   *     for (SearchCatalogResult element : response.getResponsesList()) {
+   *       // doThingsWith(element);
+   *     }
+   *     String nextPageToken = response.getNextPageToken();
+   *     if (!Strings.isNullOrEmpty(nextPageToken)) {
+   *       request = request.toBuilder().setPageToken(nextPageToken).build();
+   *     } else {
+   *       break;
+   *     }
+   *   }
+   * }
+   * }</pre>
    */
   public final UnaryCallable<SearchCatalogRequest, SearchCatalogResponse> searchCatalogCallable() {
     return stub.searchCatalogCallable();
@@ -275,15 +359,24 @@ public class DataCatalogClient implements BackgroundResource {
    * (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
-   * @param parent Required. The name of the project this entry group is in. Example:
-   *     <ul>
-   *       <li>projects/{project_id}/locations/{location}
-   *     </ul>
-   *     <p>Note that this EntryGroup and its child resources may not actually be stored in the
-   *     location in this name.
-   * @param entryGroupId Required. The id of the entry group to create. The id must begin with a
-   *     letter or underscore, contain only English letters, numbers and underscores, and be at most
-   *     64 characters.
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
+   *   String entryGroupId = "entryGroupId1228924712";
+   *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
+   *   EntryGroup response = dataCatalogClient.createEntryGroup(parent, entryGroupId, entryGroup);
+   * }
+   * }</pre>
+   *
+   * @param parent Required. The name of the project this entry group belongs to. Example:
+   *     <p>`projects/{project_id}/locations/{location}`
+   *     <p>Note: The entry group itself and its child resources might not be stored in the location
+   *     specified in its name.
+   * @param entryGroupId Required. The ID of the entry group to create.
+   *     <p>The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and must
+   *     start with a letter or underscore. The maximum size is 64 bytes when encoded in UTF-8.
    * @param entryGroup The entry group to create. Defaults to an empty entry group.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -317,15 +410,24 @@ public class DataCatalogClient implements BackgroundResource {
    * (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
-   * @param parent Required. The name of the project this entry group is in. Example:
-   *     <ul>
-   *       <li>projects/{project_id}/locations/{location}
-   *     </ul>
-   *     <p>Note that this EntryGroup and its child resources may not actually be stored in the
-   *     location in this name.
-   * @param entryGroupId Required. The id of the entry group to create. The id must begin with a
-   *     letter or underscore, contain only English letters, numbers and underscores, and be at most
-   *     64 characters.
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString();
+   *   String entryGroupId = "entryGroupId1228924712";
+   *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
+   *   EntryGroup response = dataCatalogClient.createEntryGroup(parent, entryGroupId, entryGroup);
+   * }
+   * }</pre>
+   *
+   * @param parent Required. The name of the project this entry group belongs to. Example:
+   *     <p>`projects/{project_id}/locations/{location}`
+   *     <p>Note: The entry group itself and its child resources might not be stored in the location
+   *     specified in its name.
+   * @param entryGroupId Required. The ID of the entry group to create.
+   *     <p>The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and must
+   *     start with a letter or underscore. The maximum size is 64 bytes when encoded in UTF-8.
    * @param entryGroup The entry group to create. Defaults to an empty entry group.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -359,6 +461,20 @@ public class DataCatalogClient implements BackgroundResource {
    * (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   CreateEntryGroupRequest request =
+   *       CreateEntryGroupRequest.newBuilder()
+   *           .setParent(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setEntryGroupId("entryGroupId1228924712")
+   *           .setEntryGroup(EntryGroup.newBuilder().build())
+   *           .build();
+   *   EntryGroup response = dataCatalogClient.createEntryGroup(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -386,6 +502,21 @@ public class DataCatalogClient implements BackgroundResource {
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   CreateEntryGroupRequest request =
+   *       CreateEntryGroupRequest.newBuilder()
+   *           .setParent(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setEntryGroupId("entryGroupId1228924712")
+   *           .setEntryGroup(EntryGroup.newBuilder().build())
+   *           .build();
+   *   ApiFuture<EntryGroup> future =
+   *       dataCatalogClient.createEntryGroupCallable().futureCall(request);
+   *   // Do something.
+   *   EntryGroup response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<CreateEntryGroupRequest, EntryGroup> createEntryGroupCallable() {
     return stub.createEntryGroupCallable();
@@ -394,6 +525,15 @@ public class DataCatalogClient implements BackgroundResource {
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
    * Gets an EntryGroup.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   EntryGroup response = dataCatalogClient.getEntryGroup(name);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the entry group. For example,
    *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
@@ -409,6 +549,15 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Gets an EntryGroup.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString();
+   *   EntryGroup response = dataCatalogClient.getEntryGroup(name);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the entry group. For example,
    *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -421,6 +570,16 @@ public class DataCatalogClient implements BackgroundResource {
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
    * Gets an EntryGroup.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   FieldMask readMask = FieldMask.newBuilder().build();
+   *   EntryGroup response = dataCatalogClient.getEntryGroup(name, readMask);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the entry group. For example,
    *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
@@ -440,6 +599,16 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Gets an EntryGroup.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString();
+   *   FieldMask readMask = FieldMask.newBuilder().build();
+   *   EntryGroup response = dataCatalogClient.getEntryGroup(name, readMask);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the entry group. For example,
    *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
    * @param readMask The fields to return. If not set or empty, all fields are returned.
@@ -455,6 +624,19 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Gets an EntryGroup.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   GetEntryGroupRequest request =
+   *       GetEntryGroupRequest.newBuilder()
+   *           .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setReadMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   EntryGroup response = dataCatalogClient.getEntryGroup(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -467,6 +649,19 @@ public class DataCatalogClient implements BackgroundResource {
    * Gets an EntryGroup.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   GetEntryGroupRequest request =
+   *       GetEntryGroupRequest.newBuilder()
+   *           .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setReadMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   ApiFuture<EntryGroup> future = dataCatalogClient.getEntryGroupCallable().futureCall(request);
+   *   // Do something.
+   *   EntryGroup response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<GetEntryGroupRequest, EntryGroup> getEntryGroupCallable() {
     return stub.getEntryGroupCallable();
@@ -477,6 +672,15 @@ public class DataCatalogClient implements BackgroundResource {
    * Updates an EntryGroup. The user should enable the Data Catalog API in the project identified by
    * the `entry_group.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
+   *   EntryGroup response = dataCatalogClient.updateEntryGroup(entryGroup);
+   * }
+   * }</pre>
    *
    * @param entryGroup Required. The updated entry group. "name" field must be set.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -493,9 +697,20 @@ public class DataCatalogClient implements BackgroundResource {
    * the `entry_group.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryGroup entryGroup = EntryGroup.newBuilder().build();
+   *   FieldMask updateMask = FieldMask.newBuilder().build();
+   *   EntryGroup response = dataCatalogClient.updateEntryGroup(entryGroup, updateMask);
+   * }
+   * }</pre>
+   *
    * @param entryGroup Required. The updated entry group. "name" field must be set.
-   * @param updateMask The fields to update on the entry group. If absent or empty, all modifiable
-   *     fields are updated.
+   * @param updateMask Names of fields whose values to overwrite on an entry group.
+   *     <p>If this parameter is absent or empty, all modifiable fields are overwritten. If such
+   *     fields are non-required and omitted in the request body, their values are emptied.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final EntryGroup updateEntryGroup(EntryGroup entryGroup, FieldMask updateMask) {
@@ -513,6 +728,19 @@ public class DataCatalogClient implements BackgroundResource {
    * the `entry_group.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   UpdateEntryGroupRequest request =
+   *       UpdateEntryGroupRequest.newBuilder()
+   *           .setEntryGroup(EntryGroup.newBuilder().build())
+   *           .setUpdateMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   EntryGroup response = dataCatalogClient.updateEntryGroup(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -527,6 +755,20 @@ public class DataCatalogClient implements BackgroundResource {
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   UpdateEntryGroupRequest request =
+   *       UpdateEntryGroupRequest.newBuilder()
+   *           .setEntryGroup(EntryGroup.newBuilder().build())
+   *           .setUpdateMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   ApiFuture<EntryGroup> future =
+   *       dataCatalogClient.updateEntryGroupCallable().futureCall(request);
+   *   // Do something.
+   *   EntryGroup response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<UpdateEntryGroupRequest, EntryGroup> updateEntryGroupCallable() {
     return stub.updateEntryGroupCallable();
@@ -538,6 +780,15 @@ public class DataCatalogClient implements BackgroundResource {
    * should enable the Data Catalog API in the project identified by the `name` parameter (see [Data
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryGroupName name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   dataCatalogClient.deleteEntryGroup(name);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the entry group. For example,
    *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
@@ -556,6 +807,15 @@ public class DataCatalogClient implements BackgroundResource {
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString();
+   *   dataCatalogClient.deleteEntryGroup(name);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the entry group. For example,
    *     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -572,6 +832,19 @@ public class DataCatalogClient implements BackgroundResource {
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   DeleteEntryGroupRequest request =
+   *       DeleteEntryGroupRequest.newBuilder()
+   *           .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setForce(true)
+   *           .build();
+   *   dataCatalogClient.deleteEntryGroup(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -587,6 +860,19 @@ public class DataCatalogClient implements BackgroundResource {
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   DeleteEntryGroupRequest request =
+   *       DeleteEntryGroupRequest.newBuilder()
+   *           .setName(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setForce(true)
+   *           .build();
+   *   ApiFuture<Empty> future = dataCatalogClient.deleteEntryGroupCallable().futureCall(request);
+   *   // Do something.
+   *   future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<DeleteEntryGroupRequest, Empty> deleteEntryGroupCallable() {
     return stub.deleteEntryGroupCallable();
@@ -595,6 +881,17 @@ public class DataCatalogClient implements BackgroundResource {
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
    * Lists entry groups.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   for (EntryGroup element : dataCatalogClient.listEntryGroups(parent).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
    *
    * @param parent Required. The name of the location that contains the entry groups, which can be
    *     provided in URL format. Example:
@@ -616,6 +913,17 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Lists entry groups.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString();
+   *   for (EntryGroup element : dataCatalogClient.listEntryGroups(parent).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
+   *
    * @param parent Required. The name of the location that contains the entry groups, which can be
    *     provided in URL format. Example:
    *     <ul>
@@ -633,6 +941,22 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Lists entry groups.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ListEntryGroupsRequest request =
+   *       ListEntryGroupsRequest.newBuilder()
+   *           .setParent(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .build();
+   *   for (EntryGroup element : dataCatalogClient.listEntryGroups(request).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -645,6 +969,23 @@ public class DataCatalogClient implements BackgroundResource {
    * Lists entry groups.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ListEntryGroupsRequest request =
+   *       ListEntryGroupsRequest.newBuilder()
+   *           .setParent(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .build();
+   *   ApiFuture<EntryGroup> future =
+   *       dataCatalogClient.listEntryGroupsPagedCallable().futureCall(request);
+   *   // Do something.
+   *   for (EntryGroup element : future.get().iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
    */
   public final UnaryCallable<ListEntryGroupsRequest, ListEntryGroupsPagedResponse>
       listEntryGroupsPagedCallable() {
@@ -656,6 +997,30 @@ public class DataCatalogClient implements BackgroundResource {
    * Lists entry groups.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ListEntryGroupsRequest request =
+   *       ListEntryGroupsRequest.newBuilder()
+   *           .setParent(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .build();
+   *   while (true) {
+   *     ListEntryGroupsResponse response =
+   *         dataCatalogClient.listEntryGroupsCallable().call(request);
+   *     for (EntryGroup element : response.getResponsesList()) {
+   *       // doThingsWith(element);
+   *     }
+   *     String nextPageToken = response.getNextPageToken();
+   *     if (!Strings.isNullOrEmpty(nextPageToken)) {
+   *       request = request.toBuilder().setPageToken(nextPageToken).build();
+   *     } else {
+   *       break;
+   *     }
+   *   }
+   * }
+   * }</pre>
    */
   public final UnaryCallable<ListEntryGroupsRequest, ListEntryGroupsResponse>
       listEntryGroupsCallable() {
@@ -664,7 +1029,8 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
-   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
+   * Creates an entry. Only entries of types 'FILESET', 'CLUSTER', 'DATA_STREAM' or with a
+   * user-specified type can be created.
    *
    * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
    * (see [Data Catalog Resource Project]
@@ -672,13 +1038,24 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <p>A maximum of 100,000 entries may be created per entry group.
    *
-   * @param parent Required. The name of the entry group this entry is in. Example:
-   *     <ul>
-   *       <li>projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
-   *     </ul>
-   *     <p>Note that this Entry and its child resources may not actually be stored in the location
-   *     in this name.
-   * @param entryId Required. The id of the entry to create.
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   String entryId = "entryId-1591558867";
+   *   Entry entry = Entry.newBuilder().build();
+   *   Entry response = dataCatalogClient.createEntry(parent, entryId, entry);
+   * }
+   * }</pre>
+   *
+   * @param parent Required. The name of the entry group this entry belongs to. Example:
+   *     <p>`projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`
+   *     <p>Note: The entry itself and its child resources might not be stored in the location
+   *     specified in its name.
+   * @param entryId Required. The ID of the entry to create.
+   *     <p>The ID must contain only letters (a-z, A-Z), numbers (0-9), and underscores (_). The
+   *     maximum size is 64 bytes when encoded in UTF-8.
    * @param entry Required. The entry to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -694,7 +1071,8 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
-   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
+   * Creates an entry. Only entries of types 'FILESET', 'CLUSTER', 'DATA_STREAM' or with a
+   * user-specified type can be created.
    *
    * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
    * (see [Data Catalog Resource Project]
@@ -702,13 +1080,24 @@ public class DataCatalogClient implements BackgroundResource {
    *
    * <p>A maximum of 100,000 entries may be created per entry group.
    *
-   * @param parent Required. The name of the entry group this entry is in. Example:
-   *     <ul>
-   *       <li>projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
-   *     </ul>
-   *     <p>Note that this Entry and its child resources may not actually be stored in the location
-   *     in this name.
-   * @param entryId Required. The id of the entry to create.
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString();
+   *   String entryId = "entryId-1591558867";
+   *   Entry entry = Entry.newBuilder().build();
+   *   Entry response = dataCatalogClient.createEntry(parent, entryId, entry);
+   * }
+   * }</pre>
+   *
+   * @param parent Required. The name of the entry group this entry belongs to. Example:
+   *     <p>`projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`
+   *     <p>Note: The entry itself and its child resources might not be stored in the location
+   *     specified in its name.
+   * @param entryId Required. The ID of the entry to create.
+   *     <p>The ID must contain only letters (a-z, A-Z), numbers (0-9), and underscores (_). The
+   *     maximum size is 64 bytes when encoded in UTF-8.
    * @param entry Required. The entry to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -724,13 +1113,28 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
-   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
+   * Creates an entry. Only entries of types 'FILESET', 'CLUSTER', 'DATA_STREAM' or with a
+   * user-specified type can be created.
    *
    * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
    * (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>A maximum of 100,000 entries may be created per entry group.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   CreateEntryRequest request =
+   *       CreateEntryRequest.newBuilder()
+   *           .setParent(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setEntryId("entryId-1591558867")
+   *           .setEntry(Entry.newBuilder().build())
+   *           .build();
+   *   Entry response = dataCatalogClient.createEntry(request);
+   * }
+   * }</pre>
    *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -741,7 +1145,8 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
-   * Creates an entry. Only entries of 'FILESET' type or user-specified type can be created.
+   * Creates an entry. Only entries of types 'FILESET', 'CLUSTER', 'DATA_STREAM' or with a
+   * user-specified type can be created.
    *
    * <p>Users should enable the Data Catalog API in the project identified by the `parent` parameter
    * (see [Data Catalog Resource Project]
@@ -750,6 +1155,20 @@ public class DataCatalogClient implements BackgroundResource {
    * <p>A maximum of 100,000 entries may be created per entry group.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   CreateEntryRequest request =
+   *       CreateEntryRequest.newBuilder()
+   *           .setParent(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setEntryId("entryId-1591558867")
+   *           .setEntry(Entry.newBuilder().build())
+   *           .build();
+   *   ApiFuture<Entry> future = dataCatalogClient.createEntryCallable().futureCall(request);
+   *   // Do something.
+   *   Entry response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<CreateEntryRequest, Entry> createEntryCallable() {
     return stub.createEntryCallable();
@@ -760,6 +1179,15 @@ public class DataCatalogClient implements BackgroundResource {
    * Updates an existing entry. Users should enable the Data Catalog API in the project identified
    * by the `entry.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   Entry entry = Entry.newBuilder().build();
+   *   Entry response = dataCatalogClient.updateEntry(entry);
+   * }
+   * }</pre>
    *
    * @param entry Required. The updated entry. The "name" field must be set.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -775,17 +1203,28 @@ public class DataCatalogClient implements BackgroundResource {
    * by the `entry.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   Entry entry = Entry.newBuilder().build();
+   *   FieldMask updateMask = FieldMask.newBuilder().build();
+   *   Entry response = dataCatalogClient.updateEntry(entry, updateMask);
+   * }
+   * }</pre>
+   *
    * @param entry Required. The updated entry. The "name" field must be set.
-   * @param updateMask The fields to update on the entry. If absent or empty, all modifiable fields
-   *     are updated.
+   * @param updateMask Names of fields whose values to overwrite on an entry.
+   *     <p>If this parameter is absent or empty, all modifiable fields are overwritten. If such
+   *     fields are non-required and omitted in the request body, their values are emptied.
    *     <p>The following fields are modifiable:
    *     <ul>
    *       <li>For entries with type `DATA_STREAM`: &#42; `schema`
-   *       <li>For entries with type `FILESET` &#42; `schema` &#42; `display_name` &#42;
+   *       <li>For entries with type `FILESET`: &#42; `schema` &#42; `display_name` &#42;
    *           `description` &#42; `gcs_fileset_spec` &#42; `gcs_fileset_spec.file_patterns`
-   *       <li>For entries with `user_specified_type` &#42; `schema` &#42; `display_name` &#42;
-   *           `description` &#42; user_specified_type &#42; user_specified_system &#42;
-   *           linked_resource &#42; source_system_timestamps
+   *       <li>For entries with `user_specified_type`: &#42; `schema` &#42; `display_name` &#42;
+   *           `description` &#42; `user_specified_type` &#42; `user_specified_system` &#42;
+   *           `linked_resource` &#42; `source_system_timestamps`
    *     </ul>
    *
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -802,6 +1241,19 @@ public class DataCatalogClient implements BackgroundResource {
    * by the `entry.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   UpdateEntryRequest request =
+   *       UpdateEntryRequest.newBuilder()
+   *           .setEntry(Entry.newBuilder().build())
+   *           .setUpdateMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   Entry response = dataCatalogClient.updateEntry(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -816,6 +1268,19 @@ public class DataCatalogClient implements BackgroundResource {
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   UpdateEntryRequest request =
+   *       UpdateEntryRequest.newBuilder()
+   *           .setEntry(Entry.newBuilder().build())
+   *           .setUpdateMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   ApiFuture<Entry> future = dataCatalogClient.updateEntryCallable().futureCall(request);
+   *   // Do something.
+   *   Entry response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<UpdateEntryRequest, Entry> updateEntryCallable() {
     return stub.updateEntryCallable();
@@ -828,6 +1293,15 @@ public class DataCatalogClient implements BackgroundResource {
    * should enable the Data Catalog API in the project identified by the `name` parameter (see [Data
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   dataCatalogClient.deleteEntry(name);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the entry. Example:
    *     <ul>
@@ -850,6 +1324,15 @@ public class DataCatalogClient implements BackgroundResource {
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]").toString();
+   *   dataCatalogClient.deleteEntry(name);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the entry. Example:
    *     <ul>
    *       <li>projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
@@ -870,6 +1353,19 @@ public class DataCatalogClient implements BackgroundResource {
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   DeleteEntryRequest request =
+   *       DeleteEntryRequest.newBuilder()
+   *           .setName(
+   *               EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]").toString())
+   *           .build();
+   *   dataCatalogClient.deleteEntry(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -886,6 +1382,19 @@ public class DataCatalogClient implements BackgroundResource {
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   DeleteEntryRequest request =
+   *       DeleteEntryRequest.newBuilder()
+   *           .setName(
+   *               EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]").toString())
+   *           .build();
+   *   ApiFuture<Empty> future = dataCatalogClient.deleteEntryCallable().futureCall(request);
+   *   // Do something.
+   *   future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<DeleteEntryRequest, Empty> deleteEntryCallable() {
     return stub.deleteEntryCallable();
@@ -894,6 +1403,15 @@ public class DataCatalogClient implements BackgroundResource {
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
    * Gets an entry.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   Entry response = dataCatalogClient.getEntry(name);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the entry. Example:
    *     <ul>
@@ -912,6 +1430,15 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Gets an entry.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]").toString();
+   *   Entry response = dataCatalogClient.getEntry(name);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the entry. Example:
    *     <ul>
    *       <li>projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
@@ -928,6 +1455,19 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Gets an entry.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   GetEntryRequest request =
+   *       GetEntryRequest.newBuilder()
+   *           .setName(
+   *               EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]").toString())
+   *           .build();
+   *   Entry response = dataCatalogClient.getEntry(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -940,6 +1480,19 @@ public class DataCatalogClient implements BackgroundResource {
    * Gets an entry.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   GetEntryRequest request =
+   *       GetEntryRequest.newBuilder()
+   *           .setName(
+   *               EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]").toString())
+   *           .build();
+   *   ApiFuture<Entry> future = dataCatalogClient.getEntryCallable().futureCall(request);
+   *   // Do something.
+   *   Entry response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<GetEntryRequest, Entry> getEntryCallable() {
     return stub.getEntryCallable();
@@ -949,6 +1502,15 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Get an entry by target resource name. This method allows clients to use the resource name from
    * the source Google Cloud Platform service to get the Data Catalog Entry.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   LookupEntryRequest request = LookupEntryRequest.newBuilder().build();
+   *   Entry response = dataCatalogClient.lookupEntry(request);
+   * }
+   * }</pre>
    *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -963,6 +1525,15 @@ public class DataCatalogClient implements BackgroundResource {
    * the source Google Cloud Platform service to get the Data Catalog Entry.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   LookupEntryRequest request = LookupEntryRequest.newBuilder().build();
+   *   ApiFuture<Entry> future = dataCatalogClient.lookupEntryCallable().futureCall(request);
+   *   // Do something.
+   *   Entry response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<LookupEntryRequest, Entry> lookupEntryCallable() {
     return stub.lookupEntryCallable();
@@ -971,6 +1542,17 @@ public class DataCatalogClient implements BackgroundResource {
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
    * Lists entries.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryGroupName parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]");
+   *   for (Entry element : dataCatalogClient.listEntries(parent).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
    *
    * @param parent Required. The name of the entry group that contains the entries, which can be
    *     provided in URL format. Example:
@@ -992,6 +1574,17 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Lists entries.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String parent = EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString();
+   *   for (Entry element : dataCatalogClient.listEntries(parent).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
+   *
    * @param parent Required. The name of the entry group that contains the entries, which can be
    *     provided in URL format. Example:
    *     <ul>
@@ -1009,6 +1602,23 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Lists entries.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ListEntriesRequest request =
+   *       ListEntriesRequest.newBuilder()
+   *           .setParent(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .setReadMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   for (Entry element : dataCatalogClient.listEntries(request).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1021,6 +1631,23 @@ public class DataCatalogClient implements BackgroundResource {
    * Lists entries.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ListEntriesRequest request =
+   *       ListEntriesRequest.newBuilder()
+   *           .setParent(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .setReadMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   ApiFuture<Entry> future = dataCatalogClient.listEntriesPagedCallable().futureCall(request);
+   *   // Do something.
+   *   for (Entry element : future.get().iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
    */
   public final UnaryCallable<ListEntriesRequest, ListEntriesPagedResponse>
       listEntriesPagedCallable() {
@@ -1032,6 +1659,30 @@ public class DataCatalogClient implements BackgroundResource {
    * Lists entries.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ListEntriesRequest request =
+   *       ListEntriesRequest.newBuilder()
+   *           .setParent(EntryGroupName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]").toString())
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .setReadMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   while (true) {
+   *     ListEntriesResponse response = dataCatalogClient.listEntriesCallable().call(request);
+   *     for (Entry element : response.getResponsesList()) {
+   *       // doThingsWith(element);
+   *     }
+   *     String nextPageToken = response.getNextPageToken();
+   *     if (!Strings.isNullOrEmpty(nextPageToken)) {
+   *       request = request.toBuilder().setPageToken(nextPageToken).build();
+   *     } else {
+   *       break;
+   *     }
+   *   }
+   * }
+   * }</pre>
    */
   public final UnaryCallable<ListEntriesRequest, ListEntriesResponse> listEntriesCallable() {
     return stub.listEntriesCallable();
@@ -1044,6 +1695,18 @@ public class DataCatalogClient implements BackgroundResource {
    * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   LocationName parent = LocationName.of("[PROJECT]", "[LOCATION]");
+   *   String tagTemplateId = "tagTemplateId-1438776721";
+   *   TagTemplate tagTemplate = TagTemplate.newBuilder().build();
+   *   TagTemplate response =
+   *       dataCatalogClient.createTagTemplate(parent, tagTemplateId, tagTemplate);
+   * }
+   * }</pre>
+   *
    * @param parent Required. The name of the project and the template location
    *     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
    *     <p>Example:
@@ -1051,7 +1714,9 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/us-central1
    *     </ul>
    *
-   * @param tagTemplateId Required. The id of the tag template to create.
+   * @param tagTemplateId Required. The ID of the tag template to create.
+   *     <p>The ID must contain only lowercase letters (a-z), numbers (0-9), or underscores (_), and
+   *     must start with a letter or underscore. The maximum size is 64 bytes when encoded in UTF-8.
    * @param tagTemplate Required. The tag template to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1073,6 +1738,18 @@ public class DataCatalogClient implements BackgroundResource {
    * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String parent = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString();
+   *   String tagTemplateId = "tagTemplateId-1438776721";
+   *   TagTemplate tagTemplate = TagTemplate.newBuilder().build();
+   *   TagTemplate response =
+   *       dataCatalogClient.createTagTemplate(parent, tagTemplateId, tagTemplate);
+   * }
+   * }</pre>
+   *
    * @param parent Required. The name of the project and the template location
    *     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
    *     <p>Example:
@@ -1080,7 +1757,9 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/us-central1
    *     </ul>
    *
-   * @param tagTemplateId Required. The id of the tag template to create.
+   * @param tagTemplateId Required. The ID of the tag template to create.
+   *     <p>The ID must contain only lowercase letters (a-z), numbers (0-9), or underscores (_), and
+   *     must start with a letter or underscore. The maximum size is 64 bytes when encoded in UTF-8.
    * @param tagTemplate Required. The tag template to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1102,6 +1781,20 @@ public class DataCatalogClient implements BackgroundResource {
    * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   CreateTagTemplateRequest request =
+   *       CreateTagTemplateRequest.newBuilder()
+   *           .setParent(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
+   *           .setTagTemplateId("tagTemplateId-1438776721")
+   *           .setTagTemplate(TagTemplate.newBuilder().build())
+   *           .build();
+   *   TagTemplate response = dataCatalogClient.createTagTemplate(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1117,6 +1810,21 @@ public class DataCatalogClient implements BackgroundResource {
    * information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   CreateTagTemplateRequest request =
+   *       CreateTagTemplateRequest.newBuilder()
+   *           .setParent(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
+   *           .setTagTemplateId("tagTemplateId-1438776721")
+   *           .setTagTemplate(TagTemplate.newBuilder().build())
+   *           .build();
+   *   ApiFuture<TagTemplate> future =
+   *       dataCatalogClient.createTagTemplateCallable().futureCall(request);
+   *   // Do something.
+   *   TagTemplate response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<CreateTagTemplateRequest, TagTemplate> createTagTemplateCallable() {
     return stub.createTagTemplateCallable();
@@ -1125,6 +1833,15 @@ public class DataCatalogClient implements BackgroundResource {
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
    * Gets a tag template.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagTemplateName name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   TagTemplate response = dataCatalogClient.getTagTemplate(name);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the tag template. Example:
    *     <ul>
@@ -1143,6 +1860,15 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Gets a tag template.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString();
+   *   TagTemplate response = dataCatalogClient.getTagTemplate(name);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the tag template. Example:
    *     <ul>
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
@@ -1159,6 +1885,18 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Gets a tag template.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   GetTagTemplateRequest request =
+   *       GetTagTemplateRequest.newBuilder()
+   *           .setName(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
+   *           .build();
+   *   TagTemplate response = dataCatalogClient.getTagTemplate(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1171,6 +1909,19 @@ public class DataCatalogClient implements BackgroundResource {
    * Gets a tag template.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   GetTagTemplateRequest request =
+   *       GetTagTemplateRequest.newBuilder()
+   *           .setName(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
+   *           .build();
+   *   ApiFuture<TagTemplate> future =
+   *       dataCatalogClient.getTagTemplateCallable().futureCall(request);
+   *   // Do something.
+   *   TagTemplate response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<GetTagTemplateRequest, TagTemplate> getTagTemplateCallable() {
     return stub.getTagTemplateCallable();
@@ -1183,6 +1934,15 @@ public class DataCatalogClient implements BackgroundResource {
    * create/update/delete methods. Users should enable the Data Catalog API in the project
    * identified by the `tag_template.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagTemplate tagTemplate = TagTemplate.newBuilder().build();
+   *   TagTemplate response = dataCatalogClient.updateTagTemplate(tagTemplate);
+   * }
+   * }</pre>
    *
    * @param tagTemplate Required. The template to update. The "name" field must be set.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -1201,11 +1961,21 @@ public class DataCatalogClient implements BackgroundResource {
    * identified by the `tag_template.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagTemplate tagTemplate = TagTemplate.newBuilder().build();
+   *   FieldMask updateMask = FieldMask.newBuilder().build();
+   *   TagTemplate response = dataCatalogClient.updateTagTemplate(tagTemplate, updateMask);
+   * }
+   * }</pre>
+   *
    * @param tagTemplate Required. The template to update. The "name" field must be set.
-   * @param updateMask The field mask specifies the parts of the template to overwrite.
-   *     <p>Allowed fields:
-   *     <p>&#42; `display_name`
-   *     <p>If absent or empty, all of the allowed fields above will be updated.
+   * @param updateMask Names of fields whose values to overwrite on a tag template. Currently, only
+   *     `display_name` can be overwritten.
+   *     <p>In general, if this parameter is absent or empty, all modifiable fields are overwritten.
+   *     If such fields are non-required and omitted in the request body, their values are emptied.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplate updateTagTemplate(TagTemplate tagTemplate, FieldMask updateMask) {
@@ -1225,6 +1995,19 @@ public class DataCatalogClient implements BackgroundResource {
    * identified by the `tag_template.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   UpdateTagTemplateRequest request =
+   *       UpdateTagTemplateRequest.newBuilder()
+   *           .setTagTemplate(TagTemplate.newBuilder().build())
+   *           .setUpdateMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   TagTemplate response = dataCatalogClient.updateTagTemplate(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1241,6 +2024,20 @@ public class DataCatalogClient implements BackgroundResource {
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   UpdateTagTemplateRequest request =
+   *       UpdateTagTemplateRequest.newBuilder()
+   *           .setTagTemplate(TagTemplate.newBuilder().build())
+   *           .setUpdateMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   ApiFuture<TagTemplate> future =
+   *       dataCatalogClient.updateTagTemplateCallable().futureCall(request);
+   *   // Do something.
+   *   TagTemplate response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<UpdateTagTemplateRequest, TagTemplate> updateTagTemplateCallable() {
     return stub.updateTagTemplateCallable();
@@ -1251,6 +2048,16 @@ public class DataCatalogClient implements BackgroundResource {
    * Deletes a tag template and all tags using the template. Users should enable the Data Catalog
    * API in the project identified by the `name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagTemplateName name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   boolean force = true;
+   *   dataCatalogClient.deleteTagTemplate(name, force);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the tag template to delete. Example:
    *     <ul>
@@ -1277,6 +2084,16 @@ public class DataCatalogClient implements BackgroundResource {
    * API in the project identified by the `name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString();
+   *   boolean force = true;
+   *   dataCatalogClient.deleteTagTemplate(name, force);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the tag template to delete. Example:
    *     <ul>
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
@@ -1299,6 +2116,19 @@ public class DataCatalogClient implements BackgroundResource {
    * API in the project identified by the `name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   DeleteTagTemplateRequest request =
+   *       DeleteTagTemplateRequest.newBuilder()
+   *           .setName(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
+   *           .setForce(true)
+   *           .build();
+   *   dataCatalogClient.deleteTagTemplate(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1313,6 +2143,19 @@ public class DataCatalogClient implements BackgroundResource {
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   DeleteTagTemplateRequest request =
+   *       DeleteTagTemplateRequest.newBuilder()
+   *           .setName(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
+   *           .setForce(true)
+   *           .build();
+   *   ApiFuture<Empty> future = dataCatalogClient.deleteTagTemplateCallable().futureCall(request);
+   *   // Do something.
+   *   future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<DeleteTagTemplateRequest, Empty> deleteTagTemplateCallable() {
     return stub.deleteTagTemplateCallable();
@@ -1325,6 +2168,18 @@ public class DataCatalogClient implements BackgroundResource {
    * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagTemplateName parent = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]");
+   *   String tagTemplateFieldId = "tagTemplateFieldId-1556835615";
+   *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
+   *   TagTemplateField response =
+   *       dataCatalogClient.createTagTemplateField(parent, tagTemplateFieldId, tagTemplateField);
+   * }
+   * }</pre>
+   *
    * @param parent Required. The name of the project and the template location
    *     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
    *     <p>Example:
@@ -1332,10 +2187,11 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/us-central1/tagTemplates/{tag_template_id}
    *     </ul>
    *
-   * @param tagTemplateFieldId Required. The ID of the tag template field to create. Field ids can
-   *     contain letters (both uppercase and lowercase), numbers (0-9), underscores (_) and dashes
-   *     (-). Field IDs must be at least 1 character long and at most 128 characters long. Field IDs
-   *     must also be unique within their template.
+   * @param tagTemplateFieldId Required. The ID of the tag template field to create.
+   *     <p>Note: Adding a required field to an existing template is &#42;not&#42; allowed.
+   *     <p>Field IDs can contain letters (both uppercase and lowercase), numbers (0-9), underscores
+   *     (_) and dashes (-). Field IDs must be at least 1 character long and at most 128 characters
+   *     long. Field IDs must also be unique within their template.
    * @param tagTemplateField Required. The tag template field to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1357,6 +2213,18 @@ public class DataCatalogClient implements BackgroundResource {
    * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String parent = TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString();
+   *   String tagTemplateFieldId = "tagTemplateFieldId-1556835615";
+   *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
+   *   TagTemplateField response =
+   *       dataCatalogClient.createTagTemplateField(parent, tagTemplateFieldId, tagTemplateField);
+   * }
+   * }</pre>
+   *
    * @param parent Required. The name of the project and the template location
    *     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
    *     <p>Example:
@@ -1364,10 +2232,11 @@ public class DataCatalogClient implements BackgroundResource {
    *       <li>projects/{project_id}/locations/us-central1/tagTemplates/{tag_template_id}
    *     </ul>
    *
-   * @param tagTemplateFieldId Required. The ID of the tag template field to create. Field ids can
-   *     contain letters (both uppercase and lowercase), numbers (0-9), underscores (_) and dashes
-   *     (-). Field IDs must be at least 1 character long and at most 128 characters long. Field IDs
-   *     must also be unique within their template.
+   * @param tagTemplateFieldId Required. The ID of the tag template field to create.
+   *     <p>Note: Adding a required field to an existing template is &#42;not&#42; allowed.
+   *     <p>Field IDs can contain letters (both uppercase and lowercase), numbers (0-9), underscores
+   *     (_) and dashes (-). Field IDs must be at least 1 character long and at most 128 characters
+   *     long. Field IDs must also be unique within their template.
    * @param tagTemplateField Required. The tag template field to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1389,6 +2258,20 @@ public class DataCatalogClient implements BackgroundResource {
    * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   CreateTagTemplateFieldRequest request =
+   *       CreateTagTemplateFieldRequest.newBuilder()
+   *           .setParent(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
+   *           .setTagTemplateFieldId("tagTemplateFieldId-1556835615")
+   *           .setTagTemplateField(TagTemplateField.newBuilder().build())
+   *           .build();
+   *   TagTemplateField response = dataCatalogClient.createTagTemplateField(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1404,6 +2287,21 @@ public class DataCatalogClient implements BackgroundResource {
    * information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   CreateTagTemplateFieldRequest request =
+   *       CreateTagTemplateFieldRequest.newBuilder()
+   *           .setParent(TagTemplateName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]").toString())
+   *           .setTagTemplateFieldId("tagTemplateFieldId-1556835615")
+   *           .setTagTemplateField(TagTemplateField.newBuilder().build())
+   *           .build();
+   *   ApiFuture<TagTemplateField> future =
+   *       dataCatalogClient.createTagTemplateFieldCallable().futureCall(request);
+   *   // Do something.
+   *   TagTemplateField response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<CreateTagTemplateFieldRequest, TagTemplateField>
       createTagTemplateFieldCallable() {
@@ -1416,6 +2314,17 @@ public class DataCatalogClient implements BackgroundResource {
    * should enable the Data Catalog API in the project identified by the `name` parameter (see [Data
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagTemplateFieldName name =
+   *       TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
+   *   TagTemplateField response = dataCatalogClient.updateTagTemplateField(name, tagTemplateField);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the tag template field. Example:
    *     <ul>
@@ -1442,6 +2351,18 @@ public class DataCatalogClient implements BackgroundResource {
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name =
+   *       TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
+   *           .toString();
+   *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
+   *   TagTemplateField response = dataCatalogClient.updateTagTemplateField(name, tagTemplateField);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the tag template field. Example:
    *     <ul>
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
@@ -1467,19 +2388,38 @@ public class DataCatalogClient implements BackgroundResource {
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagTemplateFieldName name =
+   *       TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
+   *   FieldMask updateMask = FieldMask.newBuilder().build();
+   *   TagTemplateField response =
+   *       dataCatalogClient.updateTagTemplateField(name, tagTemplateField, updateMask);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the tag template field. Example:
    *     <ul>
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    *     </ul>
    *
    * @param tagTemplateField Required. The template to update.
-   * @param updateMask Optional. The field mask specifies the parts of the template to be updated.
-   *     Allowed fields:
+   * @param updateMask Optional. Names of fields whose values to overwrite on an individual field of
+   *     a tag template. The following fields are modifiable:
    *     <p>&#42; `display_name` &#42; `type.enum_type` &#42; `is_required`
-   *     <p>If `update_mask` is not set or empty, all of the allowed fields above will be updated.
-   *     <p>When updating an enum type, the provided values will be merged with the existing values.
-   *     Therefore, enum values can only be added, existing enum values cannot be deleted nor
-   *     renamed. Updating a template field from optional to required is NOT allowed.
+   *     <p>If this parameter is absent or empty, all modifiable fields are overwritten. If such
+   *     fields are non-required and omitted in the request body, their values are emptied with one
+   *     exception: when updating an enum type, the provided values are merged with the existing
+   *     values. Therefore, enum values can only be added, existing enum values cannot be deleted or
+   *     renamed.
+   *     <p>Additionally, updating a template field from optional to required is
+   *     <ul>
+   *       <li>not&#42; allowed.
+   *     </ul>
+   *
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplateField updateTagTemplateField(
@@ -1500,19 +2440,39 @@ public class DataCatalogClient implements BackgroundResource {
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name =
+   *       TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
+   *           .toString();
+   *   TagTemplateField tagTemplateField = TagTemplateField.newBuilder().build();
+   *   FieldMask updateMask = FieldMask.newBuilder().build();
+   *   TagTemplateField response =
+   *       dataCatalogClient.updateTagTemplateField(name, tagTemplateField, updateMask);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the tag template field. Example:
    *     <ul>
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    *     </ul>
    *
    * @param tagTemplateField Required. The template to update.
-   * @param updateMask Optional. The field mask specifies the parts of the template to be updated.
-   *     Allowed fields:
+   * @param updateMask Optional. Names of fields whose values to overwrite on an individual field of
+   *     a tag template. The following fields are modifiable:
    *     <p>&#42; `display_name` &#42; `type.enum_type` &#42; `is_required`
-   *     <p>If `update_mask` is not set or empty, all of the allowed fields above will be updated.
-   *     <p>When updating an enum type, the provided values will be merged with the existing values.
-   *     Therefore, enum values can only be added, existing enum values cannot be deleted nor
-   *     renamed. Updating a template field from optional to required is NOT allowed.
+   *     <p>If this parameter is absent or empty, all modifiable fields are overwritten. If such
+   *     fields are non-required and omitted in the request body, their values are emptied with one
+   *     exception: when updating an enum type, the provided values are merged with the existing
+   *     values. Therefore, enum values can only be added, existing enum values cannot be deleted or
+   *     renamed.
+   *     <p>Additionally, updating a template field from optional to required is
+   *     <ul>
+   *       <li>not&#42; allowed.
+   *     </ul>
+   *
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final TagTemplateField updateTagTemplateField(
@@ -1533,6 +2493,22 @@ public class DataCatalogClient implements BackgroundResource {
    * Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   UpdateTagTemplateFieldRequest request =
+   *       UpdateTagTemplateFieldRequest.newBuilder()
+   *           .setName(
+   *               TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
+   *                   .toString())
+   *           .setTagTemplateField(TagTemplateField.newBuilder().build())
+   *           .setUpdateMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   TagTemplateField response = dataCatalogClient.updateTagTemplateField(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1548,6 +2524,23 @@ public class DataCatalogClient implements BackgroundResource {
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   UpdateTagTemplateFieldRequest request =
+   *       UpdateTagTemplateFieldRequest.newBuilder()
+   *           .setName(
+   *               TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
+   *                   .toString())
+   *           .setTagTemplateField(TagTemplateField.newBuilder().build())
+   *           .setUpdateMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   ApiFuture<TagTemplateField> future =
+   *       dataCatalogClient.updateTagTemplateFieldCallable().futureCall(request);
+   *   // Do something.
+   *   TagTemplateField response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<UpdateTagTemplateFieldRequest, TagTemplateField>
       updateTagTemplateFieldCallable() {
@@ -1560,6 +2553,18 @@ public class DataCatalogClient implements BackgroundResource {
    * identified by the `name` parameter (see [Data Catalog Resource
    * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagTemplateFieldName name =
+   *       TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   String newTagTemplateFieldId = "newTagTemplateFieldId2008993953";
+   *   TagTemplateField response =
+   *       dataCatalogClient.renameTagTemplateField(name, newTagTemplateFieldId);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the tag template. Example:
    *     <ul>
@@ -1587,6 +2592,19 @@ public class DataCatalogClient implements BackgroundResource {
    * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name =
+   *       TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
+   *           .toString();
+   *   String newTagTemplateFieldId = "newTagTemplateFieldId2008993953";
+   *   TagTemplateField response =
+   *       dataCatalogClient.renameTagTemplateField(name, newTagTemplateFieldId);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the tag template. Example:
    *     <ul>
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
@@ -1612,6 +2630,21 @@ public class DataCatalogClient implements BackgroundResource {
    * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   RenameTagTemplateFieldRequest request =
+   *       RenameTagTemplateFieldRequest.newBuilder()
+   *           .setName(
+   *               TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
+   *                   .toString())
+   *           .setNewTagTemplateFieldId("newTagTemplateFieldId2008993953")
+   *           .build();
+   *   TagTemplateField response = dataCatalogClient.renameTagTemplateField(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1627,6 +2660,22 @@ public class DataCatalogClient implements BackgroundResource {
    * information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   RenameTagTemplateFieldRequest request =
+   *       RenameTagTemplateFieldRequest.newBuilder()
+   *           .setName(
+   *               TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
+   *                   .toString())
+   *           .setNewTagTemplateFieldId("newTagTemplateFieldId2008993953")
+   *           .build();
+   *   ApiFuture<TagTemplateField> future =
+   *       dataCatalogClient.renameTagTemplateFieldCallable().futureCall(request);
+   *   // Do something.
+   *   TagTemplateField response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<RenameTagTemplateFieldRequest, TagTemplateField>
       renameTagTemplateFieldCallable() {
@@ -1635,10 +2684,170 @@ public class DataCatalogClient implements BackgroundResource {
 
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
+   * Renames an enum value in a tag template. The enum values have to be unique within one enum
+   * field.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagTemplateFieldEnumValueName name =
+   *       TagTemplateFieldEnumValueName.of(
+   *           "[PROJECT]",
+   *           "[LOCATION]",
+   *           "[TAG_TEMPLATE]",
+   *           "[TAG_TEMPLATE_FIELD_ID]",
+   *           "[ENUM_VALUE_DISPLAY_NAME]");
+   *   String newEnumValueDisplayName = "newEnumValueDisplayName-1119629027";
+   *   TagTemplateField response =
+   *       dataCatalogClient.renameTagTemplateFieldEnumValue(name, newEnumValueDisplayName);
+   * }
+   * }</pre>
+   *
+   * @param name Required. The name of the enum field value. Example:
+   *     <ul>
+   *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}
+   *     </ul>
+   *
+   * @param newEnumValueDisplayName Required. The new display name of the enum value. For example,
+   *     `my_new_enum_value`.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final TagTemplateField renameTagTemplateFieldEnumValue(
+      TagTemplateFieldEnumValueName name, String newEnumValueDisplayName) {
+    RenameTagTemplateFieldEnumValueRequest request =
+        RenameTagTemplateFieldEnumValueRequest.newBuilder()
+            .setName(name == null ? null : name.toString())
+            .setNewEnumValueDisplayName(newEnumValueDisplayName)
+            .build();
+    return renameTagTemplateFieldEnumValue(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD.
+  /**
+   * Renames an enum value in a tag template. The enum values have to be unique within one enum
+   * field.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name =
+   *       TagTemplateFieldEnumValueName.of(
+   *               "[PROJECT]",
+   *               "[LOCATION]",
+   *               "[TAG_TEMPLATE]",
+   *               "[TAG_TEMPLATE_FIELD_ID]",
+   *               "[ENUM_VALUE_DISPLAY_NAME]")
+   *           .toString();
+   *   String newEnumValueDisplayName = "newEnumValueDisplayName-1119629027";
+   *   TagTemplateField response =
+   *       dataCatalogClient.renameTagTemplateFieldEnumValue(name, newEnumValueDisplayName);
+   * }
+   * }</pre>
+   *
+   * @param name Required. The name of the enum field value. Example:
+   *     <ul>
+   *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}
+   *     </ul>
+   *
+   * @param newEnumValueDisplayName Required. The new display name of the enum value. For example,
+   *     `my_new_enum_value`.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final TagTemplateField renameTagTemplateFieldEnumValue(
+      String name, String newEnumValueDisplayName) {
+    RenameTagTemplateFieldEnumValueRequest request =
+        RenameTagTemplateFieldEnumValueRequest.newBuilder()
+            .setName(name)
+            .setNewEnumValueDisplayName(newEnumValueDisplayName)
+            .build();
+    return renameTagTemplateFieldEnumValue(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD.
+  /**
+   * Renames an enum value in a tag template. The enum values have to be unique within one enum
+   * field.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   RenameTagTemplateFieldEnumValueRequest request =
+   *       RenameTagTemplateFieldEnumValueRequest.newBuilder()
+   *           .setName(
+   *               TagTemplateFieldEnumValueName.of(
+   *                       "[PROJECT]",
+   *                       "[LOCATION]",
+   *                       "[TAG_TEMPLATE]",
+   *                       "[TAG_TEMPLATE_FIELD_ID]",
+   *                       "[ENUM_VALUE_DISPLAY_NAME]")
+   *                   .toString())
+   *           .setNewEnumValueDisplayName("newEnumValueDisplayName-1119629027")
+   *           .build();
+   *   TagTemplateField response = dataCatalogClient.renameTagTemplateFieldEnumValue(request);
+   * }
+   * }</pre>
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final TagTemplateField renameTagTemplateFieldEnumValue(
+      RenameTagTemplateFieldEnumValueRequest request) {
+    return renameTagTemplateFieldEnumValueCallable().call(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD.
+  /**
+   * Renames an enum value in a tag template. The enum values have to be unique within one enum
+   * field.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   RenameTagTemplateFieldEnumValueRequest request =
+   *       RenameTagTemplateFieldEnumValueRequest.newBuilder()
+   *           .setName(
+   *               TagTemplateFieldEnumValueName.of(
+   *                       "[PROJECT]",
+   *                       "[LOCATION]",
+   *                       "[TAG_TEMPLATE]",
+   *                       "[TAG_TEMPLATE_FIELD_ID]",
+   *                       "[ENUM_VALUE_DISPLAY_NAME]")
+   *                   .toString())
+   *           .setNewEnumValueDisplayName("newEnumValueDisplayName-1119629027")
+   *           .build();
+   *   ApiFuture<TagTemplateField> future =
+   *       dataCatalogClient.renameTagTemplateFieldEnumValueCallable().futureCall(request);
+   *   // Do something.
+   *   TagTemplateField response = future.get();
+   * }
+   * }</pre>
+   */
+  public final UnaryCallable<RenameTagTemplateFieldEnumValueRequest, TagTemplateField>
+      renameTagTemplateFieldEnumValueCallable() {
+    return stub.renameTagTemplateFieldEnumValueCallable();
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD.
+  /**
    * Deletes a field in a tag template and all uses of that field. Users should enable the Data
    * Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource
    * Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagTemplateFieldName name =
+   *       TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]");
+   *   boolean force = true;
+   *   dataCatalogClient.deleteTagTemplateField(name, force);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the tag template field to delete. Example:
    *     <ul>
@@ -1666,6 +2875,18 @@ public class DataCatalogClient implements BackgroundResource {
    * Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name =
+   *       TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
+   *           .toString();
+   *   boolean force = true;
+   *   dataCatalogClient.deleteTagTemplateField(name, force);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the tag template field to delete. Example:
    *     <ul>
    *       <li>projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
@@ -1689,6 +2910,21 @@ public class DataCatalogClient implements BackgroundResource {
    * Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
    * information).
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   DeleteTagTemplateFieldRequest request =
+   *       DeleteTagTemplateFieldRequest.newBuilder()
+   *           .setName(
+   *               TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
+   *                   .toString())
+   *           .setForce(true)
+   *           .build();
+   *   dataCatalogClient.deleteTagTemplateField(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1704,6 +2940,22 @@ public class DataCatalogClient implements BackgroundResource {
    * information).
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   DeleteTagTemplateFieldRequest request =
+   *       DeleteTagTemplateFieldRequest.newBuilder()
+   *           .setName(
+   *               TagTemplateFieldName.of("[PROJECT]", "[LOCATION]", "[TAG_TEMPLATE]", "[FIELD]")
+   *                   .toString())
+   *           .setForce(true)
+   *           .build();
+   *   ApiFuture<Empty> future =
+   *       dataCatalogClient.deleteTagTemplateFieldCallable().futureCall(request);
+   *   // Do something.
+   *   future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<DeleteTagTemplateFieldRequest, Empty>
       deleteTagTemplateFieldCallable() {
@@ -1719,13 +2971,21 @@ public class DataCatalogClient implements BackgroundResource {
    * template](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters)
    * used to create the tag must be from the same organization.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TagName parent = TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]");
+   *   Tag tag = Tag.newBuilder().build();
+   *   Tag response = dataCatalogClient.createTag(parent, tag);
+   * }
+   * }</pre>
+   *
    * @param parent Required. The name of the resource to attach this tag to. Tags can be attached to
-   *     Entries. Example:
-   *     <ul>
-   *       <li>projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
-   *     </ul>
-   *     <p>Note that this Tag and its child resources may not actually be stored in the location in
-   *     this name.
+   *     entries. An entry can have up to 1000 attached tags. Example:
+   *     <p>`projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}`
+   *     <p>Note: The tag and its child resources might not be stored in the location specified in
+   *     its name.
    * @param tag Required. The tag to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1747,13 +3007,22 @@ public class DataCatalogClient implements BackgroundResource {
    * template](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters)
    * used to create the tag must be from the same organization.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String parent =
+   *       TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]").toString();
+   *   Tag tag = Tag.newBuilder().build();
+   *   Tag response = dataCatalogClient.createTag(parent, tag);
+   * }
+   * }</pre>
+   *
    * @param parent Required. The name of the resource to attach this tag to. Tags can be attached to
-   *     Entries. Example:
-   *     <ul>
-   *       <li>projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
-   *     </ul>
-   *     <p>Note that this Tag and its child resources may not actually be stored in the location in
-   *     this name.
+   *     entries. An entry can have up to 1000 attached tags. Example:
+   *     <p>`projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}`
+   *     <p>Note: The tag and its child resources might not be stored in the location specified in
+   *     its name.
    * @param tag Required. The tag to create.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1770,6 +3039,21 @@ public class DataCatalogClient implements BackgroundResource {
    * and the [tag
    * template](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters)
    * used to create the tag must be from the same organization.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   CreateTagRequest request =
+   *       CreateTagRequest.newBuilder()
+   *           .setParent(
+   *               TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
+   *                   .toString())
+   *           .setTag(Tag.newBuilder().build())
+   *           .build();
+   *   Tag response = dataCatalogClient.createTag(request);
+   * }
+   * }</pre>
    *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -1788,6 +3072,21 @@ public class DataCatalogClient implements BackgroundResource {
    * used to create the tag must be from the same organization.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   CreateTagRequest request =
+   *       CreateTagRequest.newBuilder()
+   *           .setParent(
+   *               TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
+   *                   .toString())
+   *           .setTag(Tag.newBuilder().build())
+   *           .build();
+   *   ApiFuture<Tag> future = dataCatalogClient.createTagCallable().futureCall(request);
+   *   // Do something.
+   *   Tag response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<CreateTagRequest, Tag> createTagCallable() {
     return stub.createTagCallable();
@@ -1796,6 +3095,15 @@ public class DataCatalogClient implements BackgroundResource {
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
    * Updates an existing tag.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   Tag tag = Tag.newBuilder().build();
+   *   Tag response = dataCatalogClient.updateTag(tag);
+   * }
+   * }</pre>
    *
    * @param tag Required. The updated tag. The "name" field must be set.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -1809,9 +3117,21 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Updates an existing tag.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   Tag tag = Tag.newBuilder().build();
+   *   FieldMask updateMask = FieldMask.newBuilder().build();
+   *   Tag response = dataCatalogClient.updateTag(tag, updateMask);
+   * }
+   * }</pre>
+   *
    * @param tag Required. The updated tag. The "name" field must be set.
-   * @param updateMask The fields to update on the Tag. If absent or empty, all modifiable fields
-   *     are updated. Currently the only modifiable field is the field `fields`.
+   * @param updateMask Names of fields whose values to overwrite on a tag. Currently, a tag has the
+   *     only modifiable field with the name `fields`.
+   *     <p>In general, if this parameter is absent or empty, all modifiable fields are overwritten.
+   *     If such fields are non-required and omitted in the request body, their values are emptied.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   public final Tag updateTag(Tag tag, FieldMask updateMask) {
@@ -1823,6 +3143,19 @@ public class DataCatalogClient implements BackgroundResource {
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
    * Updates an existing tag.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   UpdateTagRequest request =
+   *       UpdateTagRequest.newBuilder()
+   *           .setTag(Tag.newBuilder().build())
+   *           .setUpdateMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   Tag response = dataCatalogClient.updateTag(request);
+   * }
+   * }</pre>
    *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -1836,6 +3169,19 @@ public class DataCatalogClient implements BackgroundResource {
    * Updates an existing tag.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   UpdateTagRequest request =
+   *       UpdateTagRequest.newBuilder()
+   *           .setTag(Tag.newBuilder().build())
+   *           .setUpdateMask(FieldMask.newBuilder().build())
+   *           .build();
+   *   ApiFuture<Tag> future = dataCatalogClient.updateTagCallable().futureCall(request);
+   *   // Do something.
+   *   Tag response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<UpdateTagRequest, Tag> updateTagCallable() {
     return stub.updateTagCallable();
@@ -1844,6 +3190,15 @@ public class DataCatalogClient implements BackgroundResource {
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
    * Deletes a tag.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryName name = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   dataCatalogClient.deleteTag(name);
+   * }
+   * }</pre>
    *
    * @param name Required. The name of the tag to delete. Example:
    *     <ul>
@@ -1862,6 +3217,16 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Deletes a tag.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String name =
+   *       TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]").toString();
+   *   dataCatalogClient.deleteTag(name);
+   * }
+   * }</pre>
+   *
    * @param name Required. The name of the tag to delete. Example:
    *     <ul>
    *       <li>projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
@@ -1878,6 +3243,20 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Deletes a tag.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   DeleteTagRequest request =
+   *       DeleteTagRequest.newBuilder()
+   *           .setName(
+   *               TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
+   *                   .toString())
+   *           .build();
+   *   dataCatalogClient.deleteTag(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1890,6 +3269,20 @@ public class DataCatalogClient implements BackgroundResource {
    * Deletes a tag.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   DeleteTagRequest request =
+   *       DeleteTagRequest.newBuilder()
+   *           .setName(
+   *               TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
+   *                   .toString())
+   *           .build();
+   *   ApiFuture<Empty> future = dataCatalogClient.deleteTagCallable().futureCall(request);
+   *   // Do something.
+   *   future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<DeleteTagRequest, Empty> deleteTagCallable() {
     return stub.deleteTagCallable();
@@ -1898,6 +3291,17 @@ public class DataCatalogClient implements BackgroundResource {
   // AUTO-GENERATED DOCUMENTATION AND METHOD.
   /**
    * Lists the tags on an [Entry][google.cloud.datacatalog.v1.Entry].
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   EntryName parent = EntryName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]");
+   *   for (Tag element : dataCatalogClient.listTags(parent).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
    *
    * @param parent Required. The name of the Data Catalog resource to list the tags of. The resource
    *     could be an [Entry][google.cloud.datacatalog.v1.Entry] or an
@@ -1920,6 +3324,18 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Lists the tags on an [Entry][google.cloud.datacatalog.v1.Entry].
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String parent =
+   *       TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]").toString();
+   *   for (Tag element : dataCatalogClient.listTags(parent).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
+   *
    * @param parent Required. The name of the Data Catalog resource to list the tags of. The resource
    *     could be an [Entry][google.cloud.datacatalog.v1.Entry] or an
    *     [EntryGroup][google.cloud.datacatalog.v1.EntryGroup].
@@ -1940,6 +3356,24 @@ public class DataCatalogClient implements BackgroundResource {
   /**
    * Lists the tags on an [Entry][google.cloud.datacatalog.v1.Entry].
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ListTagsRequest request =
+   *       ListTagsRequest.newBuilder()
+   *           .setParent(
+   *               TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
+   *                   .toString())
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .build();
+   *   for (Tag element : dataCatalogClient.listTags(request).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -1952,6 +3386,24 @@ public class DataCatalogClient implements BackgroundResource {
    * Lists the tags on an [Entry][google.cloud.datacatalog.v1.Entry].
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ListTagsRequest request =
+   *       ListTagsRequest.newBuilder()
+   *           .setParent(
+   *               TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
+   *                   .toString())
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .build();
+   *   ApiFuture<Tag> future = dataCatalogClient.listTagsPagedCallable().futureCall(request);
+   *   // Do something.
+   *   for (Tag element : future.get().iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * }</pre>
    */
   public final UnaryCallable<ListTagsRequest, ListTagsPagedResponse> listTagsPagedCallable() {
     return stub.listTagsPagedCallable();
@@ -1962,6 +3414,31 @@ public class DataCatalogClient implements BackgroundResource {
    * Lists the tags on an [Entry][google.cloud.datacatalog.v1.Entry].
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ListTagsRequest request =
+   *       ListTagsRequest.newBuilder()
+   *           .setParent(
+   *               TagName.of("[PROJECT]", "[LOCATION]", "[ENTRY_GROUP]", "[ENTRY]", "[TAG]")
+   *                   .toString())
+   *           .setPageSize(883849137)
+   *           .setPageToken("pageToken873572522")
+   *           .build();
+   *   while (true) {
+   *     ListTagsResponse response = dataCatalogClient.listTagsCallable().call(request);
+   *     for (Tag element : response.getResponsesList()) {
+   *       // doThingsWith(element);
+   *     }
+   *     String nextPageToken = response.getNextPageToken();
+   *     if (!Strings.isNullOrEmpty(nextPageToken)) {
+   *       request = request.toBuilder().setPageToken(nextPageToken).build();
+   *     } else {
+   *       break;
+   *     }
+   *   }
+   * }
+   * }</pre>
    */
   public final UnaryCallable<ListTagsRequest, ListTagsResponse> listTagsCallable() {
     return stub.listTagsCallable();
@@ -1977,6 +3454,16 @@ public class DataCatalogClient implements BackgroundResource {
    * <p>Callers must have following Google IAM permission - `datacatalog.tagTemplates.setIamPolicy`
    * to set policies on tag templates. - `datacatalog.entries.setIamPolicy` to set policies on
    * entries. - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ResourceName resource = TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]");
+   *   Policy policy = Policy.newBuilder().build();
+   *   Policy response = dataCatalogClient.setIamPolicy(resource, policy);
+   * }
+   * }</pre>
    *
    * @param resource REQUIRED: The resource for which the policy is being specified. See the
    *     operation documentation for the appropriate value for this field.
@@ -2005,6 +3492,16 @@ public class DataCatalogClient implements BackgroundResource {
    * to set policies on tag templates. - `datacatalog.entries.setIamPolicy` to set policies on
    * entries. - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String resource = TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString();
+   *   Policy policy = Policy.newBuilder().build();
+   *   Policy response = dataCatalogClient.setIamPolicy(resource, policy);
+   * }
+   * }</pre>
+   *
    * @param resource REQUIRED: The resource for which the policy is being specified. See the
    *     operation documentation for the appropriate value for this field.
    * @param policy REQUIRED: The complete policy to be applied to the `resource`. The size of the
@@ -2029,6 +3526,19 @@ public class DataCatalogClient implements BackgroundResource {
    * to set policies on tag templates. - `datacatalog.entries.setIamPolicy` to set policies on
    * entries. - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   SetIamPolicyRequest request =
+   *       SetIamPolicyRequest.newBuilder()
+   *           .setResource(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+   *           .setPolicy(Policy.newBuilder().build())
+   *           .build();
+   *   Policy response = dataCatalogClient.setIamPolicy(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -2048,6 +3558,19 @@ public class DataCatalogClient implements BackgroundResource {
    * entries. - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   SetIamPolicyRequest request =
+   *       SetIamPolicyRequest.newBuilder()
+   *           .setResource(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+   *           .setPolicy(Policy.newBuilder().build())
+   *           .build();
+   *   ApiFuture<Policy> future = dataCatalogClient.setIamPolicyCallable().futureCall(request);
+   *   // Do something.
+   *   Policy response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<SetIamPolicyRequest, Policy> setIamPolicyCallable() {
     return stub.setIamPolicyCallable();
@@ -2066,6 +3589,15 @@ public class DataCatalogClient implements BackgroundResource {
    * <p>Callers must have following Google IAM permission - `datacatalog.tagTemplates.getIamPolicy`
    * to get policies on tag templates. - `datacatalog.entries.getIamPolicy` to get policies on
    * entries. - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   ResourceName resource = TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]");
+   *   Policy response = dataCatalogClient.getIamPolicy(resource);
+   * }
+   * }</pre>
    *
    * @param resource REQUIRED: The resource for which the policy is being requested. See the
    *     operation documentation for the appropriate value for this field.
@@ -2093,6 +3625,15 @@ public class DataCatalogClient implements BackgroundResource {
    * to get policies on tag templates. - `datacatalog.entries.getIamPolicy` to get policies on
    * entries. - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   String resource = TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString();
+   *   Policy response = dataCatalogClient.getIamPolicy(resource);
+   * }
+   * }</pre>
+   *
    * @param resource REQUIRED: The resource for which the policy is being requested. See the
    *     operation documentation for the appropriate value for this field.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -2116,6 +3657,19 @@ public class DataCatalogClient implements BackgroundResource {
    * to get policies on tag templates. - `datacatalog.entries.getIamPolicy` to get policies on
    * entries. - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
    *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   GetIamPolicyRequest request =
+   *       GetIamPolicyRequest.newBuilder()
+   *           .setResource(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+   *           .setOptions(GetPolicyOptions.newBuilder().build())
+   *           .build();
+   *   Policy response = dataCatalogClient.getIamPolicy(request);
+   * }
+   * }</pre>
+   *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
@@ -2138,6 +3692,19 @@ public class DataCatalogClient implements BackgroundResource {
    * entries. - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   GetIamPolicyRequest request =
+   *       GetIamPolicyRequest.newBuilder()
+   *           .setResource(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+   *           .setOptions(GetPolicyOptions.newBuilder().build())
+   *           .build();
+   *   ApiFuture<Policy> future = dataCatalogClient.getIamPolicyCallable().futureCall(request);
+   *   // Do something.
+   *   Policy response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<GetIamPolicyRequest, Policy> getIamPolicyCallable() {
     return stub.getIamPolicyCallable();
@@ -2153,6 +3720,19 @@ public class DataCatalogClient implements BackgroundResource {
    * resources synced to Data Catalog.
    *
    * <p>A caller is not required to have Google IAM permission to make this request.
+   *
+   * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TestIamPermissionsRequest request =
+   *       TestIamPermissionsRequest.newBuilder()
+   *           .setResource(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+   *           .addAllPermissions(new ArrayList<String>())
+   *           .build();
+   *   TestIamPermissionsResponse response = dataCatalogClient.testIamPermissions(request);
+   * }
+   * }</pre>
    *
    * @param request The request object containing all of the parameters for the API call.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
@@ -2173,6 +3753,20 @@ public class DataCatalogClient implements BackgroundResource {
    * <p>A caller is not required to have Google IAM permission to make this request.
    *
    * <p>Sample code:
+   *
+   * <pre>{@code
+   * try (DataCatalogClient dataCatalogClient = DataCatalogClient.create()) {
+   *   TestIamPermissionsRequest request =
+   *       TestIamPermissionsRequest.newBuilder()
+   *           .setResource(TaxonomyName.of("[PROJECT]", "[LOCATION]", "[TAXONOMY]").toString())
+   *           .addAllPermissions(new ArrayList<String>())
+   *           .build();
+   *   ApiFuture<TestIamPermissionsResponse> future =
+   *       dataCatalogClient.testIamPermissionsCallable().futureCall(request);
+   *   // Do something.
+   *   TestIamPermissionsResponse response = future.get();
+   * }
+   * }</pre>
    */
   public final UnaryCallable<TestIamPermissionsRequest, TestIamPermissionsResponse>
       testIamPermissionsCallable() {

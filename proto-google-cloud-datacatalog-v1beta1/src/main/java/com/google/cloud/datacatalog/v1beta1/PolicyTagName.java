@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -248,10 +248,10 @@ public class PolicyTagName implements ResourceName {
     }
 
     private Builder(PolicyTagName policyTagName) {
-      project = policyTagName.project;
-      location = policyTagName.location;
-      taxonomy = policyTagName.taxonomy;
-      policyTag = policyTagName.policyTag;
+      this.project = policyTagName.project;
+      this.location = policyTagName.location;
+      this.taxonomy = policyTagName.taxonomy;
+      this.policyTag = policyTagName.policyTag;
     }
 
     public PolicyTagName build() {

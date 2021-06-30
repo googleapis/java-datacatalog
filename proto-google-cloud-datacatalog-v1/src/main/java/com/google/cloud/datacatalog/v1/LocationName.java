@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -181,8 +181,8 @@ public class LocationName implements ResourceName {
     }
 
     private Builder(LocationName locationName) {
-      project = locationName.project;
-      location = locationName.location;
+      this.project = locationName.project;
+      this.location = locationName.location;
     }
 
     public LocationName build() {

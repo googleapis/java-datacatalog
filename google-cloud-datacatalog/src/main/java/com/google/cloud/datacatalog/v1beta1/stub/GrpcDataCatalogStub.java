@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.ListEntryGr
 import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.ListTagsPagedResponse;
 import static com.google.cloud.datacatalog.v1beta1.DataCatalogClient.SearchCatalogPagedResponse;
 
+import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
 import com.google.api.gax.core.BackgroundResourceAggregation;
 import com.google.api.gax.grpc.GrpcCallSettings;
@@ -82,6 +83,7 @@ import javax.annotation.Generated;
  *
  * <p>This class is for advanced usage and reflects the underlying API directly.
  */
+@BetaApi
 @Generated("by gapic-generator-java")
 public class GrpcDataCatalogStub extends DataCatalogStub {
   private static final MethodDescriptor<SearchCatalogRequest, SearchCatalogResponse>
@@ -881,131 +883,162 @@ public class GrpcDataCatalogStub extends DataCatalogStub {
     return operationsStub;
   }
 
+  @Override
   public UnaryCallable<SearchCatalogRequest, SearchCatalogResponse> searchCatalogCallable() {
     return searchCatalogCallable;
   }
 
+  @Override
   public UnaryCallable<SearchCatalogRequest, SearchCatalogPagedResponse>
       searchCatalogPagedCallable() {
     return searchCatalogPagedCallable;
   }
 
+  @Override
   public UnaryCallable<CreateEntryGroupRequest, EntryGroup> createEntryGroupCallable() {
     return createEntryGroupCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateEntryGroupRequest, EntryGroup> updateEntryGroupCallable() {
     return updateEntryGroupCallable;
   }
 
+  @Override
   public UnaryCallable<GetEntryGroupRequest, EntryGroup> getEntryGroupCallable() {
     return getEntryGroupCallable;
   }
 
+  @Override
   public UnaryCallable<DeleteEntryGroupRequest, Empty> deleteEntryGroupCallable() {
     return deleteEntryGroupCallable;
   }
 
+  @Override
   public UnaryCallable<ListEntryGroupsRequest, ListEntryGroupsResponse> listEntryGroupsCallable() {
     return listEntryGroupsCallable;
   }
 
+  @Override
   public UnaryCallable<ListEntryGroupsRequest, ListEntryGroupsPagedResponse>
       listEntryGroupsPagedCallable() {
     return listEntryGroupsPagedCallable;
   }
 
+  @Override
   public UnaryCallable<CreateEntryRequest, Entry> createEntryCallable() {
     return createEntryCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateEntryRequest, Entry> updateEntryCallable() {
     return updateEntryCallable;
   }
 
+  @Override
   public UnaryCallable<DeleteEntryRequest, Empty> deleteEntryCallable() {
     return deleteEntryCallable;
   }
 
+  @Override
   public UnaryCallable<GetEntryRequest, Entry> getEntryCallable() {
     return getEntryCallable;
   }
 
+  @Override
   public UnaryCallable<LookupEntryRequest, Entry> lookupEntryCallable() {
     return lookupEntryCallable;
   }
 
+  @Override
   public UnaryCallable<ListEntriesRequest, ListEntriesResponse> listEntriesCallable() {
     return listEntriesCallable;
   }
 
+  @Override
   public UnaryCallable<ListEntriesRequest, ListEntriesPagedResponse> listEntriesPagedCallable() {
     return listEntriesPagedCallable;
   }
 
+  @Override
   public UnaryCallable<CreateTagTemplateRequest, TagTemplate> createTagTemplateCallable() {
     return createTagTemplateCallable;
   }
 
+  @Override
   public UnaryCallable<GetTagTemplateRequest, TagTemplate> getTagTemplateCallable() {
     return getTagTemplateCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateTagTemplateRequest, TagTemplate> updateTagTemplateCallable() {
     return updateTagTemplateCallable;
   }
 
+  @Override
   public UnaryCallable<DeleteTagTemplateRequest, Empty> deleteTagTemplateCallable() {
     return deleteTagTemplateCallable;
   }
 
+  @Override
   public UnaryCallable<CreateTagTemplateFieldRequest, TagTemplateField>
       createTagTemplateFieldCallable() {
     return createTagTemplateFieldCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateTagTemplateFieldRequest, TagTemplateField>
       updateTagTemplateFieldCallable() {
     return updateTagTemplateFieldCallable;
   }
 
+  @Override
   public UnaryCallable<RenameTagTemplateFieldRequest, TagTemplateField>
       renameTagTemplateFieldCallable() {
     return renameTagTemplateFieldCallable;
   }
 
+  @Override
   public UnaryCallable<DeleteTagTemplateFieldRequest, Empty> deleteTagTemplateFieldCallable() {
     return deleteTagTemplateFieldCallable;
   }
 
+  @Override
   public UnaryCallable<CreateTagRequest, Tag> createTagCallable() {
     return createTagCallable;
   }
 
+  @Override
   public UnaryCallable<UpdateTagRequest, Tag> updateTagCallable() {
     return updateTagCallable;
   }
 
+  @Override
   public UnaryCallable<DeleteTagRequest, Empty> deleteTagCallable() {
     return deleteTagCallable;
   }
 
+  @Override
   public UnaryCallable<ListTagsRequest, ListTagsResponse> listTagsCallable() {
     return listTagsCallable;
   }
 
+  @Override
   public UnaryCallable<ListTagsRequest, ListTagsPagedResponse> listTagsPagedCallable() {
     return listTagsPagedCallable;
   }
 
+  @Override
   public UnaryCallable<SetIamPolicyRequest, Policy> setIamPolicyCallable() {
     return setIamPolicyCallable;
   }
 
+  @Override
   public UnaryCallable<GetIamPolicyRequest, Policy> getIamPolicyCallable() {
     return getIamPolicyCallable;
   }
 
+  @Override
   public UnaryCallable<TestIamPermissionsRequest, TestIamPermissionsResponse>
       testIamPermissionsCallable() {
     return testIamPermissionsCallable;

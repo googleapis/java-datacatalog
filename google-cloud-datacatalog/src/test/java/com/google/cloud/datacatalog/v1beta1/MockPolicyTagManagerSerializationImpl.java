@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ public class MockPolicyTagManagerSerializationImpl extends PolicyTagManagerSeria
   @Override
   public void importTaxonomies(
       ImportTaxonomiesRequest request, StreamObserver<ImportTaxonomiesResponse> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof ImportTaxonomiesResponse) {
       requests.add(request);
       responseObserver.onNext(((ImportTaxonomiesResponse) response));
@@ -69,14 +69,20 @@ public class MockPolicyTagManagerSerializationImpl extends PolicyTagManagerSeria
     } else if (response instanceof Exception) {
       responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method ImportTaxonomies, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  ImportTaxonomiesResponse.class.getName(),
+                  Exception.class.getName())));
     }
   }
 
   @Override
   public void exportTaxonomies(
       ExportTaxonomiesRequest request, StreamObserver<ExportTaxonomiesResponse> responseObserver) {
-    Object response = responses.remove();
+    Object response = responses.poll();
     if (response instanceof ExportTaxonomiesResponse) {
       requests.add(request);
       responseObserver.onNext(((ExportTaxonomiesResponse) response));
@@ -84,7 +90,13 @@ public class MockPolicyTagManagerSerializationImpl extends PolicyTagManagerSeria
     } else if (response instanceof Exception) {
       responseObserver.onError(((Exception) response));
     } else {
-      responseObserver.onError(new IllegalArgumentException("Unrecognized response type"));
+      responseObserver.onError(
+          new IllegalArgumentException(
+              String.format(
+                  "Unrecognized response type %s for method ExportTaxonomies, expected %s or %s",
+                  response == null ? "null" : response.getClass().getName(),
+                  ExportTaxonomiesResponse.class.getName(),
+                  Exception.class.getName())));
     }
   }
 }

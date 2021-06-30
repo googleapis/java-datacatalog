@@ -935,6 +935,21 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
    *
    * <code>double double_value = 2;</code>
    *
+   * @return Whether the doubleValue field is set.
+   */
+  @java.lang.Override
+  public boolean hasDoubleValue() {
+    return kindCase_ == 2;
+  }
+  /**
+   *
+   *
+   * <pre>
+   * Holds the value for a tag field with double type.
+   * </pre>
+   *
+   * <code>double double_value = 2;</code>
+   *
    * @return The doubleValue.
    */
   @java.lang.Override
@@ -951,6 +966,22 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
    *
    * <pre>
    * Holds the value for a tag field with string type.
+   * The maximum length is 2000 UTF-8 characters.
+   * </pre>
+   *
+   * <code>string string_value = 3;</code>
+   *
+   * @return Whether the stringValue field is set.
+   */
+  public boolean hasStringValue() {
+    return kindCase_ == 3;
+  }
+  /**
+   *
+   *
+   * <pre>
+   * Holds the value for a tag field with string type.
+   * The maximum length is 2000 UTF-8 characters.
    * </pre>
    *
    * <code>string string_value = 3;</code>
@@ -978,6 +1009,7 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
    *
    * <pre>
    * Holds the value for a tag field with string type.
+   * The maximum length is 2000 UTF-8 characters.
    * </pre>
    *
    * <code>string string_value = 3;</code>
@@ -1002,6 +1034,21 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
   }
 
   public static final int BOOL_VALUE_FIELD_NUMBER = 4;
+  /**
+   *
+   *
+   * <pre>
+   * Holds the value for a tag field with boolean type.
+   * </pre>
+   *
+   * <code>bool bool_value = 4;</code>
+   *
+   * @return Whether the boolValue field is set.
+   */
+  @java.lang.Override
+  public boolean hasBoolValue() {
+    return kindCase_ == 4;
+  }
   /**
    *
    *
@@ -1753,6 +1800,20 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
      *
      * <code>double double_value = 2;</code>
      *
+     * @return Whether the doubleValue field is set.
+     */
+    public boolean hasDoubleValue() {
+      return kindCase_ == 2;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Holds the value for a tag field with double type.
+     * </pre>
+     *
+     * <code>double double_value = 2;</code>
+     *
      * @return The doubleValue.
      */
     public double getDoubleValue() {
@@ -1804,6 +1865,23 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
      *
      * <pre>
      * Holds the value for a tag field with string type.
+     * The maximum length is 2000 UTF-8 characters.
+     * </pre>
+     *
+     * <code>string string_value = 3;</code>
+     *
+     * @return Whether the stringValue field is set.
+     */
+    @java.lang.Override
+    public boolean hasStringValue() {
+      return kindCase_ == 3;
+    }
+    /**
+     *
+     *
+     * <pre>
+     * Holds the value for a tag field with string type.
+     * The maximum length is 2000 UTF-8 characters.
      * </pre>
      *
      * <code>string string_value = 3;</code>
@@ -1832,6 +1910,7 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
      *
      * <pre>
      * Holds the value for a tag field with string type.
+     * The maximum length is 2000 UTF-8 characters.
      * </pre>
      *
      * <code>string string_value = 3;</code>
@@ -1860,6 +1939,7 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
      *
      * <pre>
      * Holds the value for a tag field with string type.
+     * The maximum length is 2000 UTF-8 characters.
      * </pre>
      *
      * <code>string string_value = 3;</code>
@@ -1881,6 +1961,7 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
      *
      * <pre>
      * Holds the value for a tag field with string type.
+     * The maximum length is 2000 UTF-8 characters.
      * </pre>
      *
      * <code>string string_value = 3;</code>
@@ -1900,6 +1981,7 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
      *
      * <pre>
      * Holds the value for a tag field with string type.
+     * The maximum length is 2000 UTF-8 characters.
      * </pre>
      *
      * <code>string string_value = 3;</code>
@@ -1918,6 +2000,20 @@ public final class TagField extends com.google.protobuf.GeneratedMessageV3
       return this;
     }
 
+    /**
+     *
+     *
+     * <pre>
+     * Holds the value for a tag field with boolean type.
+     * </pre>
+     *
+     * <code>bool bool_value = 4;</code>
+     *
+     * @return Whether the boolValue field is set.
+     */
+    public boolean hasBoolValue() {
+      return kindCase_ == 4;
+    }
     /**
      *
      *

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -284,11 +284,11 @@ public class TagName implements ResourceName {
     }
 
     private Builder(TagName tagName) {
-      project = tagName.project;
-      location = tagName.location;
-      entryGroup = tagName.entryGroup;
-      entry = tagName.entry;
-      tag = tagName.tag;
+      this.project = tagName.project;
+      this.location = tagName.location;
+      this.entryGroup = tagName.entryGroup;
+      this.entry = tagName.entry;
+      this.tag = tagName.tag;
     }
 
     public TagName build() {

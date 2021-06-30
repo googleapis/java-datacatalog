@@ -1,5 +1,110 @@
 # Changelog
 
+### [1.4.1](https://www.github.com/googleapis/java-datacatalog/compare/v1.4.0...v1.4.1) (2021-06-04)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v1.3.0 ([#546](https://www.github.com/googleapis/java-datacatalog/issues/546)) ([198f08a](https://www.github.com/googleapis/java-datacatalog/commit/198f08a9fd620c2d6f9095cf94ce1fd479ff4845))
+
+## [1.4.0](https://www.github.com/googleapis/java-datacatalog/compare/v1.3.3...v1.4.0) (2021-05-31)
+
+
+### Features
+
+* add `gcf-owl-bot[bot]` to `ignoreAuthors` ([#533](https://www.github.com/googleapis/java-datacatalog/issues/533)) ([73513ef](https://www.github.com/googleapis/java-datacatalog/commit/73513ef9339264a054227efb986f15d69bdf545c))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v1.2.0 ([#532](https://www.github.com/googleapis/java-datacatalog/issues/532)) ([970ce77](https://www.github.com/googleapis/java-datacatalog/commit/970ce779ac53ab924b07b024abea8b70f6d34df7))
+
+### [1.3.3](https://www.github.com/googleapis/java-datacatalog/compare/v1.3.2...v1.3.3) (2021-05-11)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v1.1.0 ([#521](https://www.github.com/googleapis/java-datacatalog/issues/521)) ([9bca2ed](https://www.github.com/googleapis/java-datacatalog/commit/9bca2ed045d28b12789eddfd43096babaaf27664))
+
+### [1.3.2](https://www.github.com/googleapis/java-datacatalog/compare/v1.3.1...v1.3.2) (2021-04-23)
+
+
+### Bug Fixes
+
+* release scripts from issuing overlapping phases ([#491](https://www.github.com/googleapis/java-datacatalog/issues/491)) ([5243cd7](https://www.github.com/googleapis/java-datacatalog/commit/5243cd799592056159fb7d6b37188bf7c5814f60))
+* typo ([#488](https://www.github.com/googleapis/java-datacatalog/issues/488)) ([e81c4ca](https://www.github.com/googleapis/java-datacatalog/commit/e81c4cadb0bcc9a5049cf5fbad4c7ca956a002db))
+
+
+### Documentation
+
+* reformat comments in PolicyTagManager definition ([#493](https://www.github.com/googleapis/java-datacatalog/issues/493)) ([54f9277](https://www.github.com/googleapis/java-datacatalog/commit/54f9277a195029a235f74a63a836feefe43def42))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.21.1 ([#495](https://www.github.com/googleapis/java-datacatalog/issues/495)) ([d12f96d](https://www.github.com/googleapis/java-datacatalog/commit/d12f96d9d9e3cb69ca9b437b001bdb49d5d92a84))
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v1 ([#509](https://www.github.com/googleapis/java-datacatalog/issues/509)) ([bab8d3c](https://www.github.com/googleapis/java-datacatalog/commit/bab8d3cc0df343e5bdcfdf34f19a343259e78ce9))
+
+### [1.3.1](https://www.github.com/googleapis/java-datacatalog/compare/v1.3.0...v1.3.1) (2021-04-09)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.21.0 ([#477](https://www.github.com/googleapis/java-datacatalog/issues/477)) ([8b4f7e3](https://www.github.com/googleapis/java-datacatalog/commit/8b4f7e30be68f64893cd6afd493cdb456b787a97))
+
+## [1.3.0](https://www.github.com/googleapis/java-datacatalog/compare/v1.2.0...v1.3.0) (2021-03-30)
+
+
+### Features
+
+* added DATAPROC_METASTORE integrated system along with new entry types: DATABASE and SERVICE ([fcf9213](https://www.github.com/googleapis/java-datacatalog/commit/fcf9213bc23ce5b82dd520a1828cecdcfe36c920))
+* adding fully_qualified_name in lookup and search ([fcf9213](https://www.github.com/googleapis/java-datacatalog/commit/fcf9213bc23ce5b82dd520a1828cecdcfe36c920))
+* new RenameTagTemplateFieldEnumValue API ([fcf9213](https://www.github.com/googleapis/java-datacatalog/commit/fcf9213bc23ce5b82dd520a1828cecdcfe36c920))
+* Policy Tag Manager v1 API service ([#469](https://www.github.com/googleapis/java-datacatalog/issues/469)) ([fcf9213](https://www.github.com/googleapis/java-datacatalog/commit/fcf9213bc23ce5b82dd520a1828cecdcfe36c920))
+
+
+### Documentation
+
+* Docum ([fcf9213](https://www.github.com/googleapis/java-datacatalog/commit/fcf9213bc23ce5b82dd520a1828cecdcfe36c920))
+
+## [1.2.0](https://www.github.com/googleapis/java-datacatalog/compare/v1.1.1...v1.2.0) (2021-03-11)
+
+
+### Features
+
+* **generator:** update protoc to v3.15.3 ([#445](https://www.github.com/googleapis/java-datacatalog/issues/445)) ([7069951](https://www.github.com/googleapis/java-datacatalog/commit/70699514e2f0aacc65cc226f641354b0991df899))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.20.1 ([#457](https://www.github.com/googleapis/java-datacatalog/issues/457)) ([ccd0c83](https://www.github.com/googleapis/java-datacatalog/commit/ccd0c8354b4039dc4fe53508eae63dfd916ad8d2))
+
+### [1.1.1](https://www.github.com/googleapis/java-datacatalog/compare/v1.1.0...v1.1.1) (2021-02-25)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.20.0 ([#441](https://www.github.com/googleapis/java-datacatalog/issues/441)) ([3a3e6a9](https://www.github.com/googleapis/java-datacatalog/commit/3a3e6a9f03f51c58f1c4ba2ee00ca33db2b3dc6b))
+
+## [1.1.0](https://www.github.com/googleapis/java-datacatalog/compare/v1.0.13...v1.1.0) (2021-02-22)
+
+
+### Features
+
+* generate sample code in the Java microgenerator ([#419](https://www.github.com/googleapis/java-datacatalog/issues/419)) ([0dfec30](https://www.github.com/googleapis/java-datacatalog/commit/0dfec300b1d1b90d026b73c8d080fe7aa5b5af8e))
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.19.0 ([#431](https://www.github.com/googleapis/java-datacatalog/issues/431)) ([19e2d6d](https://www.github.com/googleapis/java-datacatalog/commit/19e2d6da3de10c54a2ceec164c0c55e27b7925fe))
+
+### [1.0.13](https://www.github.com/googleapis/java-datacatalog/compare/v1.0.12...v1.0.13) (2021-01-14)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v0.18.0 ([#401](https://www.github.com/googleapis/java-datacatalog/issues/401)) ([c3f7fb2](https://www.github.com/googleapis/java-datacatalog/commit/c3f7fb25da06e95124c418f8c8b597e39cb2e5ea))
+
 ### [1.0.12](https://www.github.com/googleapis/java-datacatalog/compare/v1.0.11...v1.0.12) (2020-12-15)
 
 

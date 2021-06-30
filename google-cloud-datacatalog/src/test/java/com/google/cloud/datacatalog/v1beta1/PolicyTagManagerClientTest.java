@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,10 +53,10 @@ import org.junit.Test;
 
 @Generated("by gapic-generator-java")
 public class PolicyTagManagerClientTest {
-  private static MockServiceHelper mockServiceHelper;
   private static MockPolicyTagManager mockPolicyTagManager;
-  private PolicyTagManagerClient client;
+  private static MockServiceHelper mockServiceHelper;
   private LocalChannelProvider channelProvider;
+  private PolicyTagManagerClient client;
 
   @BeforeClass
   public static void startStaticServer() {
