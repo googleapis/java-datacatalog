@@ -69,7 +69,7 @@ public class CreateCustomType {
       try {
         String entryName = EntryName.of(projectId, location, entryGroupId, entryId).toString();
         dataCatalogClient.deleteEntry(entryName);
-        System.out.printf("\nDeleted Entry: %s", entryName);
+        System.out.println("Deleted Entry: " + entryName);
       } catch (PermissionDeniedException | NotFoundException e) {
         // PermissionDeniedException or NotFoundException are thrown if
         // Entry does not exist.
@@ -81,7 +81,7 @@ public class CreateCustomType {
       try {
         String entryGroupName = EntryGroupName.of(projectId, location, entryGroupId).toString();
         dataCatalogClient.deleteEntryGroup(entryGroupName);
-        System.out.printf("\nDeleted Entry Group: %s", entryGroupName);
+        System.out.println("Deleted Entry Group: " + entryGroupName);
       } catch (PermissionDeniedException | NotFoundException e) {
         // PermissionDeniedException or NotFoundException are thrown if
         // Entry Group does not exist.
@@ -104,9 +104,9 @@ public class CreateCustomType {
                 .setName(tagTemplateName)
                 .setForce(true)
                 .build());
-        System.out.printf("\nDeleted template: %s", tagTemplateName);
+        System.out.println("Deleted template: " + tagTemplateName);
       } catch (Exception e) {
-        System.out.printf("\nCannot delete template: %s", tagTemplateName);
+        System.out.println("Cannot delete template: " + tagTemplateName);
       }
 
       // 2. Create an Entry Group.
@@ -128,7 +128,7 @@ public class CreateCustomType {
       // Use the client to send the API request.
       EntryGroup createdEntryGroup = dataCatalogClient.createEntryGroup(entryGroupRequest);
 
-      System.out.printf("\nEntry Group created with name: %s", createdEntryGroup.getName());
+      System.out.println("Entry Group created with name: " + createdEntryGroup.getName());
 
       // 3. Create an Entry.
       // Construct the Entry for the Entry request.
@@ -168,7 +168,7 @@ public class CreateCustomType {
 
       // Use the client to send the API request.
       Entry createdEntry = dataCatalogClient.createEntry(entryRequest);
-      System.out.printf("\nEntry created with name: %s", createdEntry.getName());
+      System.out.println("Entry created with name: " + createdEntry.getName());
 
       // 4. Create a Tag Template.
       // For more field types, including ENUM, please refer to
@@ -200,7 +200,7 @@ public class CreateCustomType {
 
       TagTemplate createdTagTemplate = dataCatalogClient
           .createTagTemplate(createTagTemplateRequest);
-      System.out.printf("\nTemplate created with name: %s", createdTagTemplate.getName());
+      System.out.println("\nTemplate created with name: %s" + createdTagTemplate.getName());
 
       TagField sourceValue =
           TagField.newBuilder().setStringValue("On-premises system name").build();
@@ -215,7 +215,7 @@ public class CreateCustomType {
           CreateTagRequest.newBuilder().setParent(createdEntry.getName()).setTag(tag).build();
 
       Tag createdTag = dataCatalogClient.createTag(createTagRequest);
-      System.out.printf("\nCreated tag: %s", createdTag.getName());
+      System.out.println("\nCreated tag: %s" + createdTag.getName());
 
     } catch (AlreadyExistsException | IOException e) {
       // AlreadyExistsException is thrown if the EntryGroup or Entry already exists.
