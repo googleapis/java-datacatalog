@@ -117,7 +117,7 @@ public class CreateEntryTests {
 
     String output = bout.toString();
 
-    String entryGroupTemplate = "Entry Group created with name: %s";
+    String entryGroupTemplate = "Entry Group created successfully";
     assertThat(
         output,
         CoreMatchers.containsString(String.format(entryGroupTemplate, expectedEntryGroupName)));
