@@ -87,7 +87,7 @@ public class CreateEntryTests {
 
     // Must create a Entry Group before creating the entry.
     CreateEntryGroup.createEntryGroup(PROJECT_ID, LOCATION, entryGroupId);
-    CreateFilesetEntry.createFilesEntry(PROJECT_ID, entryGroupId, entryId);
+    CreateFilesetEntry.createFilesetEntry(PROJECT_ID, entryGroupId, entryId);
 
     // Store names for clean up on teardown
     String expectedEntryGroupName =
