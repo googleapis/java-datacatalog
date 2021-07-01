@@ -119,7 +119,9 @@ public class Quickstart {
       // Lookup Data Catalog's Entry referring to the table.
       // -------------------------------
       String linkedResource = 
-          "//bigquery.googleapis.com/projects/bigquery-public-data/datasets/new_york_taxi_trips/tables/taxi_zone_geom";
+          "//bigquery.googleapis.com/projects/bigquery-public-data/" + 
+          "datasets/new_york_taxi_trips/" + 
+          "tables/taxi_zone_geom";
       LookupEntryRequest lookupEntryRequest =
           LookupEntryRequest.newBuilder().setLinkedResource(linkedResource).build();
       Entry tableEntry = dataCatalogClient.lookupEntry(lookupEntryRequest);
