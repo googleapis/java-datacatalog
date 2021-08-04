@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/java-datacatalog/compare/v1.4.2...v1.5.0) (2021-08-04)
+
+
+### Features
+
+* configure initial sp version ([#591](https://www.github.com/googleapis/java-datacatalog/issues/591)) ([fd77899](https://www.github.com/googleapis/java-datacatalog/commit/fd77899f1cf1b60d581805025ed3703cd2422eb7))
+
 ### [1.4.2](https://www.github.com/googleapis/java-datacatalog/compare/v1.4.1...v1.4.2) (2021-07-05)
 
 
