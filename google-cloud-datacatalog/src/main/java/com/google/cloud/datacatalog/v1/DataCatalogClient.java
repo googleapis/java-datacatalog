@@ -16,7 +16,6 @@
 
 package com.google.cloud.datacatalog.v1;
 
-import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutures;
 import com.google.api.core.BetaApi;
@@ -3953,12 +3952,7 @@ public class DataCatalogClient implements BackgroundResource {
           SearchCatalogPage.createEmptyPage().createPageAsync(context, futureResponse);
       return ApiFutures.transform(
           futurePage,
-          new ApiFunction<SearchCatalogPage, SearchCatalogPagedResponse>() {
-            @Override
-            public SearchCatalogPagedResponse apply(SearchCatalogPage input) {
-              return new SearchCatalogPagedResponse(input);
-            }
-          },
+          input -> new SearchCatalogPagedResponse(input),
           MoreExecutors.directExecutor());
     }
 
@@ -4034,12 +4028,7 @@ public class DataCatalogClient implements BackgroundResource {
           ListEntryGroupsPage.createEmptyPage().createPageAsync(context, futureResponse);
       return ApiFutures.transform(
           futurePage,
-          new ApiFunction<ListEntryGroupsPage, ListEntryGroupsPagedResponse>() {
-            @Override
-            public ListEntryGroupsPagedResponse apply(ListEntryGroupsPage input) {
-              return new ListEntryGroupsPagedResponse(input);
-            }
-          },
+          input -> new ListEntryGroupsPagedResponse(input),
           MoreExecutors.directExecutor());
     }
 
@@ -4115,14 +4104,7 @@ public class DataCatalogClient implements BackgroundResource {
       ApiFuture<ListEntriesPage> futurePage =
           ListEntriesPage.createEmptyPage().createPageAsync(context, futureResponse);
       return ApiFutures.transform(
-          futurePage,
-          new ApiFunction<ListEntriesPage, ListEntriesPagedResponse>() {
-            @Override
-            public ListEntriesPagedResponse apply(ListEntriesPage input) {
-              return new ListEntriesPagedResponse(input);
-            }
-          },
-          MoreExecutors.directExecutor());
+          futurePage, input -> new ListEntriesPagedResponse(input), MoreExecutors.directExecutor());
     }
 
     private ListEntriesPagedResponse(ListEntriesPage page) {
@@ -4191,14 +4173,7 @@ public class DataCatalogClient implements BackgroundResource {
       ApiFuture<ListTagsPage> futurePage =
           ListTagsPage.createEmptyPage().createPageAsync(context, futureResponse);
       return ApiFutures.transform(
-          futurePage,
-          new ApiFunction<ListTagsPage, ListTagsPagedResponse>() {
-            @Override
-            public ListTagsPagedResponse apply(ListTagsPage input) {
-              return new ListTagsPagedResponse(input);
-            }
-          },
-          MoreExecutors.directExecutor());
+          futurePage, input -> new ListTagsPagedResponse(input), MoreExecutors.directExecutor());
     }
 
     private ListTagsPagedResponse(ListTagsPage page) {

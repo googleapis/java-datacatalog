@@ -16,7 +16,6 @@
 
 package com.google.cloud.datacatalog.v1;
 
-import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutures;
 import com.google.api.core.BetaApi;
@@ -1387,12 +1386,7 @@ public class PolicyTagManagerClient implements BackgroundResource {
           ListTaxonomiesPage.createEmptyPage().createPageAsync(context, futureResponse);
       return ApiFutures.transform(
           futurePage,
-          new ApiFunction<ListTaxonomiesPage, ListTaxonomiesPagedResponse>() {
-            @Override
-            public ListTaxonomiesPagedResponse apply(ListTaxonomiesPage input) {
-              return new ListTaxonomiesPagedResponse(input);
-            }
-          },
+          input -> new ListTaxonomiesPagedResponse(input),
           MoreExecutors.directExecutor());
     }
 
@@ -1468,12 +1462,7 @@ public class PolicyTagManagerClient implements BackgroundResource {
           ListPolicyTagsPage.createEmptyPage().createPageAsync(context, futureResponse);
       return ApiFutures.transform(
           futurePage,
-          new ApiFunction<ListPolicyTagsPage, ListPolicyTagsPagedResponse>() {
-            @Override
-            public ListPolicyTagsPagedResponse apply(ListPolicyTagsPage input) {
-              return new ListPolicyTagsPagedResponse(input);
-            }
-          },
+          input -> new ListPolicyTagsPagedResponse(input),
           MoreExecutors.directExecutor());
     }
 
