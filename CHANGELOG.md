@@ -1,5 +1,38 @@
 # Changelog
 
+### [1.5.3](https://www.github.com/googleapis/java-datacatalog/compare/v1.5.2...v1.5.3) (2021-08-23)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v2.1.0 ([#615](https://www.github.com/googleapis/java-datacatalog/issues/615)) ([3f7fc7a](https://www.github.com/googleapis/java-datacatalog/commit/3f7fc7a402eadd12a9b387a1003ef79d215bb176))
+
+### [1.5.2](https://www.github.com/googleapis/java-datacatalog/compare/v1.5.1...v1.5.2) (2021-08-11)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v2.0.1 ([#605](https://www.github.com/googleapis/java-datacatalog/issues/605)) ([f0c970f](https://www.github.com/googleapis/java-datacatalog/commit/f0c970f2e81adf3027a31f64a0334e377e8c3b80))
+
+### [1.5.1](https://www.github.com/googleapis/java-datacatalog/compare/v1.5.0...v1.5.1) (2021-08-09)
+
+
+### Dependencies
+
+* update dependency com.google.cloud:google-cloud-shared-dependencies to v2 ([#594](https://www.github.com/googleapis/java-datacatalog/issues/594)) ([2fd520a](https://www.github.com/googleapis/java-datacatalog/commit/2fd520a1c98d1862d9f68bbae51ad279a15e8263))
+
+## [1.5.0](https://www.github.com/googleapis/java-datacatalog/compare/v1.4.2...v1.5.0) (2021-08-09)
+
+
+### Features
+
+* Added support for BigQuery connections entries feat: Added support for BigQuery routines entries feat: Added usage_signal field feat: Added labels field feat: Added ReplaceTaxonomy in Policy Tag Manager Serialization API feat: Added support for public tag templates feat: Added support for rich text tags docs: Documentation improvements ([#587](https://www.github.com/googleapis/java-datacatalog/issues/587)) ([2e7535b](https://www.github.com/googleapis/java-datacatalog/commit/2e7535b13cd6fb1ffa1caa8cb818f6d9be63a247))
+
+
+### Documentation
+
+* **samples:** adds samples from documentation with correct region tags ([#392](https://www.github.com/googleapis/java-datacatalog/issues/392)) ([eff2228](https://www.github.com/googleapis/java-datacatalog/commit/eff2228a09fc16d5b682740727f425d4290e1058))
+
 ### [1.4.2](https://www.github.com/googleapis/java-datacatalog/compare/v1.4.1...v1.4.2) (2021-07-05)
 
 

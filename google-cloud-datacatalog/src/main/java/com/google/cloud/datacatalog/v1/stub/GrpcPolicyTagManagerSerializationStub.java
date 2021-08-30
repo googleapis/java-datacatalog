@@ -21,18 +21,18 @@ import com.google.api.gax.core.BackgroundResourceAggregation;
 import com.google.api.gax.grpc.GrpcCallSettings;
 import com.google.api.gax.grpc.GrpcStubCallableFactory;
 import com.google.api.gax.rpc.ClientContext;
-import com.google.api.gax.rpc.RequestParamsExtractor;
 import com.google.api.gax.rpc.UnaryCallable;
 import com.google.cloud.datacatalog.v1.ExportTaxonomiesRequest;
 import com.google.cloud.datacatalog.v1.ExportTaxonomiesResponse;
 import com.google.cloud.datacatalog.v1.ImportTaxonomiesRequest;
 import com.google.cloud.datacatalog.v1.ImportTaxonomiesResponse;
+import com.google.cloud.datacatalog.v1.ReplaceTaxonomyRequest;
+import com.google.cloud.datacatalog.v1.Taxonomy;
 import com.google.common.collect.ImmutableMap;
 import com.google.longrunning.stub.GrpcOperationsStub;
 import io.grpc.MethodDescriptor;
 import io.grpc.protobuf.ProtoUtils;
 import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Generated;
 
@@ -44,6 +44,17 @@ import javax.annotation.Generated;
  */
 @Generated("by gapic-generator-java")
 public class GrpcPolicyTagManagerSerializationStub extends PolicyTagManagerSerializationStub {
+  private static final MethodDescriptor<ReplaceTaxonomyRequest, Taxonomy>
+      replaceTaxonomyMethodDescriptor =
+          MethodDescriptor.<ReplaceTaxonomyRequest, Taxonomy>newBuilder()
+              .setType(MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(
+                  "google.cloud.datacatalog.v1.PolicyTagManagerSerialization/ReplaceTaxonomy")
+              .setRequestMarshaller(
+                  ProtoUtils.marshaller(ReplaceTaxonomyRequest.getDefaultInstance()))
+              .setResponseMarshaller(ProtoUtils.marshaller(Taxonomy.getDefaultInstance()))
+              .build();
+
   private static final MethodDescriptor<ImportTaxonomiesRequest, ImportTaxonomiesResponse>
       importTaxonomiesMethodDescriptor =
           MethodDescriptor.<ImportTaxonomiesRequest, ImportTaxonomiesResponse>newBuilder()
@@ -68,6 +79,7 @@ public class GrpcPolicyTagManagerSerializationStub extends PolicyTagManagerSeria
                   ProtoUtils.marshaller(ExportTaxonomiesResponse.getDefaultInstance()))
               .build();
 
+  private final UnaryCallable<ReplaceTaxonomyRequest, Taxonomy> replaceTaxonomyCallable;
   private final UnaryCallable<ImportTaxonomiesRequest, ImportTaxonomiesResponse>
       importTaxonomiesCallable;
   private final UnaryCallable<ExportTaxonomiesRequest, ExportTaxonomiesResponse>
@@ -120,18 +132,25 @@ public class GrpcPolicyTagManagerSerializationStub extends PolicyTagManagerSeria
     this.callableFactory = callableFactory;
     this.operationsStub = GrpcOperationsStub.create(clientContext, callableFactory);
 
+    GrpcCallSettings<ReplaceTaxonomyRequest, Taxonomy> replaceTaxonomyTransportSettings =
+        GrpcCallSettings.<ReplaceTaxonomyRequest, Taxonomy>newBuilder()
+            .setMethodDescriptor(replaceTaxonomyMethodDescriptor)
+            .setParamsExtractor(
+                request -> {
+                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+                  params.put("name", String.valueOf(request.getName()));
+                  return params.build();
+                })
+            .build();
     GrpcCallSettings<ImportTaxonomiesRequest, ImportTaxonomiesResponse>
         importTaxonomiesTransportSettings =
             GrpcCallSettings.<ImportTaxonomiesRequest, ImportTaxonomiesResponse>newBuilder()
                 .setMethodDescriptor(importTaxonomiesMethodDescriptor)
                 .setParamsExtractor(
-                    new RequestParamsExtractor<ImportTaxonomiesRequest>() {
-                      @Override
-                      public Map<String, String> extract(ImportTaxonomiesRequest request) {
-                        ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-                        params.put("parent", String.valueOf(request.getParent()));
-                        return params.build();
-                      }
+                    request -> {
+                      ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+                      params.put("parent", String.valueOf(request.getParent()));
+                      return params.build();
                     })
                 .build();
     GrpcCallSettings<ExportTaxonomiesRequest, ExportTaxonomiesResponse>
@@ -139,16 +158,16 @@ public class GrpcPolicyTagManagerSerializationStub extends PolicyTagManagerSeria
             GrpcCallSettings.<ExportTaxonomiesRequest, ExportTaxonomiesResponse>newBuilder()
                 .setMethodDescriptor(exportTaxonomiesMethodDescriptor)
                 .setParamsExtractor(
-                    new RequestParamsExtractor<ExportTaxonomiesRequest>() {
-                      @Override
-                      public Map<String, String> extract(ExportTaxonomiesRequest request) {
-                        ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-                        params.put("parent", String.valueOf(request.getParent()));
-                        return params.build();
-                      }
+                    request -> {
+                      ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+                      params.put("parent", String.valueOf(request.getParent()));
+                      return params.build();
                     })
                 .build();
 
+    this.replaceTaxonomyCallable =
+        callableFactory.createUnaryCallable(
+            replaceTaxonomyTransportSettings, settings.replaceTaxonomySettings(), clientContext);
     this.importTaxonomiesCallable =
         callableFactory.createUnaryCallable(
             importTaxonomiesTransportSettings, settings.importTaxonomiesSettings(), clientContext);
@@ -165,6 +184,11 @@ public class GrpcPolicyTagManagerSerializationStub extends PolicyTagManagerSeria
   }
 
   @Override
+  public UnaryCallable<ReplaceTaxonomyRequest, Taxonomy> replaceTaxonomyCallable() {
+    return replaceTaxonomyCallable;
+  }
+
+  @Override
   public UnaryCallable<ImportTaxonomiesRequest, ImportTaxonomiesResponse>
       importTaxonomiesCallable() {
     return importTaxonomiesCallable;
@@ -178,7 +202,13 @@ public class GrpcPolicyTagManagerSerializationStub extends PolicyTagManagerSeria
 
   @Override
   public final void close() {
-    shutdown();
+    try {
+      backgroundResources.close();
+    } catch (RuntimeException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to close resource", e);
+    }
   }
 
   @Override
