@@ -50,16 +50,6 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>com.google.api.grpc</groupId>
-        <artifactId>proto-google-cloud-datacatalog-v1</artifactId>
-        <version>1.5.4-SNAPSHOT</version><!-- {x-version-update:proto-google-cloud-datacatalog-v1:current} -->
-      </dependency>
-      <dependency>
-        <groupId>com.google.api.grpc</groupId>
-        <artifactId>proto-google-cloud-datacatalog-v1beta1</artifactId>
-        <version>0.42.4-SNAPSHOT</version><!-- {x-version-update:proto-google-cloud-datacatalog-v1beta1:current} -->
-      </dependency>
-      <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>google-cloud-datacatalog</artifactId>
         <version>1.5.4-SNAPSHOT</version><!-- {x-version-update:google-cloud-datacatalog:current} -->
@@ -77,12 +67,12 @@
       <dependency>
         <groupId>com.google.api.grpc</groupId>
         <artifactId>proto-google-cloud-datacatalog-v1</artifactId>
-        <version>1.4.2-SNAPSHOT</version><!-- {x-version-update:proto-google-cloud-datacatalog-v1:current} -->
+        <version>1.5.4-SNAPSHOT</version><!-- {x-version-update:proto-google-cloud-datacatalog-v1:current} -->
       </dependency>
       <dependency>
         <groupId>com.google.api.grpc</groupId>
         <artifactId>proto-google-cloud-datacatalog-v1beta1</artifactId>
-        <version>0.41.2-SNAPSHOT</version><!-- {x-version-update:proto-google-cloud-datacatalog-v1beta1:current} -->
+        <version>0.42.4-SNAPSHOT</version><!-- {x-version-update:proto-google-cloud-datacatalog-v1beta1:current} -->
       </dependency>
     </dependencies>
   </dependencyManagement>
