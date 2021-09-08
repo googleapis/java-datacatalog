@@ -41,7 +41,7 @@ If you are using Maven without BOM, add this to your dependencies:
 <dependency>
   <groupId>com.google.cloud</groupId>
   <artifactId>google-cloud-datacatalog</artifactId>
-  <version>1.5.3</version>
+  <version>1.5.4</version>
 </dependency>
 
 ```
@@ -49,7 +49,7 @@ If you are using Maven without BOM, add this to your dependencies:
 If you are using Gradle 5.x or later, add this to your dependencies
 
 ```Groovy
-implementation platform('com.google.cloud:libraries-bom:22.0.0')
+implementation platform('com.google.cloud:libraries-bom:23.0.0')
 
 implementation 'com.google.cloud:google-cloud-datacatalog'
 ```
