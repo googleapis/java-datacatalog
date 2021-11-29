@@ -77,8 +77,8 @@ public final class Tags {
   static {
     java.lang.String[] descriptorData = {
       "\n"
-          + "+google/cloud/datacatalog/v1beta1/tags.proto\022 google.cloud.datacatalog.v1beta1\032"
-          + "\037google/api/field_behavior.proto\032\031google/api/resource.proto\032\037google/protobuf/timestamp.proto\"\220\003\n"
+          + "+google/cloud/datacatalog/v1beta1/tags.proto\022"
+          + " google.cloud.datacatalog.v1beta1\032\037google/api/field_behavior.proto\032\031google/api/resource.proto\032\037google/protobuf/timestamp.proto\"\220\003\n"
           + "\003Tag\022\014\n"
           + "\004name\030\001 \001(\t\022\025\n"
           + "\010template\030\002 \001(\tB\003\340A\002\022\"\n"
@@ -121,8 +121,7 @@ public final class Tags {
           + " \001(\0132+.google.cloud.datacatalog.v1beta1.FieldTypeB\003\340A\002\022\023\n"
           + "\013is_required\030\003 \001(\010\022\r\n"
           + "\005order\030\005 \001(\005:\205\001\352A\201\001\n"
-          + "+datacatalog.googleapis.com/TagTemplateField\022R"
-          + "projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}\"\247\003\n"
+          + "+datacatalog.googleapis.com/TagTemplateField\022Rprojects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}\"\247\003\n"
           + "\tFieldType\022S\n"
           + "\016primitive_type\030\001"
           + " \001(\01629.google.cloud.datacatalog.v1beta1.FieldType.PrimitiveTypeH\000\022I\n"
